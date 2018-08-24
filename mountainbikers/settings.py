@@ -131,10 +131,10 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-MEDIA_URL = '/media/'
-
-if not DEBUG:
+if DEBUG:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+    MEDIA_URL = '/media/'
+else:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
