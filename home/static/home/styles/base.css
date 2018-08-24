@@ -186,7 +186,7 @@
 .main-footer {
     /* grid-row: -1; */
     background: var(--base01);
-    color: var(--base02);
+    color: var(--base03);
     padding-bottom: calc(var(--section-margin-height) / 2);
     overflow: hidden;
 }
@@ -197,6 +197,10 @@
     font-size: 16px;
     text-align: center;
     max-width: calc(var(--page-maxwidth) + 2 * var(--page-gutter-width));
+}
+
+.main-footer__link:hover {
+    text-decoration: underline;
 }
 
 /* --- Forms --- */
