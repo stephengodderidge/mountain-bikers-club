@@ -32,7 +32,7 @@
     <link rel="preload" href="{% static 'home/styles/shell.css' %}" as="style">
     <link rel="preload" href="{% static 'home/styles/base.css' %}" as="style">
     <link rel="preload" href="{% static 'home/styles/trail.css' %}" as="style">
-    <link rel="preload" href="{% static 'home/webfonts/35C717_3_0.woff2' %}" as="font">
+    <link rel="preload" href="{% static 'home/webfonts/3755DA_2_0.woff2' %}" as="font">
     <link rel="preload" href="{% static 'home/scripts/main.js' %}" as="script">
 
     <link rel="stylesheet" href="{% static 'home/styles/shell.css' %}">
@@ -63,26 +63,14 @@
         <div class="o-wave" style="background: var(--page-background)" aria-hidden="true"></div>
         {% load flatpages %}
         {% get_flatpages as flatpages %}
-        <ul class="o-flex-inline has-horizontal-gutter is-center main-footer__links" style="display: none;">
-            {% for page in flatpages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-            {% endfor %}
-        </ul>
         <ul class="o-flex-inline has-horizontal-gutter is-middle is-center main-footer__links">
-            <li>
-                <a href="https://fb.me/mountainbikersclub" target="_blank" rel="noopener">
-                    <svg width="32" height="32" class="trail__icon">
-                        <use xlink:href="#facebook"></use>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="https://m.me/mountainbikersclub" target="_blank" rel="noopener">
-                    <svg width="40" height="40" class="trail__icon">
-                        <use xlink:href="#messenger"></use>
-                    </svg>
-                </a>
-            </li>
+            {% for page in flatpages %}
+                <li>
+                    <a href="{{ page.url }}" class="main-footer__link">
+                        {{ page.title }}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </footer>
 </div>
