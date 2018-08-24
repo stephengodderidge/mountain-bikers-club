@@ -1,13 +1,7 @@
 import os
-import environ
+import django_heroku
 
 from django.utils.translation import gettext_lazy as _
-
-
-env = environ.Env(
-    DEBUG=(bool, False)
-)
-env.read_env('.env')
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -18,18 +12,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'poocy^yh9)@z5*c^$h53$5xap21t^562npgpgqt1*w8gucc^td'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = [
-    'mountain-bikers-club.herokuapp.com',
-    'mountainbikers.club',
-]
-
-if DEBUG:
-    ALLOWED_HOSTS.append('127.0.0.1')
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -90,7 +78,10 @@ WSGI_APPLICATION = 'mountainbikers.wsgi.application'
 
 CONN_MAX_AGE = 600
 DATABASES = {
-    'default': env.db()
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
@@ -162,3 +153,8 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
+
+
+# Heroku config
+
+django_heroku.settings(locals())
