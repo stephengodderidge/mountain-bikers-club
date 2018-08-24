@@ -71,9 +71,4 @@ def delete(request, trail_id):
     current_trail = get_object_or_404(Trail, pk=trail_id)
     current_trail.delete()
 
-    # FIXME (do remove empty folders via a 'cron' task)
-    # trail_path = os.path.join(settings.MEDIA_ROOT, 'trails/', str(trail_id))
-    # if os.path.isdir(trail_path):
-    #     shutil.rmtree(trail_path)
-
     return HttpResponseRedirect(reverse('dashboard'))
