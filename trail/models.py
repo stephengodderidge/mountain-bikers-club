@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
+from storages.backends.s3boto3 import S3Boto3Storage
 
 
 # Create your models here.
@@ -20,7 +22,9 @@ class Trail(models.Model):
     # Info
     name = models.CharField(_('Title'), max_length=255, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
-    file = models.FileField(_('GPX file'), upload_to=user_directory_path, validators=[FileExtensionValidator(['gpx'])])
+    file = models.FileField(_('GPX file'), upload_to=user_directory_path, validators=[FileExtensionValidator(['gpx'])])\
+        if settings.DEBUG is True else\
+        models.FileField(_('GPX file'), upload_to=user_directory_path, validators=[FileExtensionValidator(['gpx'])], storage=S3Boto3Storage)
 
     # Track
     distance = models.FloatField(blank=True, null=True)
