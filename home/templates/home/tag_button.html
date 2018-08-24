@@ -1,0 +1,11 @@
+<div class="button__outer {{ class|default:'' }}">
+    {% if link %}
+        <a class="button" href="{{ link }}">
+            <span>{{ label }}</span>
+        </a>
+    {% else %}
+        <button class="button">
+            <span>{{ label }}</span>
+        </button>
+    {% endif %}
+</div>

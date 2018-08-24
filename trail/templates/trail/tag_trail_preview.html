@@ -1,0 +1,25 @@
+{% load i18n tpl_trail_map filter_gpx %}
+<li class="trail-preview__outer cell-{{ cell|default:'1of1' }} has-hidden-links">
+    <a href="{{ url }}" class="trail-preview">
+        <div class="trail-preview__map">
+            {% tpl_trail_map trail.file '180px' False %}
+            <h3 class="trail-preview__title">{{ trail.name|default:'Unnamed trail' }}</h3>
+        </div>
+        {% if trail.distance and trail.uphill %}
+        <ul class="trail-preview__info-grid">
+            <li class="trail__statistic">
+                <svg width="20" height="20" class="trail__icon"><use xlink:href="#distance"></use></svg>
+                {{ trail.distance|floatformat }}km
+            </li>
+            <li class="trail__statistic">
+                <svg width="20" height="20" class="trail__icon"><use xlink:href="#rocket"></use></svg>
+                {{ trail.uphill|floatformat:"0" }}m
+            </li>
+            <li class="trail__statistic">
+                <svg width="20" height="20" class="trail__icon"><use xlink:href="#time"></use></svg>
+                {{ trail.moving_time|format_time }}
+            </li>
+        </ul>
+        {% endif %}
+    </a>
+</li>

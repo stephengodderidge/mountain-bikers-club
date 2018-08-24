@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block headerlinks %}
+    <li class="has-hidden-links">
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}">
+                {% filter lower %}
+                    {% blocktrans with user=user.username %}{{ user }}'s dashboard{% endblocktrans %}
+                {% endfilter %}
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">{% trans 'Sign in'|lower %}</a>
+        {% endif %}
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="o-section">
+        <div class="o-group">
+            {{ flatpage.content }}
+        </div>
+    </div>
+{% endblock %}

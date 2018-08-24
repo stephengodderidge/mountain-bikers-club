@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+{% load static i18n tpl_button tpl_trail_map %}
+
+{% block title %}Edit a GPX file{% endblock %}
+
+{% block headerlinks %}
+    {% include 'dashboard/headerlinks.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="o-section">
+        <div class="o-group is-large">
+            <div class="o-flex-inline has-gutter">
+                <div class="cell-2of3">
+                    <h1>Edit {{ trail.name|default:'' }}</h1>
+                    <form action="{% url 'trail__edit' trail.id %}" method="post">
+                        {% csrf_token %}
+                        <ul class="django__form">
+                            {{ form.as_ul }}
+                        </ul>
+                        <div class="o-flex-space has-horizontal-gutter">
+                            <div class="o-flex-inline has-horizontal-gutter">
+                                <div>
+                                    {% trans 'Save' as button_label %}
+                                    {% tpl_button button_label class='is-success' %}
+                                </div>
+                                <div>
+                                    {% trans 'Cancel' as button_label %}
+                                    {% url 'trail' trail.id as button_link %}
+                                    {% tpl_button button_label button_link class='is-secondary' %}
+                                </div>
+                            </div>
+                            <div>
+                                {% trans 'Delete' as button_label %}
+                                {% url 'trail__delete' trail.id as button_link %}
+                                {% tpl_button button_label button_link class='is-danger' %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="cell-1of3">
+                    <h2>Map</h2>
+                    {% tpl_trail_map trail.file '280px' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

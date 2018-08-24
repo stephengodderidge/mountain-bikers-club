@@ -1,0 +1,66 @@
+{% load static %}
+{% if file %}
+    <div id="map-{{ uid }}" style="height: {{ css_height|default:'54vh' }};" class="trail-map"></div>
+    <script type="module">
+        import { loadJS, loadCSS } from '{% static 'home/scripts/library/async-loader.js' %}';
+
+        (async function() {
+            await loadCSS(
+                'https://unpkg.com/leaflet@1.3.3/dist/leaflet.css',
+                true,
+                'sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==',
+            );
+
+            await loadJS(
+                'https://unpkg.com/leaflet@1.3.3/dist/leaflet.js',
+                true,
+                'sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==',
+            );
+
+            await loadJS('https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.4.0/gpx.min.js', true);
+
+            const myMap = L.map('map-{{ uid }}', {
+                {% if not interface %}
+                    zoomControl: false,
+                    attributionControl: false,
+                    dragging: false,
+                {% endif %}
+                scrollWheelZoom: false,
+            });
+
+            L.tileLayer('https://a.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
+                maxZoom: 17,
+            }).addTo(myMap);
+
+            new L.GPX(
+                '{{ file.url }}',
+                {
+                    async: true,
+                    polyline_options: {
+                        color: 'crimson',
+                        opacity: 0.75,
+                        weight: 4,
+                        lineCap: 'round',
+                    },
+                    marker_options: {
+                        {% if not interface %}
+                            startIconUrl: '',
+                            endIconUrl: '',
+                        {% else %}
+
+                            startIconUrl: '{% static 'trail/pin_start.svg' %}',
+                            endIconUrl: '{% static 'trail/pin_end.svg' %}',
+                        {% endif %}
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 30],
+                        shadowUrl: '',
+                        wptIconUrls: {},
+                    },
+                },
+            ).on('loaded', function(e) {
+                myMap.fitBounds(e.target.getBounds());
+            }).addTo(myMap);
+        })();
+    </script>
+{% endif %}

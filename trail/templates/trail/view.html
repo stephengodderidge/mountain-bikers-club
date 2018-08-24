@@ -1,0 +1,72 @@
+{% extends 'home/base.html' %}
+{% load static i18n tpl_button tpl_trail_map filter_gpx %}
+
+{% block title %}{{ trail.name|default:'Trail' }}{% endblock %}
+{% block description %}{{ trail.description|default:'' }}{% endblock %}
+
+{% block headerlinks %}
+    {% if user.is_authenticated %}
+        {% include 'dashboard/headerlinks.html' %}
+    {% else %}
+        <li class="has-hidden-links">
+            <a href="{% url 'register' %}">{% trans 'Sign up'|lower %}</a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="o-section">
+        <div class="o-group is-large">
+            <h1 class="has-no-bottom-space">{{ trail.name|default:'Unnamed trail' }}</h1>
+            <p style="color: var(--yellow);">
+                Published by {{ trail.user.first_name|default:trail.user.username }}
+                on {{ trail.pub_date|date }}
+            </p>
+            {% if trail.distance > 0 %}
+                <ul class="trail__statistics-grid">
+                    <li class="trail__statistic">
+                        <svg width="20" height="20" class="trail__icon">
+                            <use xlink:href="#calendar"></use>
+                        </svg>
+                        {{ trail.start_datetime|date:"SHORT_DATE_FORMAT" }}
+                    </li>
+                    <li class="trail__statistic">
+                        <svg width="20" height="20" class="trail__icon">
+                            <use xlink:href="#distance"></use>
+                        </svg>
+                        {{ trail.distance|default:0|floatformat:"-2" }}km
+                    </li>
+                    <li class="trail__statistic">
+                        <svg width="20" height="20" class="trail__icon">
+                            <use xlink:href="#rocket"></use>
+                        </svg>
+                        {{ trail.uphill|default:0|floatformat:"0" }}m
+                    </li>
+                    <li class="trail__statistic">
+                        <svg width="20" height="20" class="trail__icon">
+                            <use xlink:href="#time"></use>
+                        </svg>
+                        {{ trail.moving_time|format_time }}
+                    </li>
+                    <li class="trail__statistic">
+                        <svg width="20" height="20" class="trail__icon">
+                            <use xlink:href="#speed-medium"></use>
+                        </svg>
+                        {{ trail.average_speed|default:0|floatformat }}km/h
+                    </li>
+                </ul>
+                <p><!-- empty --></p>
+            {% endif %}
+            {% tpl_trail_map trail.file '84vh' %}
+            <p><!-- empty --></p>
+            {% if trail.description %}
+                <p>{{ trail.description }}</p>
+            {% endif %}
+            {% if user.is_authenticated and user == trail.user %}
+                {% trans 'Edit' as button_label %}
+                {% url 'trail__edit' trail.id as button_link %}
+                {% tpl_button button_label button_link class='is-warning' %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

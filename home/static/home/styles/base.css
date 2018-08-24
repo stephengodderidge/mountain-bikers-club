@@ -1,0 +1,246 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3626458, 2018-08-24T02:35:04-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: UniNeueHeavy by Fontfabric
+ * URL: https://www.myfonts.com/fonts/font-fabric/uni-neue/heavy/
+ * Copyright: Copyright (c) 2017 by Fontfabric LLC. All rights reserved.
+ *
+ * Webfont: UniNeueLight by Fontfabric
+ * URL: https://www.myfonts.com/fonts/font-fabric/uni-neue/light/
+ * Copyright: Copyright (c) 2017 by Fontfabric LLC. All rights reserved.
+ *
+ * Webfont: UniNeueRegular by Fontfabric
+ * URL: https://www.myfonts.com/fonts/font-fabric/uni-neue/regular/
+ * Copyright: Copyright (c) 2016 by FontfabricLLC. All rights reserved.
+ *
+ *
+ * License: https://www.myfonts.com/viewlicense?type=web&buildid=3626458
+ * Licensed pageviews: 10,000
+ *
+ * © 2018 MyFonts Inc
+*/
+
+@font-face {
+    font-family: 'UniNeue';
+    src: url('../webfonts/3755DA_0_0.woff2') format('woff2');
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: 'UniNeue';
+    src: url('../webfonts/3755DA_1_0.woff2') format('woff2');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'UniNeue';
+    src: url('../webfonts/3755DA_2_0.woff2') format('woff2');
+    font-weight: 500
+}
+
+/* --- View --- */
+
+.o-view {
+    display: grid;
+    grid-template: auto 1fr auto / 1fr;
+}
+
+/* --- Wave --- */
+
+.o-wave {
+    display: block;
+    width: 100%;
+    /* height: ${this.height || "var(--section-margin-height)"}; */
+    height: var(--section-margin-height);
+    border-radius: 0 0 65% 55%/0 0 100% 60%;
+    /* background: ${this.color}; */
+    transform: scale(1.3, 2.7) rotate(-0.3deg);
+    transform-origin: center bottom;
+    position: relative;
+}
+
+/* --- Button --- */
+
+.button__outer {
+    --button-color: var(--blue);
+
+    display: inline-block;
+    box-shadow: 0 0 0 2px var(--base00), 0 0 0 5px var(--button-color);
+    border-radius: 3px;
+    line-height: 0;
+
+    position: relative;
+    left: 5px;
+}
+
+.button__outer.is-secondary {
+    --button-color: var(--base04);
+    opacity: 0.85;
+}
+
+.button__outer.is-success {
+    --button-color: var(--green);
+}
+
+.button__outer.is-warning {
+    --button-color: var(--yellow);
+}
+
+.button__outer.is-danger {
+    --button-color: var(--red);
+}
+
+.button {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    background: var(--base00);
+    border-radius: 3px;
+    text-decoration: none;
+    line-height: 4.8rem;
+    font-size: 1.8rem;
+    color: var(--base07);
+    overflow: hidden;
+    transform: translateZ(0);
+    padding: 0 23px;
+}
+
+.button::before {
+    --size: 0;
+    content: '';
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle closest-side, var(--button-color), transparent);
+    transform: translate(-50%, -50%);
+    transition: transform 200ms ease;
+}
+
+.button:hover {
+    color: var(--base00);
+}
+
+.button:hover::before {
+    --size: 1200px;
+}
+
+.button span {
+    position: relative;
+}
+
+/* --- Header --- */
+
+.main-header {
+    color: var(--yellow);
+    padding: 10px 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    position: relative;
+}
+
+.main-header::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    opacity: .7;
+    background-image: linear-gradient(to right, var(--page-background) 5%, var(--yellow) 50%, var(--page-background) 95%);
+    transform: scale(2, 1);
+}
+
+.main-header__logo {
+    font-size: 24px;
+    line-height: 24px;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.main-header__icons {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.main-header__icons button {
+    color: inherit;
+}
+
+.main-header__icons a {
+    line-height: 0;
+    display: block;
+}
+
+/* --- Footer --- */
+
+.main-footer {
+    /* grid-row: -1; */
+    background: var(--base01);
+    color: var(--base02);
+    padding-bottom: calc(var(--section-margin-height) / 2);
+    overflow: hidden;
+}
+
+.main-footer__links {
+    margin: 0 auto !important;
+    padding: calc(var(--section-margin-height) / 2) var(--page-gutter-width) 0;
+    font-size: 16px;
+    text-align: center;
+    max-width: calc(var(--page-maxwidth) + 2 * var(--page-gutter-width));
+}
+
+/* --- Forms --- */
+
+.django__form > li {
+    margin-bottom: 20px;
+}
+
+.django__form label {
+    display: block;
+    font-size: 90%;
+}
+
+.django__form input,
+.django__form textarea {
+    border: solid 1px white;
+    padding: 8px;
+    border-radius: 3px;
+    background: #ffffff17;
+    color: white;
+    font-size: 18px;
+    margin: 10px 0 5px;
+    width: 70%;
+    min-width: 260px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.django__form input[type="file"] {
+    border: 0;
+    font-size: initial;
+    border-left: solid 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;;
+}
+
+.django__form .helptext {
+    display: block;
+    font-size: 70%;
+}
+
+.django__form .errorlist {
+    color: var(--red);
+    margin-bottom: 10px;
+    font-size: 85%;
+    padding-top: 5px;
+}

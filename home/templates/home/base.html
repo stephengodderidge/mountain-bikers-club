@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>{% block title %}{% endblock %} ・ Mountain Bikers Club</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+
+    <!-- Android / Standard: 192x192px -->
+    <meta name="application-name" content="MTB Club">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    {# <link rel="icon" sizes="192x192" href="{% static "hello/assets/icons/touch-icon.png" %}">#}
+
+    <!-- iOS: 152x152px (180x180px) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MTB Club">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    {# <link rel="apple-touch-icon" href="{% static "hello/assets/icons/apple-touch-icon.png" %}">#}
+
+    <!-- Safari pinned tab: 80x80px -->
+    {# <link rel="mask-icon" href="{% static "hello/assets/icons/website-icon.svg" %}" color="#393939">#}
+
+    <!-- Windows: 144x144px -->
+    {# <meta name="msapplication-TileImage" content="{% static "hello/assets/icons/ms-touch-icon.png" %}">#}
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <link rel="preload" href="{% static 'home/styles/shell.css' %}" as="style">
+    <link rel="preload" href="{% static 'home/styles/base.css' %}" as="style">
+    <link rel="preload" href="{% static 'home/styles/trail.css' %}" as="style">
+    <link rel="preload" href="{% static 'home/webfonts/35C717_3_0.woff2' %}" as="font">
+    <link rel="preload" href="{% static 'home/scripts/main.js' %}" as="script">
+
+    <link rel="stylesheet" href="{% static 'home/styles/shell.css' %}">
+    <link rel="stylesheet" href="{% static 'home/styles/base.css' %}">
+    <link rel="stylesheet" href="{% static 'home/styles/trail.css' %}">
+
+    <!-- Web App Manifest -->
+    {# <link rel="manifest" href="{% static "hello/webapp.manifest" %}">#}
+</head>
+<body>
+{% include 'home/symbols.html' %}
+<div class="o-view">
+    <header class="main-header o-section">
+        <ul class="o-flex-space o-group is-large">
+            <li>
+                <a href="{% url 'home' %}" class="main-header__logo">Mountain Bikers Club</a>
+                <sup style="color: var(--red)">early preview</sup>
+            </li>
+            {% block headerlinks %}
+            {% endblock %}
+        </ul>
+    </header>
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="main-footer has-hidden-links">
+        <div class="o-wave" style="background: var(--page-background)" aria-hidden="true"></div>
+        {% load flatpages %}
+        {% get_flatpages as flatpages %}
+        <ul class="o-flex-inline has-horizontal-gutter is-center main-footer__links" style="display: none;">
+            {% for page in flatpages %}
+                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
+        </ul>
+        <ul class="o-flex-inline has-horizontal-gutter is-middle is-center main-footer__links">
+            <li>
+                <a href="https://fb.me/mountainbikersclub" target="_blank" rel="noopener">
+                    <svg width="32" height="32" class="trail__icon">
+                        <use xlink:href="#facebook"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="https://m.me/mountainbikersclub" target="_blank" rel="noopener">
+                    <svg width="40" height="40" class="trail__icon">
+                        <use xlink:href="#messenger"></use>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </footer>
+</div>
+<script async type="module" src="{% static "home/scripts/main.js" %}"></script>
+</body>

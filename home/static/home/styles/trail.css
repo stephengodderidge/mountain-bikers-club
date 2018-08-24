@@ -1,0 +1,100 @@
+/* --- Trail generic --- */
+
+.trail__icon {
+    vertical-align: middle;
+    position: relative;
+    bottom: 3px;
+    margin-right: 5px;
+}
+
+.trail__statistic {
+    text-align: center;
+}
+
+
+/* --- Trail Preview --- */
+
+.trail-preview {
+    display: block;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--base01);
+    position: relative;
+    box-shadow: inset 0 0 0 1px var(--base02);
+}
+
+.trail-preview__map {
+    position: relative;
+}
+
+.trail-preview__map::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--base00);
+    opacity: 0;
+    z-index: 1;
+    will-change: opacity;
+    transition: 350ms;
+}
+
+.trail-preview:hover .trail-preview__map::after {
+    opacity: 0.82;
+}
+
+.trail-preview__title {
+    font-weight: 500;
+    position: absolute;
+    bottom: 0;
+    left: var(--h2-margin-bottom);
+    color: var(--base07);
+    z-index: 2;
+    opacity: 0;
+    will-change: opacity;
+    transform: translate3d(0, 10px, 0);
+    transition: 350ms;
+}
+
+.trail-preview:hover .trail-preview__title {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.trail-preview__info-grid {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    border-top: solid 1px var(--base02);
+    font-size: 80%
+}
+
+
+/* --- Trail Map --- */
+
+.trail-map {
+    width: 100%;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.trail-preview .trail-map {
+    border-radius: 0;
+    z-index: 0;
+}
+
+
+/* --- Trail View --- */
+
+.trail__statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 10px;
+    padding: 10px;
+    border: solid 1px var(--base02);
+    background: var(--base01);
+    border-radius: 3px;
+}

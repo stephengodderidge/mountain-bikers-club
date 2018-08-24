@@ -1,0 +1,32 @@
+{% extends 'home/base.html' %}
+{% load i18n tpl_button %}
+
+{% block title %}Upload a GPX file{% endblock %}
+
+{% block headerlinks %}
+    {% include 'dashboard/headerlinks.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="o-section">
+        <div class="o-group is-large">
+            <div class="o-flex-inline has-gutter">
+                <div class="cell-2of3">
+                    <h1>{% trans 'Upload a GPX file' %}</h1>
+                    <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <ul class="django__form">
+                            {{ form.as_ul }}
+                        </ul>
+                        {% trans 'Save' as button_label %}
+                        {% tpl_button button_label class='is-success' %}
+                    </form>
+                </div>
+                <div class="cell-1of3">
+                    <h2>{% trans 'Share the fun of the trail' %}</h2>
+                    <p>{% lorem %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
