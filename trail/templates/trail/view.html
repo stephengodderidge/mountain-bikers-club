@@ -19,8 +19,9 @@
         <div class="o-group is-large">
             <h1 class="has-no-bottom-space">{{ trail.name|default:'Unnamed trail' }}</h1>
             <p style="color: var(--yellow);">
-                Published by {{ trail.user.first_name|default:trail.user.username }}
-                on {{ trail.pub_date|date }}
+                {% blocktrans trimmed with user=trail.user.first_name|default:trail.user.username date=trail.pub_date|date %}
+                Published by {{ user }} on {{ date }}
+                {% endblocktrans %}
             </p>
             {% if trail.distance > 0 %}
                 <ul class="trail__statistics-grid">
