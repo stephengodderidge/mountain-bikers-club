@@ -1,20 +1,24 @@
 # Mountain Bikers Club
-
-
 ## Technologies
+- The application runs with Django and PostgreSQL.
+- The maps are build with Leaflet.
+- The JavaScript is built on top of [my JS library](https://www.cedeber.fr), which is open source too.
 
-The application runs with Django and PostgreSQL.
-
+## Browsers support
+I am not going to do Progressive enhancement. Mountain Bikers Club is a side project and nearly all modern browsers offer the support of what is needed:
+- CSS variables
+- CSS Grid
+- ES 2017 support at minimun, as the app is loaded as an ES Module, which include all API released before ES 2017.
+- Web Component and Shadow DOM (later this year with Firefox 63)
 
 ## Hosting
+- The website and the database are hosted on Heroku.
+- The user's files (GPX, photos, ...) are uploaded and served via Amazon Web Service S3.
+- The DNS is managed on Cloudflare.
+- The map tiles come from OpenTopoMap.
 
-The website and the database are hosted on Heroku.
+# Support
+The hosting on Heroku and AWS S3 are not free and I code this app during my free time.
+If you want to support the development of the app, you can send me some money via Buy Me A Coffee.
 
-The user's files (GPX, photos, ...) are uploaded and served via Amazon Web Service S3.
-
-The DNS is managed on Cloudflare.
-
-
-## Usage
-
-Every push to the master branch updates automatically the web application on Heroku.
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/cedeber)
