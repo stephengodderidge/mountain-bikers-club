@@ -8,7 +8,7 @@
 I am not going to do Progressive enhancement. Mountain Bikers Club is a side project and nearly all modern browsers offer the support of what is needed:
 - CSS variables
 - CSS Grid
-- ES 2017 support at minimun, as the app is loaded as an ES Module, which include all API released before ES 2017.
+- ES 2017 support at minimun, as the app is loaded as an ES Module, which includes all API released before ES 2017.
 - Web Component and Shadow DOM (later this year with Firefox 63)
 
 ## Hosting
