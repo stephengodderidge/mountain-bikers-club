@@ -5,7 +5,7 @@ let loadCSSPromise = null;
 /**
  * Load JS asynchronously
  * @param {string} src
- * @param {boolean} [crossOrigin=false]
+ * @param {boolean|string} [crossOrigin=false]
  * @param {string} [integrity='']
  * @returns {Promise<*>}
  */
@@ -20,7 +20,11 @@ export function loadJS(src, crossOrigin = false, integrity = '') {
         script.onload = event => resolve(event);
         script.onerror = event => reject(event);
         script.async = true;
-        script.crossOrigin = crossOrigin;
+        if (typeof crossOrigin === "string") {
+            script.crossOrigin = crossOrigin;
+        } else if (crossOrigin === true) {
+            script.crossOrigin = "anonymous";
+        }
         script.integrity = integrity;
         script.src = src;
 
@@ -56,7 +60,11 @@ export function loadCSS(
         link.addEventListener('error', event => reject(event));
         link.setAttribute('rel', 'stylesheet');
         link.setAttribute('media', media);
-        link.crossOrigin = crossOrigin;
+        if (typeof crossOrigin === "string") {
+            link.crossOrigin = crossOrigin;
+        } else if (crossOrigin === true) {
+            link.crossOrigin = "anonymous";
+        }
         link.integrity = integrity;
         link.setAttribute('href', src);
 
