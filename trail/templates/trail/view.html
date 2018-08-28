@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="o-section">
+    <div class="o-section has-no-bottom-space">
         <div class="o-group is-large">
             <h1 class="has-no-bottom-space">{{ trail.name|default:'Unnamed trail' }}</h1>
             <p style="color: var(--yellow);">
@@ -23,41 +23,71 @@
                 Published by {{ user }} on {{ date }}
                 {% endblocktrans %}
             </p>
-            {% if trail.distance > 0 %}
-                <ul class="trail__statistics-grid">
-                    <li class="trail__statistic">
-                        <svg width="20" height="20" class="trail__icon">
-                            <use xlink:href="#calendar"></use>
-                        </svg>
-                        {{ trail.start_datetime|date:"SHORT_DATE_FORMAT" }}
-                    </li>
-                    <li class="trail__statistic">
-                        <svg width="20" height="20" class="trail__icon">
-                            <use xlink:href="#distance"></use>
-                        </svg>
-                        {{ trail.distance|default:0|floatformat:"-2" }}km
-                    </li>
-                    <li class="trail__statistic">
-                        <svg width="20" height="20" class="trail__icon">
-                            <use xlink:href="#rocket"></use>
-                        </svg>
-                        {{ trail.uphill|default:0|floatformat:"0" }}m
-                    </li>
-                    <li class="trail__statistic">
-                        <svg width="20" height="20" class="trail__icon">
-                            <use xlink:href="#time"></use>
-                        </svg>
-                        {{ trail.moving_time|format_time }}
-                    </li>
-                    <li class="trail__statistic">
-                        <svg width="20" height="20" class="trail__icon">
-                            <use xlink:href="#speed-medium"></use>
-                        </svg>
-                        {{ trail.average_speed|default:0|floatformat }}km/h
-                    </li>
-                </ul>
-                <p><!-- empty --></p>
-            {% endif %}
+            <ul class="trail__statistics-grid">
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#home"></use>
+                    </svg>
+                    {{ trail.location|default:'n/a'|truncatechars:18 }}
+                </li>
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#distance"></use>
+                    </svg>
+                    {{ trail.distance|default:0|floatformat:"-2" }}km
+                </li>
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#rocket"></use>
+                    </svg>
+                    {{ trail.uphill|default:0|floatformat:"0" }}m
+                </li>
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#time"></use>
+                    </svg>
+                    {{ trail.moving_time|format_time }}
+                </li>
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#speed-medium"></use>
+                    </svg>
+                    {{ trail.average_speed|default:0|floatformat }}km/h
+                </li>
+            </ul>
+            <ul class="trail__statistics-grid">
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#calendar"></use>
+                    </svg>
+                    {{ trail.start_datetime|date:"SHORT_DATETIME_FORMAT" }}
+                </li>
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#calendar"></use>
+                    </svg>
+                    {{ trail.end_datetime|date:"SHORT_DATETIME_FORMAT" }}
+                </li>
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#enter-down"></use>
+                    </svg>
+                    {{ trail.min_altitude|floatformat:"0" }}m
+                </li>
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#enter-up"></use>
+                    </svg>
+                    {{ trail.max_altitude|floatformat:"0" }}m
+                </li>
+                <li class="is-left">
+                    <svg width="20" height="20" class="trail__icon">
+                        <use xlink:href="#speed-fast"></use>
+                    </svg>
+                    {{ trail.max_speed|floatformat:"1" }}km/h
+                </li>
+            </ul>
+            <p><!-- empty --></p>
             {% tpl_trail_map trail.file '84vh' %}
             <p><!-- empty --></p>
             {% if trail.description %}

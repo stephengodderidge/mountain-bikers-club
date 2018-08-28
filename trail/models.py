@@ -1,5 +1,6 @@
 import uuid
 import gpxpy
+import gpx
 
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
@@ -20,6 +21,7 @@ class Trail(models.Model):
     # Info
     name = models.CharField(_('Title'), max_length=255, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
+    location = models.CharField(_('Location'), max_length=255, blank=True, null=True)
     file = models.FileField(_('GPX file'), upload_to=user_directory_path, validators=[FileExtensionValidator(['gpx'])])
 
     # Track
@@ -52,36 +54,31 @@ class Trail(models.Model):
         if bool(self.file):
             with self.file.open() as file:
                 gpx_file = file.read()
-                gpx = gpxpy.parse(gpx_file.decode('utf-8'))
-                track = gpx.tracks[0] if len(gpx.tracks) > 0 else None
+                parser = gpx.parse(gpx_file.decode('utf-8'))
 
+                name, description, start_time, end_time, location = parser.get_metadata()
                 if not self.name:
-                    self.name = gpx.name or None
-
+                    self.name = name or _('Unnamed Trail')
                 if not self.description:
-                    self.description = gpx.description or None
+                    self.description = description
+                self.start_datetime = start_time
+                self.end_datetime = end_time
+                self.location = location
 
-                if track:
-                    if not self.name:
-                        self.name = track.name or _('Unnamed Trail')
+                min_elevation, max_elevation, uphill, downhill = parser.get_elevation_data()
+                self.min_altitude = min_elevation
+                self.max_altitude = max_elevation
+                self.uphill = uphill
+                self.downhill = downhill
 
-                    if not self.description:
-                        self.description = track.description or None
+                distance, time, max_speed = parser.get_moving_data()
+                self.distance = distance / 1000
 
-                    uphill, downhill = track.get_uphill_downhill()
-                    moving_time, stopped_time, moving_distance, stopped_distance, max_speed = track.get_moving_data()
-                    start_time, end_time = track.get_time_bounds()
+                gpx_old = gpxpy.parse(gpx_file.decode('utf-8'))
+                track_old = gpx_old.tracks[0] if len(gpx_old.tracks) > 0 else None
+                if track_old:
+                    moving_time, stopped_time, moving_distance, stopped_distance, max_speed = track_old.get_moving_data()
 
-                    # Track
-                    self.distance = (track.length_3d() or track.length_2d()) / 1000.
-                    self.uphill = uphill
-                    self.downhill = downhill
-                    # self.min_altitude = 0.
-                    # self.max_altitude = 0.
-
-                    # Time
-                    self.start_datetime = start_time
-                    self.end_datetime = end_time
                     # self.total_time = 0
                     self.moving_time = moving_time
 

@@ -7,17 +7,17 @@
         </div>
         {% if trail.distance and trail.uphill %}
         <ul class="trail-preview__info-grid">
-            <li class="trail__statistic">
-                <svg width="20" height="20" class="trail__icon"><use xlink:href="#distance"></use></svg>
+            <li class="is-left" style="grid-column-end: span 2;">
+                <svg width="15" height="15" class="trail__icon"><use xlink:href="#home"></use></svg>
+                {{ trail.location|default:'n/a'|truncatechars:18 }}
+            </li>
+            <li class="is-center">
+                <svg width="15" height="15" class="trail__icon"><use xlink:href="#distance"></use></svg>
                 {{ trail.distance|floatformat }}km
             </li>
-            <li class="trail__statistic">
-                <svg width="20" height="20" class="trail__icon"><use xlink:href="#rocket"></use></svg>
+            <li class="is-right">
+                <svg width="15" height="15" class="trail__icon"><use xlink:href="#rocket"></use></svg>
                 {{ trail.uphill|floatformat:"0" }}m
-            </li>
-            <li class="trail__statistic">
-                <svg width="20" height="20" class="trail__icon"><use xlink:href="#time"></use></svg>
-                {{ trail.moving_time|format_time }}
             </li>
         </ul>
         {% endif %}
