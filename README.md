@@ -17,8 +17,11 @@ I am not going to do Progressive enhancement. Mountain Bikers Club is a side pro
 - The DNS is managed on Cloudflare.
 - The map tiles come from OpenTopoMap.
 
+## Privacy
+When I started to code websites in 1998, we were used to listen to people's feedbacks. This is the web I love.
+I am not going to install any script that do statistics.
+
 # Support
-The hosting on Heroku and AWS S3 are not free and I code this app during my free time.
-If you want to support the development of the app, you can send me some money via Buy Me A Coffee.
+The hosting on Heroku and AWS S3 are not free and I code this app during my free time. Having ads on the website is not an option. If you want to support the development of the app, you can send me some money via Buy Me A Coffee.
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/cedeber)
