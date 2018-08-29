@@ -125,11 +125,14 @@
     transition: transform 200ms ease;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
     color: var(--base00);
+    outline: 0;
 }
 
-.button:hover::before {
+.button:hover::before,
+.button:focus::before {
     --size: 1200px;
 }
 
@@ -219,7 +222,7 @@
     border: solid 1px white;
     padding: 8px;
     border-radius: 3px;
-    background: #ffffff17;
+    background: #404040;
     color: white;
     font-size: 18px;
     margin: 10px 0 5px;
@@ -227,6 +230,18 @@
     min-width: 260px;
     resize: vertical;
     font-family: inherit;
+}
+
+.django__form input:-moz-ui-invalid {
+    border-color: var(--red);
+    box-shadow: 0 0 0 2px #404040, 0 0 0 5px #f2777a4d;
+}
+
+.django__form input:focus,
+.django__form textarea:focus {
+    outline: 0;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px #404040, 0 0 0 5px #6699cc4d;
 }
 
 .django__form input[type="file"] {
