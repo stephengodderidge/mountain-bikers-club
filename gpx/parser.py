@@ -66,6 +66,7 @@ class GPXParser:
 
         name = self.root.find('metadata/name') or self.root.find('trk/name')
         description = self.root.find('metadata/desc') or self.root.find('trk/desc')
+        location = None
 
         if name is not None:
             name = name.text
@@ -76,7 +77,6 @@ class GPXParser:
         start_time = self.points[0]['time']
         end_time = self.points[size - 1]['time']
 
-        village = None
         url = 'https://nominatim.openstreetmap.org/reverse?lat=' + str(self.points[0]['lat']) + '&lon=' + str(self.points[0]['lon'])
         headers = {'User-Agent': 'mountainbikers.club'}
         req = urllib.request.Request(url, headers=headers)
@@ -85,9 +85,11 @@ class GPXParser:
             reverse_root = ET.fromstring(reverse_xml)
 
             if reverse_root is not None and reverse_root.tag == 'reversegeocode':
-                village = reverse_root.find('addressparts/village')
+                location = reverse_root.find('addressparts/village')
+                if location is None:
+                    location = reverse_root.find('addressparts/town')
 
-        location = village.text if village is not None else None
+        location = location.text if location is not None else None
 
         return name, description, start_time, end_time, location
 
