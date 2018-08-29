@@ -23,15 +23,24 @@
                             {% tpl_button button_label class='is-success' %}
                         </div>
                         <div>
+                            {% trans 'Logout' as button_label %}
+                            {% url 'user__delete' as button_link %}
+                            {% tpl_button button_label button_link class='is-warning' %}
+                        </div>
+                        {% comment %}
+                        <div>
                             {% trans 'Cancel' as button_label %}
                             {% url 'dashboard' as button_link %}
                             {% tpl_button button_label button_link class='is-secondary' %}
                         </div>
+                        {% endcomment %}
                     </div>
-                    <div>
-                        {% trans 'Delete my account' as button_label %}
-                        {% url 'user__delete' as button_link %}
-                        {% tpl_button button_label button_link class='is-danger' %}
+                    <div class="o-flex-inline has-horizontal-gutter">
+                        <div>
+                            {% trans 'Delete my account' as button_label %}
+                            {% url 'user__delete' as button_link %}
+                            {% tpl_button button_label button_link class='is-danger' %}
+                        </div>
                     </div>
                 </div>
             </form>

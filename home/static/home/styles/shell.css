@@ -51,7 +51,7 @@
     --page-background: var(--base00);
     --page-maxwidth: 80rem;
     --page-maxwidth-large: 110rem;
-    --page-gutter-width: 1.5rem;
+    --page-gutter-width: 16px;
 
     --section-margin-height: 6.667vw;
     --layout-gutter-width: 20px;

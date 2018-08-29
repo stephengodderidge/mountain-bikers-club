@@ -8,9 +8,9 @@
     {% if user.is_authenticated %}
         {% include 'dashboard/headerlinks.html' %}
     {% else %}
-        <li class="has-hidden-links">
+        <div class="has-hidden-links">
             <a href="{% url 'register' %}">{% trans 'Sign up'|lower %}</a>
-        </li>
+        </div>
     {% endif %}
 {% endblock %}
 

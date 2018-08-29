@@ -41,6 +41,7 @@ class GPXParser:
     def __parse(self):
         all_points = []
         tracks = self.root.findall('trk')
+        # FIXME Split tracks
         for track in tracks:
             segments = track.findall('trkseg')
             for segment in segments:

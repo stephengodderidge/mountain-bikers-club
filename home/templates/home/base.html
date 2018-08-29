@@ -1,6 +1,7 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -45,15 +46,17 @@
 <body>
 {% include 'home/symbols.html' %}
 <div class="o-view">
-    <header class="main-header o-section">
-        <ul class="o-flex-space o-group is-large">
-            <li>
+    <header class="main-header o-flex-space">
+        <div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="main-header__logo">Mountain Bikers Club</a>
+            {% else %}
                 <a href="{% url 'home' %}" class="main-header__logo">Mountain Bikers Club</a>
-                <sup style="color: var(--red)">early preview</sup>
-            </li>
-            {% block headerlinks %}
-            {% endblock %}
-        </ul>
+            {% endif %}
+            <sup style="color: var(--red)">early preview</sup>
+        </div>
+        {% block headerlinks %}
+        {% endblock %}
     </header>
     <main class="main-content">
         {% block content %}
@@ -63,7 +66,7 @@
         <div class="o-wave" style="background: var(--page-background)" aria-hidden="true"></div>
         {% load flatpages %}
         {% get_flatpages as flatpages %}
-        <ul class="o-flex-inline has-horizontal-gutter is-middle is-center main-footer__links">
+        <ul class="o-flex-inline has-gutter is-middle is-center main-footer__links">
             {% for page in flatpages %}
                 <li>
                     <a href="{{ page.url }}" class="main-footer__link">
@@ -72,30 +75,29 @@
                 </li>
             {% endfor %}
         </ul>
-        <p><!-- empty --></p>
-        <ul class="o-flex-inline is-center">
-            <li style="padding: 0 5px;">
+        <ul class="o-flex-inline has-horizontal-gutter gutter is-center">
+            <li>
                 <a href="https://fb.me/mountainbikersclub" target="_blank" rel="noopener">
                     <svg width="24" height="24" class="trail__icon">
                         <use xlink:href="#facebook"></use>
                     </svg>
                 </a>
             </li>
-            <li style="padding: 0 5px;">
+            <li>
                 <a href="https://m.me/mountainbikersclub" target="_blank" rel="noopener">
                     <svg width="24" height="24" class="trail__icon">
                         <use xlink:href="#messenger"></use>
                     </svg>
                 </a>
             </li>
-            <li style="padding: 0 5px;">
+            <li>
                 <a href="https://mastodon.social/@cedeber" target="_blank" rel="noopener">
                     <svg width="24" height="24" class="trail__icon">
                         <use xlink:href="#mastodon"></use>
                     </svg>
                 </a>
             </li>
-            <li style="padding: 0 5px;">
+            <li>
                 <a href="https://github.com/cedeber/mountain-bikers-club" target="_blank" rel="noopener">
                     <svg width="24" height="24" class="trail__icon">
                         <use xlink:href="#github"></use>

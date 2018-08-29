@@ -4,7 +4,7 @@
 {% block title %}{{ flatpage.title }}{% endblock %}
 
 {% block headerlinks %}
-    <li class="has-hidden-links">
+    <div class="has-hidden-links">
         {% if user.is_authenticated %}
             <a href="{% url 'dashboard' %}">
                 {% filter lower %}
@@ -14,7 +14,7 @@
         {% else %}
             <a href="{% url 'login' %}">{% trans 'Sign in'|lower %}</a>
         {% endif %}
-    </li>
+    </div>
 {% endblock %}
 
 {% block content %}
