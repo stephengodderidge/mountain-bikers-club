@@ -1,4 +1,3 @@
-/** @type {HTMLButtonElement|HTMLLinkElement} */
 const buttons = document.querySelectorAll('.button');
 let isTouch = false;
 
