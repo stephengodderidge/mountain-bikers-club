@@ -226,6 +226,7 @@ body { font-size: var(--default-font-size); }
  * constant(apple) == env(w3c)
  */
 @supports(padding: max(0px)) {
+    /*
     .o-section:not(.has-no-gutter), .o-section:not(.is-full-width) {
         margin-left: max(var(--page-gutter-width), constant(safe-area-inset-left));
         margin-right: max(var(--page-gutter-width), constant(safe-area-inset-right));
@@ -236,6 +237,7 @@ body { font-size: var(--default-font-size); }
         padding-left: max(var(--page-gutter-width), constant(safe-area-inset-left));;
         padding-right: max(var(--page-gutter-width), constant(safe-area-inset-right));
     }
+    */
 }
 
 
