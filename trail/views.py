@@ -22,7 +22,7 @@ def upload(request):
             f.pub_date = timezone.now()
             f.save()
 
-            return HttpResponseRedirect(reverse('trail__edit', args=[f.id]))
+            return HttpResponseRedirect(reverse('trail', args=[f.id]))
 
     else:
         form = GpxUploadForm()
