@@ -1,0 +1,33 @@
+{% extends 'home/base.html' %}
+{% load static i18n tpl_button tpl_trail_preview %}
+
+{% block title %}{% trans 'Discover' %}{% endblock %}
+{% block description %}{% trans 'Discover new trails' %}{% endblock %}
+
+{% block headerlinks %}
+    <div class="has-hidden-links">
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}">
+                {% filter lower %}
+                    {% blocktrans with user=user.username %}{{ user }}'s dashboard{% endblocktrans %}
+                {% endfilter %}
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">{% trans 'Sign in'|lower %}</a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="o-section">
+        <div class="o-group is-large">
+            <h1>{% trans 'Last trails' %}</h1>
+            <ul class="o-flex has-gutter is-multiline">
+                {% for trail in last_trails %}
+                    {% url 'trail' trail.id as trail_url %}
+                    {% tpl_trail_preview trail trail_url '1of3' %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

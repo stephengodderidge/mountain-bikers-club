@@ -47,14 +47,20 @@
 {% include 'home/symbols.html' %}
 <div class="o-view">
     <header class="main-header o-flex-space">
-        <div>
-            {% if user.is_authenticated %}
-                <a href="{% url 'dashboard' %}" class="main-header__logo">Mountain Bikers Club</a>
-            {% else %}
-                <a href="{% url 'home' %}" class="main-header__logo">Mountain Bikers Club</a>
-            {% endif %}
-            <sup style="color: var(--red)">early preview</sup>
-        </div>
+        <ul class="o-flex-inline has-gutter has-hidden-links">
+            <li>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="main-header__logo">Mountain Bikers Club</a>
+                {% else %}
+                    <a href="{% url 'home' %}" class="main-header__logo">Mountain Bikers Club</a>
+                {% endif %}
+                <sup style="color: var(--red)">early preview</sup>
+            </li>
+            <li aria-hidden="true" style="width: 20px;"><!-- empty --></li>
+            <li>
+                <a href="{% url 'discover' %}" class="main-header__menu__link">Discover</a>
+            </li>
+        </ul>
         {% block headerlinks %}
         {% endblock %}
     </header>

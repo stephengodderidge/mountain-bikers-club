@@ -37,11 +37,6 @@
                                 {% url 'dashboard' as button_link %}
                                 {% tpl_button button_label button_link %}
                             </div>
-                            <div>
-                                {% trans 'Logout' as button_label %}
-                                {% url 'logout' as button_link %}
-                                {% tpl_button button_label button_link class='is-secondary' %}
-                            </div>
                         </div>
                     {% else %}
                         <div class="o-flex-inline has-gutter">
@@ -73,28 +68,9 @@
                             {% trans 'Sign up' as button_label %}
                             {% tpl_button button_label class='is-success' %}
                         </form>
-                    {% else %}
-                        <h2>{% trans 'Your last trails' %}</h2>
-                        <ul class="o-flex has-gutter is-multiline">
-                            {% for trail in last_user_trails %}
-                                {% url 'trail' trail.id as trail_url %}
-                                {% tpl_trail_preview trail trail_url %}
-                            {% endfor %}
-                        </ul>
                     {% endif %}
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="o-section">
-        <div class="o-group is-large">
-            <h2>{% trans 'Last trails' %}</h2>
-            <ul class="o-flex has-gutter is-multiline">
-                {% for trail in last_trails %}
-                    {% url 'trail' trail.id as trail_url %}
-                    {% tpl_trail_preview trail trail_url '1of3' %}
-                {% endfor %}
-            </ul>
         </div>
     </div>
 {% endblock %}

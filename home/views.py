@@ -9,12 +9,17 @@ from trail.models import Trail
 # Create your views here.
 def index(request):
     form_register = UserCreateForm()
-    last_trails = Trail.objects.filter(pub_date__lte=timezone.now())[:30]
-    last_user_trails = Trail.objects.filter(user=request.user)[:2] if request.user.is_authenticated else None
     context = {
         'form_register': form_register,
-        'last_trails': last_trails,
-        'last_user_trails': last_user_trails,
     }
 
     return render(request, 'home/index.html', context)
+
+
+def discover(request):
+    last_trails = Trail.objects.filter(pub_date__lte=timezone.now())[:30]
+    context = {
+        'last_trails': last_trails,
+    }
+
+    return render(request, 'home/discover.html', context)
