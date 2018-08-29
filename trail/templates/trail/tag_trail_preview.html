@@ -5,21 +5,27 @@
             {% tpl_trail_map trail.file '180px' False %}
             <h3 class="trail-preview__title">{{ trail.name|default:'Unnamed trail' }}</h3>
         </div>
-        {% if trail.distance and trail.uphill %}
-        <ul class="trail-preview__info-grid">
-            <li class="is-left" style="grid-column-end: span 2;">
-                <svg width="15" height="15" class="trail__icon"><use xlink:href="#home"></use></svg>
-                {{ trail.location|default:'n/a'|truncatechars:18 }}
-            </li>
-            <li class="is-center">
-                <svg width="15" height="15" class="trail__icon"><use xlink:href="#distance"></use></svg>
-                {{ trail.distance|floatformat }}km
-            </li>
-            <li class="is-right">
-                <svg width="15" height="15" class="trail__icon"><use xlink:href="#rocket"></use></svg>
-                {{ trail.uphill|floatformat:"0" }}m
-            </li>
-        </ul>
+        {% if trail.location or trail.distance or trail.uphill %}
+            <ul class="trail-preview__info-grid">
+                <li class="is-left" style="grid-column-end: span 2;">
+                    <svg width="15" height="15" class="trail__icon">
+                        <use xlink:href="#home"></use>
+                    </svg>
+                    {{ trail.location|default:'n/a'|truncatechars:18 }}
+                </li>
+                <li class="is-center">
+                    <svg width="15" height="15" class="trail__icon">
+                        <use xlink:href="#distance"></use>
+                    </svg>
+                    {{ trail.distance|floatformat }}km
+                </li>
+                <li class="is-right">
+                    <svg width="15" height="15" class="trail__icon">
+                        <use xlink:href="#rocket"></use>
+                    </svg>
+                    {{ trail.uphill|floatformat:"0" }}m
+                </li>
+            </ul>
         {% endif %}
     </a>
 </li>
