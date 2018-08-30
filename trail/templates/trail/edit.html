@@ -3,10 +3,6 @@
 
 {% block title %}Edit a GPX file{% endblock %}
 
-{% block headerlinks %}
-    {% include 'dashboard/headerlinks.html' %}
-{% endblock %}
-
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
@@ -26,7 +22,7 @@
                                 </div>
                                 <div>
                                     {% trans 'Cancel' as button_label %}
-                                    {% url 'trail' trail.id as button_link %}
+                                    {% url 'trail__main' trail.id as button_link %}
                                     {% tpl_button button_label button_link class='is-secondary' %}
                                 </div>
                             </div>

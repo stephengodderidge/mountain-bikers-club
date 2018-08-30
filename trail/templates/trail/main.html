@@ -4,23 +4,14 @@
 {% block title %}{{ trail.name|default:'Trail' }}{% endblock %}
 {% block description %}{{ trail.description|default:'' }}{% endblock %}
 
-{% block headerlinks %}
-    {% if user.is_authenticated %}
-        {% include 'dashboard/headerlinks.html' %}
-    {% else %}
-        <div class="has-hidden-links">
-            <a href="{% url 'register' %}">{% trans 'Sign up'|lower %}</a>
-        </div>
-    {% endif %}
-{% endblock %}
-
 {% block content %}
     <div class="o-section has-no-bottom-space">
         <div class="o-group is-large">
             <h1 class="has-no-bottom-space">{{ trail.name|default:'Unnamed trail' }}</h1>
-            <p style="color: var(--yellow);">
-                {% blocktrans trimmed with user=trail.user.first_name|default:trail.user.username date=trail.pub_date|date %}
-                Published by {{ user }} on {{ date }}
+            <p class="trail__published has-semihidden-links">
+                {% url 'member__main' username=trail.user.username as link %}
+                {% blocktrans trimmed with user=trail.user.first_name|default:trail.user.username date=trail.pub_date|date link=link %}
+                Published by <a href="{{ link }}">{{ user }}</a> on {{ date }}
                 {% endblocktrans %}
             </p>
             <ul class="trail__statistics-grid">

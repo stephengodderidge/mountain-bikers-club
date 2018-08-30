@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home',
     'dashboard',
     'trail',
+    'member',
 ]
 
 MIDDLEWARE = [
@@ -143,7 +144,7 @@ else:
 
 # Auth
 
-LOGIN_URL = '/dashboard/login/'
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 

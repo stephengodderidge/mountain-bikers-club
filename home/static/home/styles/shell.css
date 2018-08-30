@@ -97,8 +97,15 @@ p {
 a { color: inherit }
 
 .has-hidden-links a,
-a.has-hidden-links {
+a.has-hidden-links,
+.has-semihidden-links a,
+a.has-semihidden-links {
     text-decoration: none;
+}
+
+.has-semihidden-links a:hover,
+a.has-semihidden-links:hover {
+    text-decoration: underline;
 }
 
 

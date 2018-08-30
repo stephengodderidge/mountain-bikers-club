@@ -3,23 +3,19 @@
 
 {% block title %}{% trans 'Dashboard' %}{% endblock %}
 
-{% block headerlinks %}
-    {% include 'dashboard/headerlinks.html' %}
-{% endblock %}
-
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
             <h1>{% trans 'Your last trails' %}</h1>
             <ul class="o-flex has-gutter is-multiline">
                 {% for trail in user_trails %}
-                    {% url 'trail' trail.id as trail_url %}
+                    {% url 'trail__main' trail.id as trail_url %}
                     {% tpl_trail_preview trail trail_url '1of3' %}
                 {% endfor %}
             </ul>
             <p><!-- empty --></p>
             {% trans 'Upload a GPX file' as button_label %}
-            {% url 'upload' as button_link %}
+            {% url 'trail__new' as button_link %}
             {% tpl_button button_label button_link class='is-warning' %}
         </div>
     </div>

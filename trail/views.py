@@ -8,9 +8,17 @@ from .forms import GpxUploadForm, GpxEditForm
 from .models import Trail
 
 
-# Create your views here.
+def main(request, trail_id):
+    trail = get_object_or_404(Trail, pk=trail_id)
+    context = {
+        'trail': trail
+    }
+
+    return render(request, 'trail/main.html', context)
+
+
 @login_required
-def upload(request):
+def new(request):
     current_user = request.user
 
     if request.method == 'POST':
@@ -31,16 +39,7 @@ def upload(request):
         'form': form,
     }
 
-    return render(request, 'trail/upload.html', context)
-
-
-def view(request, trail_id):
-    trail = get_object_or_404(Trail, pk=trail_id)
-    context = {
-        'trail': trail
-    }
-
-    return render(request, 'trail/view.html', context)
+    return render(request, 'trail/new.html', context)
 
 
 @login_required
@@ -71,4 +70,4 @@ def delete(request, trail_id):
     current_trail = get_object_or_404(Trail, pk=trail_id)
     current_trail.delete()
 
-    return HttpResponseRedirect(reverse('dashboard'))
+    return HttpResponseRedirect(reverse('dashboard__main'))

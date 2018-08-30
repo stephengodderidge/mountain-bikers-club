@@ -3,5 +3,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.main, name='dashboard__main'),
+    path('<str:username>/', views.main, name='member__main'),
 ]

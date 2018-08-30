@@ -4,20 +4,6 @@
 {% block title %}{% trans 'Home' %}{% endblock %}
 {% block description %}{% trans 'For the love of mountain biking and wild nature' %}{% endblock %}
 
-{% block headerlinks %}
-    <div class="has-hidden-links">
-        {% if user.is_authenticated %}
-            <a href="{% url 'dashboard' %}">
-                {% filter lower %}
-                    {% blocktrans with user=user.username %}{{ user }}'s dashboard{% endblocktrans %}
-                {% endfilter %}
-            </a>
-        {% else %}
-            <a href="{% url 'login' %}">{% trans 'Sign in'|lower %}</a>
-        {% endif %}
-    </div>
-{% endblock %}
-
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
@@ -34,7 +20,7 @@
                         <div class="o-flex-inline has-gutter">
                             <div>
                                 {% trans 'Go to your dashboard' as button_label %}
-                                {% url 'dashboard' as button_link %}
+                                {% url 'dashboard__main' as button_link %}
                                 {% tpl_button button_label button_link %}
                             </div>
                         </div>

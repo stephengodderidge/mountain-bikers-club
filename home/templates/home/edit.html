@@ -3,15 +3,11 @@
 
 {% block title %}{% blocktrans with user=user.first_name|default:user.username %}{{ user }}'s profile{% endblocktrans %}{% endblock %}
 
-{% block headerlinks %}
-    {% include 'dashboard/headerlinks.html' %}
-{% endblock %}
-
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
             <h1>{% blocktrans with user=user.first_name|default:user.username %}{{ user }}'s profile{% endblocktrans %}</h1>
-            <form action="{% url 'profile' %}" method="post">
+            <form action="{% url 'member__edit' %}" method="post">
                 {% csrf_token %}
                 <ul class="django__form">
                     {{ form.as_ul }}
@@ -30,7 +26,7 @@
                         {% comment %}
                         <div>
                             {% trans 'Cancel' as button_label %}
-                            {% url 'dashboard' as button_link %}
+                            {% url 'dashboard__main' as button_link %}
                             {% tpl_button button_label button_link class='is-secondary' %}
                         </div>
                         {% endcomment %}
@@ -38,7 +34,7 @@
                     <div class="o-flex-inline has-horizontal-gutter">
                         <div>
                             {% trans 'Delete my account' as button_label %}
-                            {% url 'user__delete' as button_link %}
+                            {% url 'member__delete' as button_link %}
                             {% tpl_button button_label button_link class='is-danger' %}
                         </div>
                     </div>

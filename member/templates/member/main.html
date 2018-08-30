@@ -1,15 +1,14 @@
 {% extends 'home/base.html' %}
 {% load static i18n tpl_button tpl_trail_preview %}
 
-{% block title %}{% trans 'Discover' %}{% endblock %}
-{% block description %}{% trans 'Discover new trails' %}{% endblock %}
+{% block title %}{% trans 'Dashboard' %}{% endblock %}
 
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
-            <h1>{% trans 'Last trails' %}</h1>
+            <h1>{{ member.first_name|default:member.username }}</h1>
             <ul class="o-flex has-gutter is-multiline">
-                {% for trail in last_trails %}
+                {% for trail in member_trails %}
                     {% url 'trail__main' trail.id as trail_url %}
                     {% tpl_trail_preview trail trail_url '1of3' %}
                 {% endfor %}

@@ -90,6 +90,14 @@
 
 /* --- Trail View --- */
 
+.trail__published {
+    color: var(--yellow)
+}
+
+.trail__published a {
+    font-weight: 800;
+}
+
 .trail__statistics-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

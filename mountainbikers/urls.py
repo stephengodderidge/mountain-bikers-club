@@ -37,6 +37,7 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('dashboard/', include('dashboard.urls')),
     path('trail/', include('trail.urls')),
+    path('@', include('member.urls')),
     path('', include('home.urls')),
 )
 
