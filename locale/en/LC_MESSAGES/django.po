@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-27 21:41+0000\n"
+"POT-Creation-Date: 2018-08-30 17:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,42 +22,37 @@ msgstr ""
 msgid "This username is forbidden."
 msgstr ""
 
-#: dashboard/templates/dashboard/headerlinks.html:20
-#: dashboard/templates/dashboard/index.html:4
-msgid "Dashboard"
-msgstr ""
-
-#: dashboard/templates/dashboard/headerlinks.html:55
+#: dashboard/templates/dashboard/headerlinks.html:37
 #: dashboard/templates/dashboard/index.html:21
 #: trail/templates/trail/upload.html:15
 msgid "Upload a GPX file"
 msgstr ""
 
-#: dashboard/templates/dashboard/headerlinks.html:66
+#: dashboard/templates/dashboard/headerlinks.html:48
 msgid "Profile"
 msgstr ""
 
-#: dashboard/templates/dashboard/headerlinks.html:79
-#: home/templates/home/index.html:41
-msgid "Logout"
+#: dashboard/templates/dashboard/index.html:4 home/templates/home/member.html:4
+msgid "Dashboard"
 msgstr ""
 
 #: dashboard/templates/dashboard/index.html:13
-#: home/templates/home/index.html:77
 msgid "Your last trails"
 msgstr ""
 
 #: dashboard/templates/dashboard/login.html:4
 #: dashboard/templates/dashboard/login.html:17
 #: dashboard/templates/dashboard/register.html:8
-#: home/templates/flatpages/default.html:15 home/templates/home/index.html:16
-#: home/templates/home/index.html:49
+#: home/templates/flatpages/default.html:15
+#: home/templates/home/discover.html:16 home/templates/home/index.html:16
+#: home/templates/home/index.html:44
 msgid "Sign in"
 msgstr ""
 
 #: dashboard/templates/dashboard/login.html:8
 #: dashboard/templates/dashboard/register.html:23
-#: home/templates/home/index.html:73 trail/templates/trail/view.html:12
+#: home/templates/home/index.html:68 home/templates/home/member.html:11
+#: trail/templates/trail/view.html:12
 msgid "Sign up"
 msgstr ""
 
@@ -77,17 +72,16 @@ msgid "Save"
 msgstr ""
 
 #: dashboard/templates/dashboard/profile.html:26
-#: trail/templates/trail/edit.html:28
-msgid "Cancel"
+msgid "Logout"
 msgstr ""
 
-#: dashboard/templates/dashboard/profile.html:32
+#: dashboard/templates/dashboard/profile.html:41
 msgid "Delete my account"
 msgstr ""
 
 #: dashboard/templates/dashboard/register.html:4
 #: dashboard/templates/dashboard/register.html:17
-#: home/templates/home/index.html:54 home/templates/home/index.html:67
+#: home/templates/home/index.html:49 home/templates/home/index.html:62
 msgid "Create an account"
 msgstr ""
 
@@ -99,9 +93,22 @@ msgstr ""
 msgid "Welcome to the Mountain Bikers Club."
 msgstr ""
 
-#: home/templates/flatpages/default.html:11 home/templates/home/index.html:12
+#: home/templates/flatpages/default.html:11
+#: home/templates/home/discover.html:12 home/templates/home/index.html:12
 #, python-format
 msgid "%(user)s's dashboard"
+msgstr ""
+
+#: home/templates/home/base.html:61 home/templates/home/discover.html:4
+msgid "Discover"
+msgstr ""
+
+#: home/templates/home/discover.html:5
+msgid "Discover new trails"
+msgstr ""
+
+#: home/templates/home/discover.html:24
+msgid "Last trails"
 msgstr ""
 
 #: home/templates/home/index.html:4
@@ -124,7 +131,7 @@ msgstr ""
 msgid "Go to your dashboard"
 msgstr ""
 
-#: home/templates/home/index.html:61
+#: home/templates/home/index.html:56
 msgid "This is the multiline welcome message"
 msgstr ""
 "<p>This web application is dedicated to mountain biking. This is a <a href="
@@ -140,10 +147,6 @@ msgstr ""
 "&#108;&#x75;&#x62;\">send me a polite email</a>. I may not answer but I will "
 "read it!</p><p>Respect nature, plants and animals. Priority for walkers. "
 "Have fun!</p>"
-
-#: home/templates/home/index.html:91
-msgid "Last trails"
-msgstr ""
 
 #: mountainbikers/settings.py:121
 msgid "French"
@@ -185,6 +188,10 @@ msgstr ""
 msgid "Unnamed Trail"
 msgstr ""
 
+#: trail/templates/trail/edit.html:28
+msgid "Cancel"
+msgstr ""
+
 #: trail/templates/trail/edit.html:34
 msgid "Delete"
 msgstr ""
@@ -193,11 +200,11 @@ msgstr ""
 msgid "Share the fun of the trail"
 msgstr ""
 
-#: trail/templates/trail/view.html:22
+#: trail/templates/trail/view.html:23
 #, python-format
-msgid "Published by %(user)s on %(date)s"
+msgid "Published by <a href=\"%(link)s\">%(user)s</a> on %(date)s"
 msgstr ""
 
-#: trail/templates/trail/view.html:73
+#: trail/templates/trail/view.html:98
 msgid "Edit"
 msgstr ""
