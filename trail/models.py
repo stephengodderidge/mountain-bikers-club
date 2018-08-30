@@ -73,6 +73,7 @@ class Trail(models.Model):
 
                 distance, time, max_speed = parser.get_moving_data()
                 self.distance = distance / 1000
+                self.max_speed = max_speed * 3600. / 1000.
 
                 gpx_old = gpxpy.parse(gpx_file.decode('utf-8'))
                 track_old = gpx_old.tracks[0] if len(gpx_old.tracks) > 0 else None
@@ -84,6 +85,5 @@ class Trail(models.Model):
 
                     # Speed
                     self.average_speed = (moving_distance / moving_time) * 3600. / 1000.
-                    self.max_speed = max_speed * 3600. / 1000.
 
                 super().save(*args, **kwargs)

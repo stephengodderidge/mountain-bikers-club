@@ -113,6 +113,55 @@ class GPXParser:
 
         return list(map(__filter, range(size)))
 
+    def __smoothed_speeds(self):
+        size = len(self.points)
+
+        def __filter(n):
+            current_time = self.points[n]['time']
+
+            if current_time is None:
+                return False
+
+            if 0 < n < size - 1:
+                previous_time = self.points[n - 1]['time']
+                next_time = self.points[n + 1]['time']
+
+                if previous_time is not None and current_time is not None and next_time is not None:
+                    delta_time = previous_time - next_time
+                    delta_time = math.fabs(delta_time.total_seconds())
+
+                    distance1 = self.haversine_distance(self.points[n - 1], self.points[n])
+                    distance2 = self.haversine_distance(self.points[n], self.points[n + 1])
+                    distance = distance1 + distance2
+
+                    speed = distance / delta_time
+
+                    return speed
+
+            return 0.
+
+        speed = list(map(__filter, range(size)))
+
+        # FIXME merge this with __smoothed_elevation as static __smoother
+        def __filter2(n):
+            current_speed = speed[n]
+
+            if current_speed is None:
+                return False
+
+            if 0 < n < size - 1:
+                previous_speed = speed[n - 1]
+                next_speed = speed[n + 1]
+
+                if previous_speed is not None and current_speed is not None and next_speed is not None:
+                    return previous_speed * .3 + current_speed * .4 + next_speed * .3
+
+            return current_speed
+
+        smoothed_speeds = list(map(__filter2, range(size)))
+
+        return smoothed_speeds
+
     def get_elevation_data(self):
         smoothed_elevations = self.__smoothed_elevations()
         min_elevation = smoothed_elevations[0]
@@ -134,15 +183,13 @@ class GPXParser:
 
         return min_elevation, max_elevation, uphill, downhill
 
-    def __smoothed_speeds(self):
-        pass
-
     def get_moving_data(self):
         size = len(self.points)
 
+        smoothed_speeds = self.__smoothed_speeds()
         distance = 0.
         moving_time = 0.
-        max_speed = 0.
+        max_speed = max(smoothed_speeds)
 
         for n, point in enumerate(self.points):
             if n < size - 2:
