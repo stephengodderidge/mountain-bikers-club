@@ -58,7 +58,7 @@
             </li>
             <li aria-hidden="true" style="width: 20px;"><!-- empty --></li>
             <li>
-                <a href="{% url 'discover' %}" class="main-header__menu__link">Discover</a>
+                <a href="{% url 'discover' %}" class="main-header__menu__link">{% trans 'Discover' %}</a>
             </li>
         </ul>
         {% block headerlinks %}
@@ -107,6 +107,13 @@
                 <a href="https://github.com/cedeber/mountain-bikers-club" target="_blank" rel="noopener">
                     <svg width="24" height="24" class="trail__icon">
                         <use xlink:href="#github"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="https://patreon.com/cedeber" target="_blank" rel="noopener">
+                    <svg width="24" height="24" class="trail__icon">
+                        <use xlink:href="#patreon"></use>
                     </svg>
                 </a>
             </li>
