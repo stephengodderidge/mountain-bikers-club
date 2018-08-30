@@ -11,7 +11,7 @@ from trail.models import Trail
 # Create your views here.
 @login_required
 def index(request):
-    user_trails = Trail.objects.all().filter(user=request.user)
+    user_trails = Trail.objects.filter(user=request.user)
     context = {
         'user_trails': user_trails
     }
