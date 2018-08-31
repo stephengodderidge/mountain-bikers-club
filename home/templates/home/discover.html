@@ -7,7 +7,7 @@
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
-            <h1>{% trans 'Last trails' %}</h1>
+            <h1>{% trans 'Discover' %}</h1>
             <ul class="o-flex has-gutter is-multiline">
                 {% for trail in last_trails %}
                     {% url 'trail__main' trail.id as trail_url %}
