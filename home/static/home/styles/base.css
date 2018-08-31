@@ -45,12 +45,28 @@
     font-weight: 500
 }
 
+
 /* --- View --- */
 
 .o-view {
     display: grid;
-    grid-template: auto 1fr auto / 1fr;
+    grid-template: auto auto 1fr auto / 1fr;
 }
+
+
+/* --- Support Bar --- */
+
+.support-bar {
+    background: var(--yellow);
+    padding: 10px var(--page-gutter-width);
+    font-size: 15px;
+    color: var(--base00);
+}
+
+.support-bar p {
+    hyphens: none;
+}
+
 
 /* --- Wave --- */
 
@@ -65,6 +81,7 @@
     transform-origin: center bottom;
     position: relative;
 }
+
 
 /* --- Button --- */
 
@@ -140,6 +157,7 @@
     position: relative;
 }
 
+
 /* --- Header --- */
 
 .main-header {
@@ -190,6 +208,7 @@
 .main-header__menu__link:not(.is-active):hover {
     color: var(--base05);
 }
+
 
 /* --- Footer --- */
 

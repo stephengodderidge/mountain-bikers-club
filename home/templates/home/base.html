@@ -46,6 +46,20 @@
 <body>
 {% include 'home/symbols.html' %}
 <div class="o-view">
+    <div class="support-bar o-flex-inline">
+        <div class="o-flex-middle" style="flex: 0; margin-right: 10px;">
+        <svg width="24" height="24">
+            <use xlink:href="#bag-euro"></use>
+        </svg>
+        </div>
+        <p>
+        {% blocktrans trimmed %}
+            Developing and hosting a great web applicable is fun, but not free. If you love Mountain Bikers Club please consider
+            <a href="https://liberapay.com/cedeber" target="_blank" rel="noopener">helping me for the price of few cafes</a>.
+            Thank you very much!
+        {% endblocktrans %}
+        </p>
+    </div>
     <header class="main-header o-flex-space">
         <ul class="o-flex-inline has-gutter has-hidden-links">
             <li>
@@ -87,7 +101,7 @@
                 </li>
             {% endfor %}
         </ul>
-        <ul class="o-flex-inline has-horizontal-gutter gutter is-center">
+        <ul class="o-flex-inline has-horizontal-gutter is-center">
             <li>
                 <a href="https://fb.me/mountainbikersclub" target="_blank" rel="noopener">
                     <svg width="24" height="24" class="trail__icon">
@@ -117,9 +131,9 @@
                 </a>
             </li>
             <li>
-                <a href="https://patreon.com/cedeber" target="_blank" rel="noopener">
+                <a href="https://www.buymeacoffee.com/cedeber" target="_blank" rel="noopener">
                     <svg width="24" height="24" class="trail__icon">
-                        <use xlink:href="#patreon"></use>
+                        <use xlink:href="#buy-gift"></use>
                     </svg>
                 </a>
             </li>

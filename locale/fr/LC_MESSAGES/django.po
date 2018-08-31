@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-31 13:06+0000\n"
+"POT-Creation-Date: 2018-08-31 16:26+0000\n"
 "PO-Revision-Date: 2018-08-22 15:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -43,31 +43,31 @@ msgstr "Ce nom d'utilisateur est interdit."
 
 #: home/templates/home/base.html:56
 msgid ""
-"Developing and hosting a great web applicable is fun. But not free. If you "
+"Developing and hosting a great web applicable is fun, but not free. If you "
 "love Mountain Bikers Club please consider <a href=\"https://liberapay.com/"
-"cedeber\" target=\"_blank\" rel=\"noopener\">donating with a Liberapay "
-"subscription</a>. Thank you very much!"
+"cedeber\" target=\"_blank\" rel=\"noopener\">helping me for the price of few "
+"cafes</a>. Thank you very much!"
 msgstr ""
-"Programmer et héberger une bonne application web est divertissant. Mais pas "
-"gratuit. Si vous aimez Mountain Bikers Club, pensez à <a href=\"https://"
-"liberapay.com/cedeber\" target=\"_blank\" rel=\"noopener\">faire un don avec "
-"un abonnement grâce à Liberapay</a>. Merci beaucoup !"
+"Programmer et héberger une chouette application web est divertissant, mais "
+"pas gratuit. Si vous aimez Mountain Bikers Club, pensez à <a href=\"https://"
+"liberapay.com/cedeber\" target=\"_blank\" rel=\"noopener\">m'aider pour le "
+"prix de quelques cafés</a>. Merci beaucoup !"
 
-#: home/templates/home/base.html:76 home/templates/home/discover.html:4
+#: home/templates/home/base.html:75 home/templates/home/discover.html:4
 #: home/templates/home/discover.html:10
 msgid "Discover"
 msgstr "Découvrir"
 
-#: home/templates/home/base.html:83 home/templates/home/index.html:30
+#: home/templates/home/base.html:82 home/templates/home/index.html:30
 #: home/templates/home/login.html:4 home/templates/home/login.html:11
 msgid "Sign in"
 msgstr "Se logger"
 
-#: home/templates/home/base.html:83
+#: home/templates/home/base.html:82
 msgid "or"
 msgstr "ou"
 
-#: home/templates/home/base.html:84 home/templates/home/index.html:54
+#: home/templates/home/base.html:83 home/templates/home/index.html:54
 #: home/templates/home/register.html:17
 msgid "Sign up"
 msgstr "S'enregistrer"
@@ -165,8 +165,8 @@ msgid "Edit profile"
 msgstr "Modifier le profil"
 
 #: member/templates/member/main.html:23
-msgid "Log out"
-msgstr ""
+msgid "Logout"
+msgstr "Se déconnecter"
 
 #: mountainbikers/settings.py:122
 msgid "French"
@@ -224,9 +224,6 @@ msgstr "Supprimer"
 #: trail/templates/trail/new.html:22
 msgid "Share the fun of the trail"
 msgstr "Partager le fun de ce Trail"
-
-#~ msgid "Logout"
-#~ msgstr "Se déconnecter"
 
 #~ msgid "Last trails"
 #~ msgstr "Derniers trails"
