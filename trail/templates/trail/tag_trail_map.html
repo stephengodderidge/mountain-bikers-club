@@ -1,6 +1,6 @@
 {% load static %}
 {% if file %}
-    <div id="map-{{ uid }}" style="height: {{ css_height|default:'54vh' }};" class="trail-map"></div>
+    <div id="map-{{ uid }}" style="height: {{ css_height|default:'54vh' }}; max-height: 825px;" class="trail-map"></div>
     <script type="module">
         import { loadJS, loadCSS } from '{% static 'home/scripts/library/async-loader.js' %}';
 
