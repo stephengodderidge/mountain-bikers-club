@@ -144,7 +144,7 @@ else:
 
 # Auth
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/member/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
