@@ -30,7 +30,7 @@ def new(request):
             f.pub_date = timezone.now()
             f.save()
 
-            return HttpResponseRedirect(reverse('trail', args=[f.id]))
+            return HttpResponseRedirect(reverse('trail__main', args=[f.id]))
 
     else:
         form = GpxUploadForm()
