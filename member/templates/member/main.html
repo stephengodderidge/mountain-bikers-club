@@ -1,12 +1,31 @@
 {% extends 'home/base.html' %}
 {% load static i18n tpl_button tpl_trail_preview %}
 
-{% block title %}{% trans 'Dashboard' %}{% endblock %}
+{% block title %}{% trans 'Profile' %}{% endblock %}
 
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
-            <h1>{{ member.first_name|default:member.username }}</h1>
+            <h1 class="has-no-bottom-space">{{ member.first_name|default:member.username }} {{ member.last_name|default:''}}</h1>
+            <p class="trail__published">
+                {% blocktrans trimmed with date=member.date_joined|date %}
+                    Member since {{ date }}.
+                {% endblocktrans %}
+            </p>
+            {% if user.is_authenticated and user == member %}
+                <div>
+                    <link rel="stylesheet" href="{% static 'home/styles/user_bar.css' %}">
+                    <ul class="user-bar has-hidden-links">
+                        <li class="user-bar__button">
+                            <a href="{% url 'member__edit' %}">{% trans 'Edit profile' %}</a>
+                        </li>
+                        <li class="user-bar__button is-right">
+                             <a href="{% url 'logout' %}">{% trans 'Log out' %}</a>
+                        </li>
+                    </ul>
+                    <p><!-- empty --></p>
+                </div>
+            {% endif %}
             <ul class="o-flex has-gutter is-multiline">
                 {% for trail in member_trails %}
                     {% url 'trail__main' trail.id as trail_url %}

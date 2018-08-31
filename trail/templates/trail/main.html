@@ -5,15 +5,29 @@
 {% block description %}{{ trail.description|default:'' }}{% endblock %}
 
 {% block content %}
-    <div class="o-section has-no-bottom-space">
+    <div class="o-section">
         <div class="o-group is-large">
             <h1 class="has-no-bottom-space">{{ trail.name|default:'Unnamed trail' }}</h1>
             <p class="trail__published has-semihidden-links">
                 {% url 'member__main' username=trail.user.username as link %}
-                {% blocktrans trimmed with user=trail.user.first_name|default:trail.user.username date=trail.pub_date|date link=link %}
-                Published by <a href="{{ link }}">{{ user }}</a> on {{ date }}
+                {% blocktrans trimmed with user=trail.user.username date=trail.pub_date|date link=link %}
+                Published by <a href="{{ link }}">@{{ user }}</a> on {{ date }}.
                 {% endblocktrans %}
             </p>
+            {% if user.is_authenticated and user == trail.user %}
+                <div>
+                    <link rel="stylesheet" href="{% static 'home/styles/user_bar.css' %}">
+                    <ul class="user-bar has-hidden-links">
+                        <li class="user-bar__button">
+                            <a href="{% url 'trail__edit' trail.id %}">{% trans 'Edit' %}</a>
+                        </li>
+                        <li class="user-bar__button is-right is-danger">
+                             <a href="{% url 'trail__delete' trail.id %}">{% trans 'Delete' %}</a>
+                        </li>
+                    </ul>
+                    <p><!-- empty --></p>
+                </div>
+            {% endif %}
             <ul class="trail__statistics-grid">
                 <li class="is-left">
                     <svg width="20" height="20" class="trail__icon">
@@ -83,11 +97,6 @@
             <p><!-- empty --></p>
             {% if trail.description %}
                 <p>{{ trail.description }}</p>
-            {% endif %}
-            {% if user.is_authenticated and user == trail.user %}
-                {% trans 'Edit' as button_label %}
-                {% url 'trail__edit' trail.id as button_link %}
-                {% tpl_button button_label button_link class='is-warning' %}
             {% endif %}
         </div>
     </div>

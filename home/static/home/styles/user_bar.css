@@ -1,0 +1,46 @@
+.user-bar {
+    --border-color: var(--base07);
+
+    width: 100%;
+    color: var(--base00);
+    background: linear-gradient(to top, var(--base06), var(--border-color));
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    margin-bottom: var(--layout-gutter-height);
+    overflow: hidden;
+}
+
+.user-bar__button {
+    display: inline-block;
+    border-radius: 1px;
+}
+
+.user-bar__button a {
+    display: block;
+    padding: 10px 20px;
+}
+
+.user-bar__button:not(.is-right) {
+    /* border-right: solid 1px var(--base06); */
+    box-shadow: 1px 0 0 0 var(--base06);
+}
+
+.user-bar__button.is-right {
+    float: right;
+    /* border-left: solid 1px var(--base06); */
+    box-shadow: -1px 0 0 0 var(--base06);
+}
+
+.user-bar__button:hover {
+    background: var(--border-color);
+}
+
+.user-bar__button.is-danger {
+    color: var(--red);
+}
+
+.user-bar__button.is-danger:hover {
+    color: white;
+    background: var(--red);
+    box-shadow: 0 0 0 1px var(--red);
+}

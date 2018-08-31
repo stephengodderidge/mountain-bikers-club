@@ -14,22 +14,15 @@
                         <ul class="django__form">
                             {{ form.as_ul }}
                         </ul>
-                        <div class="o-flex-space has-horizontal-gutter">
-                            <div class="o-flex-inline has-horizontal-gutter">
-                                <div>
-                                    {% trans 'Save' as button_label %}
-                                    {% tpl_button button_label class='is-success' %}
-                                </div>
-                                <div>
-                                    {% trans 'Cancel' as button_label %}
-                                    {% url 'trail__main' trail.id as button_link %}
-                                    {% tpl_button button_label button_link class='is-secondary' %}
-                                </div>
+                        <div class="o-flex-inline has-horizontal-gutter">
+                            <div>
+                                {% trans 'Save' as button_label %}
+                                {% tpl_button button_label class='is-success' %}
                             </div>
                             <div>
-                                {% trans 'Delete' as button_label %}
-                                {% url 'trail__delete' trail.id as button_link %}
-                                {% tpl_button button_label button_link class='is-danger' %}
+                                {% trans 'Cancel' as button_label %}
+                                {% url 'trail__main' trail.id as button_link %}
+                                {% tpl_button button_label button_link class='is-secondary' %}
                             </div>
                         </div>
                     </form>
