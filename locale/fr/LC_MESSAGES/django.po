@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-30 17:52+0000\n"
+"POT-Creation-Date: 2018-08-31 13:06+0000\n"
 "PO-Revision-Date: 2018-08-22 15:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,120 +18,108 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.1.1\n"
 
-#: dashboard/forms.py:21 dashboard/forms.py:35
-msgid "This username is forbidden."
-msgstr "Ce nom d'utilisateur est interdit."
+#: dashboard/templates/dashboard/index.html:5
+#, python-format
+msgid "%(user)s's dashborad"
+msgstr "Tableau de bord de %(user)s"
 
-#: dashboard/templates/dashboard/headerlinks.html:37
-#: dashboard/templates/dashboard/index.html:21
-#: trail/templates/trail/upload.html:15
-msgid "Upload a GPX file"
-msgstr "Charger un fichier GPX"
-
-#: dashboard/templates/dashboard/headerlinks.html:48
-msgid "Profile"
-msgstr "Profil"
-
-#: dashboard/templates/dashboard/index.html:4 home/templates/home/member.html:4
+#: dashboard/templates/dashboard/index.html:13
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: dashboard/templates/dashboard/index.html:13
+#: dashboard/templates/dashboard/index.html:14
 msgid "Your last trails"
 msgstr "Vos derniers trails"
 
-#: dashboard/templates/dashboard/login.html:4
-#: dashboard/templates/dashboard/login.html:17
-#: dashboard/templates/dashboard/register.html:8
-#: home/templates/flatpages/default.html:15
-#: home/templates/home/discover.html:16 home/templates/home/index.html:16
-#: home/templates/home/index.html:44
+#: dashboard/templates/dashboard/index.html:22
+#: member/templates/member/headerlinks.html:37
+#: trail/templates/trail/new.html:11
+msgid "Upload a GPX file"
+msgstr "Charger un fichier GPX"
+
+#: home/forms.py:21 home/forms.py:35
+msgid "This username is forbidden."
+msgstr "Ce nom d'utilisateur est interdit."
+
+#: home/templates/home/base.html:56
+msgid ""
+"Developing and hosting a great web applicable is fun. But not free. If you "
+"love Mountain Bikers Club please consider <a href=\"https://liberapay.com/"
+"cedeber\" target=\"_blank\" rel=\"noopener\">donating with a Liberapay "
+"subscription</a>. Thank you very much!"
+msgstr ""
+"Programmer et héberger une bonne application web est divertissant. Mais pas "
+"gratuit. Si vous aimez Mountain Bikers Club, pensez à <a href=\"https://"
+"liberapay.com/cedeber\" target=\"_blank\" rel=\"noopener\">faire un don avec "
+"un abonnement grâce à Liberapay</a>. Merci beaucoup !"
+
+#: home/templates/home/base.html:76 home/templates/home/discover.html:4
+#: home/templates/home/discover.html:10
+msgid "Discover"
+msgstr "Découvrir"
+
+#: home/templates/home/base.html:83 home/templates/home/index.html:30
+#: home/templates/home/login.html:4 home/templates/home/login.html:11
 msgid "Sign in"
 msgstr "Se logger"
 
-#: dashboard/templates/dashboard/login.html:8
-#: dashboard/templates/dashboard/register.html:23
-#: home/templates/home/index.html:68 home/templates/home/member.html:11
-#: trail/templates/trail/view.html:12
+#: home/templates/home/base.html:83
+msgid "or"
+msgstr "ou"
+
+#: home/templates/home/base.html:84 home/templates/home/index.html:54
+#: home/templates/home/register.html:17
 msgid "Sign up"
 msgstr "S'enregistrer"
-
-#: dashboard/templates/dashboard/login.html:23
-msgid "Login"
-msgstr "Se connecter"
-
-#: dashboard/templates/dashboard/profile.html:4
-#: dashboard/templates/dashboard/profile.html:13
-#, python-format
-msgid "%(user)s's profile"
-msgstr "Profil de %(user)s"
-
-#: dashboard/templates/dashboard/profile.html:22
-#: trail/templates/trail/edit.html:24 trail/templates/trail/upload.html:21
-msgid "Save"
-msgstr "Sauvegarder"
-
-#: dashboard/templates/dashboard/profile.html:26
-msgid "Logout"
-msgstr "Se déconnecter"
-
-#: dashboard/templates/dashboard/profile.html:41
-msgid "Delete my account"
-msgstr "Supprimer mon compte"
-
-#: dashboard/templates/dashboard/register.html:4
-#: dashboard/templates/dashboard/register.html:17
-#: home/templates/home/index.html:49 home/templates/home/index.html:62
-msgid "Create an account"
-msgstr "Créer un compte"
-
-#: dashboard/templates/dashboard/register.html:28
-msgid "Welcome"
-msgstr "Bienvenue"
-
-#: dashboard/templates/dashboard/register.html:29
-msgid "Welcome to the Mountain Bikers Club."
-msgstr "Bienvenue au Mountain Bikers Club."
-
-#: home/templates/flatpages/default.html:11
-#: home/templates/home/discover.html:12 home/templates/home/index.html:12
-#, python-format
-msgid "%(user)s's dashboard"
-msgstr "Tableau de bord de %(user)s"
-
-#: home/templates/home/base.html:61 home/templates/home/discover.html:4
-msgid "Discover"
-msgstr "Découvrir"
 
 #: home/templates/home/discover.html:5
 msgid "Discover new trails"
 msgstr "Découvrir de nouveaux trails"
 
-#: home/templates/home/discover.html:24
-msgid "Last trails"
-msgstr "Derniers trails"
+#: home/templates/home/edit.html:4 home/templates/home/edit.html:9
+#, python-format
+msgid "%(user)s's profile"
+msgstr "Profil de %(user)s"
+
+#: home/templates/home/edit.html:18 trail/templates/trail/edit.html:19
+#: trail/templates/trail/new.html:17
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: home/templates/home/edit.html:22 trail/templates/trail/edit.html:23
+msgid "Cancel"
+msgstr "Annuler"
+
+#: home/templates/home/edit.html:29
+msgid "Delete my account"
+msgstr "Supprimer mon compte"
 
 #: home/templates/home/index.html:4
 msgid "Home"
 msgstr "Accueil"
 
-#: home/templates/home/index.html:5 home/templates/home/index.html:26
+#: home/templates/home/index.html:5 home/templates/home/index.html:12
 msgid "For the love of mountain biking and wild nature"
 msgstr "Pour l'amour du VTT et de la nature sauvage"
 
-#: home/templates/home/index.html:28
+#: home/templates/home/index.html:14
 msgid "Welcome back"
 msgstr "Bon retour parmi nous"
 
-#: home/templates/home/index.html:29
+#: home/templates/home/index.html:15
 msgid "Hello"
 msgstr "Bonjour"
 
-#: home/templates/home/index.html:36
+#: home/templates/home/index.html:22
 msgid "Go to your dashboard"
 msgstr "Votre tableau de bord"
 
-#: home/templates/home/index.html:56
+#: home/templates/home/index.html:35 home/templates/home/index.html:48
+#: home/templates/home/register.html:4 home/templates/home/register.html:11
+msgid "Create an account"
+msgstr "Créer un compte"
+
+#: home/templates/home/index.html:42
 msgid "This is the multiline welcome message"
 msgstr ""
 "<p>Cette application web est dédiée à la pratique du vélo tout terrain. "
@@ -150,15 +138,45 @@ msgstr ""
 "p><p>Respectez la nature, plantes et animaux. Priorité aux marcheurs. Amusez-"
 "vous!</p>"
 
-#: mountainbikers/settings.py:121
+#: home/templates/home/login.html:17
+msgid "Login"
+msgstr "Se connecter"
+
+#: home/templates/home/register.html:22
+msgid "Welcome"
+msgstr "Bienvenue"
+
+#: home/templates/home/register.html:23
+msgid "Welcome to the Mountain Bikers Club."
+msgstr "Bienvenue au Mountain Bikers Club."
+
+#: member/templates/member/headerlinks.html:48
+#: member/templates/member/main.html:4
+msgid "Profile"
+msgstr "Profil"
+
+#: member/templates/member/main.html:11
+#, python-format
+msgid "Member since %(date)s."
+msgstr "Membre depuis le %(date)s."
+
+#: member/templates/member/main.html:20
+msgid "Edit profile"
+msgstr "Modifier le profil"
+
+#: member/templates/member/main.html:23
+msgid "Log out"
+msgstr ""
+
+#: mountainbikers/settings.py:122
 msgid "French"
 msgstr "Français"
 
-#: mountainbikers/settings.py:122
+#: mountainbikers/settings.py:123
 msgid "English"
 msgstr "Anglais"
 
-#: mountainbikers/settings.py:123
+#: mountainbikers/settings.py:124
 msgid "German"
 msgstr "Allemand"
 
@@ -190,22 +208,25 @@ msgstr "Fichier GPX"
 msgid "Unnamed Trail"
 msgstr "Trail sans nom"
 
-#: trail/templates/trail/edit.html:28
-msgid "Cancel"
-msgstr "Annuler"
+#: trail/templates/trail/main.html:13
+#, python-format
+msgid "Published by <a href=\"%(link)s\">@%(user)s</a> on %(date)s."
+msgstr "Publié par <a href=\"%(link)s\">@%(user)s</a> le %(date)s."
 
-#: trail/templates/trail/edit.html:34
+#: trail/templates/trail/main.html:22
+msgid "Edit"
+msgstr "Editer"
+
+#: trail/templates/trail/main.html:25
 msgid "Delete"
 msgstr "Supprimer"
 
-#: trail/templates/trail/upload.html:26
+#: trail/templates/trail/new.html:22
 msgid "Share the fun of the trail"
 msgstr "Partager le fun de ce Trail"
 
-#: trail/templates/trail/view.html:23
-msgid "Published by <a href=\"%(link)s\">%(user)s</a> on %(date)s"
-msgstr "Publié par <a href=\"%(link)s\">%(user)s</a> le %(date)s"
+#~ msgid "Logout"
+#~ msgstr "Se déconnecter"
 
-#: trail/templates/trail/view.html:98
-msgid "Edit"
-msgstr "Editer"
+#~ msgid "Last trails"
+#~ msgstr "Derniers trails"
