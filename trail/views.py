@@ -52,7 +52,7 @@ def edit(request, trail_id):
         if form.is_valid():
             form.save()
 
-            return HttpResponseRedirect(reverse('trail', args=[trail.id]))
+            return HttpResponseRedirect(reverse('trail__main', args=[trail.id]))
 
     else:
         form = GpxEditForm(instance=trail)
