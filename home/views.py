@@ -78,9 +78,13 @@ def delete(request):
 
 def discover(request):
     current_user = request.user
-    last_trails = Trail.objects.filter(pub_date__lte=timezone.now()).exclude(user=current_user)[:30]
+    last_trails = Trail.objects.filter(pub_date__lte=timezone.now())
+
+    if current_user.is_authenticated:
+        last_trails = last_trails.exclude(user=current_user)
+
     context = {
-        'last_trails': last_trails,
+        'last_trails': last_trails[:30],
     }
 
     return render(request, 'home/discover.html', context)
