@@ -9,9 +9,16 @@ from .models import Trail
 
 
 def main(request, trail_id):
+    current_user = request.user
     trail = get_object_or_404(Trail, pk=trail_id)
+    is_favorite = False
+
+    if current_user.is_authenticated:
+        is_favorite = current_user in trail.favorite_by.all()
+
     context = {
-        'trail': trail
+        'trail': trail,
+        'is_favorite': is_favorite,
     }
 
     return render(request, 'trail/main.html', context)
@@ -26,7 +33,7 @@ def new(request):
 
         if form.is_valid():
             f = form.save(commit=False)
-            f.user = current_user
+            f.author = current_user
             f.pub_date = timezone.now()
             f.save()
 
@@ -44,7 +51,7 @@ def new(request):
 
 @login_required
 def edit(request, trail_id):
-    trail = get_object_or_404(Trail, pk=trail_id, user=request.user)
+    trail = get_object_or_404(Trail, pk=trail_id, author=request.user)
 
     if request.method == 'POST':
         form = GpxEditForm(data=request.POST, instance=trail)
@@ -63,6 +70,20 @@ def edit(request, trail_id):
     }
 
     return render(request, 'trail/edit.html', context)
+
+
+@login_required
+def favorite(request, trail_id):
+    current_user = request.user
+    current_user_favorite_trails = current_user.favorite_trails.all()
+    trail = get_object_or_404(Trail, pk=trail_id)
+
+    if trail in current_user_favorite_trails:
+        current_user.favorite_trails.remove(trail)
+    else:
+        current_user.favorite_trails.add(trail)
+
+    return HttpResponseRedirect(reverse('trail__main', args=[trail.id]))
 
 
 @login_required

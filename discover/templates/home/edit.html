@@ -1,12 +1,12 @@
 {% extends 'home/base.html' %}
 {% load i18n tpl_button %}
 
-{% block title %}{% blocktrans with user=user.first_name|default:user.username %}{{ user }}'s profile{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with user=user.get_full_name|default:user.username %}{{ user }}'s profile{% endblocktrans %}{% endblock %}
 
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
-            <h1>{% blocktrans with user=user.first_name|default:user.username %}{{ user }}'s profile{% endblocktrans %}</h1>
+            <h1>{% blocktrans with user=user.get_short_name|default:user.username %}{{ user }}'s profile{% endblocktrans %}</h1>
             <form action="{% url 'member__edit' %}" method="post">
                 {% csrf_token %}
                 <ul class="django__form">

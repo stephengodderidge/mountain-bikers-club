@@ -2,7 +2,7 @@
 {% if file %}
     <div id="map-{{ uid }}" style="height: {{ css_height|default:'54vh' }}; max-height: 825px;" class="trail-map"></div>
     <script type="module">
-        import { loadJS, loadCSS } from '{% static 'home/scripts/library/async-loader.js' %}';
+        import { loadJS, loadCSS } from '{% static 'discover/scripts/library/async-loader.js' %}';
 
         (async function() {
             await loadCSS(

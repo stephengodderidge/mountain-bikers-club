@@ -14,7 +14,7 @@
                         {% if user.is_authenticated %}{% trans 'Welcome back' %},
                             {% else %}{% trans 'Hello' %},
                         {% endif %}
-                        {{ user.first_name|default:user.username|default:'mountain biker' }}. 👋
+                        {{ user.get_short_name|default:user.username|default:'mountain biker' }}. 👋
                     </p>
                     {% if user.is_authenticated %}
                         <div class="o-flex-inline has-gutter">

@@ -1,18 +1,19 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm as DefaultUserCreationForm
 from django.utils.translation import gettext_lazy as _
+
+from .models import User
 
 
 forbidden_username = [
-    'cedeber',
+    'superuser',
 ]
 
 
-class UserCreateForm(UserCreationForm):
+class UserCreateForm(DefaultUserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = DefaultUserCreationForm.Meta.fields + ('email',)
 
     def clean_username(self):
         username = self.cleaned_data['username']

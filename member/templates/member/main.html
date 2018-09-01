@@ -6,7 +6,7 @@
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
-            <h1 class="has-no-bottom-space">{{ member.first_name|default:member.username }} {{ member.last_name|default:''}}</h1>
+            <h1 class="has-no-bottom-space">{{ member.first_name|default:member.username }} {{ member.last_name|default:'' }}</h1>
             <p class="trail__published">
                 {% blocktrans trimmed with date=member.date_joined|date %}
                     Member since {{ date }}.
@@ -14,7 +14,7 @@
             </p>
             {% if user.is_authenticated and user == member %}
                 <div>
-                    <link rel="stylesheet" href="{% static 'home/styles/user_bar.css' %}">
+                    <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
                     <ul class="user-bar has-hidden-links">
                         <li class="user-bar__button">
                             <a href="{% url 'member__edit' %}">{% trans 'Edit profile' %}</a>
@@ -23,14 +23,23 @@
                             <a href="{% url 'password_change' %}">{% trans 'Change password' %}</a>
                         </li>
                         <li class="user-bar__button is-right">
-                             <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                            <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
                         </li>
                     </ul>
                     <p><!-- empty --></p>
                 </div>
             {% endif %}
+            <h2>{% trans 'Trails' %}</h2>
             <ul class="o-flex has-gutter is-multiline">
                 {% for trail in member_trails %}
+                    {% url 'trail__main' trail.id as trail_url %}
+                    {% tpl_trail_preview trail trail_url '1of3' %}
+                {% endfor %}
+            </ul>
+            <p><!-- empty --></p>
+            <h2>{% trans 'Favorites' %}</h2>
+            <ul class="o-flex has-gutter is-multiline">
+                {% for trail in member_favorite_trails %}
                     {% url 'trail__main' trail.id as trail_url %}
                     {% tpl_trail_preview trail trail_url '1of3' %}
                 {% endfor %}

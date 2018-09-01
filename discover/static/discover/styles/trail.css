@@ -94,6 +94,10 @@
     color: var(--yellow)
 }
 
+.trail__favorite .is-favorite {
+    color: var(--red);
+}
+
 .trail__statistics-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

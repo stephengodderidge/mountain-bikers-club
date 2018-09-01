@@ -80,6 +80,8 @@ class GPXParser:
         url = 'https://nominatim.openstreetmap.org/reverse?lat=' + str(self.points[0]['lat']) + '&lon=' + str(self.points[0]['lon'])
         headers = {'User-Agent': 'mountainbikers.club'}
         req = urllib.request.Request(url, headers=headers)
+
+        # FIXME Manage errors
         with urllib.request.urlopen(req) as response:
             reverse_xml = response.read()
             reverse_root = ET.fromstring(reverse_xml)

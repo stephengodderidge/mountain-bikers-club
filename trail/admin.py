@@ -6,7 +6,7 @@ from .models import Trail
 
 # Register your models here.
 class TrailAdmin(admin.ModelAdmin):
-    list_display = ('name', 'pub_date', 'user')
+    list_display = ('name', 'pub_date', 'author')
     search_fields = ['name']
     actions = ['update_from_gpx']
 

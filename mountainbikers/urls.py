@@ -20,6 +20,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.urls import path, include
 from django.conf.urls.static import static
 
+from member import views as member_views
 from .sitemaps import FlatPageSitemap, StaticViewSitemap
 
 sitemaps = {
@@ -35,10 +36,11 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
+    path('@<str:username>/', member_views.main, name='member__main'),
     path('dashboard/', include('dashboard.urls')),
     path('trail/', include('trail.urls')),
-    path('@', include('member.urls')),
-    path('', include('home.urls')),
+    path('member/', include('member.urls')),
+    path('', include('discover.urls')),
 )
 
 if settings.DEBUG is True:

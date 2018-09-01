@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'storages',
     'robots',
-    'home',
+    'discover',
+    'member',
     'dashboard',
     'trail',
-    'member',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +144,7 @@ else:
 
 # Auth
 
+AUTH_USER_MODEL = 'member.User'
 LOGIN_URL = '/member/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'

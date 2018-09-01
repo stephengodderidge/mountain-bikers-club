@@ -8,21 +8,34 @@
     <div class="o-section">
         <div class="o-group is-large">
             <h1 class="has-no-bottom-space">{{ trail.name|default:'Unnamed trail' }}</h1>
-            <p class="trail__published has-semihidden-links">
-                {% url 'member__main' username=trail.user.username as link %}
-                {% blocktrans trimmed with user=trail.user.username date=trail.pub_date|date link=link %}
-                Published by <a href="{{ link }}">@{{ user }}</a> on {{ date }}.
+            <p class="trail__published has-hidden-links">
+                {% url 'member__main' username=trail.author.username as link %}
+                {% blocktrans trimmed with user=trail.author.username date=trail.pub_date|date link=link %}
+                    Published by <a href="{{ link }}">@{{ user }}</a> on {{ date }}.
                 {% endblocktrans %}
+                ・
+                <span class="trail__favorite">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'trail__favorite' trail.id %}" class="{% if is_favorite %}is-favorite{% endif %}">
+                {% endif %}
+                    <svg width="20" height="20" class="trail__icon">
+                    <use xlink:href="#heart"></use>
+                </svg>
+                    {% if user.is_authenticated %}
+                        </a>
+                    {% endif %}
+                    {{ trail.favorite_by.all|length }}
+                </span>
             </p>
-            {% if user.is_authenticated and user == trail.user %}
+            {% if user.is_authenticated and user == trail.author %}
                 <div>
-                    <link rel="stylesheet" href="{% static 'home/styles/user_bar.css' %}">
+                    <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
                     <ul class="user-bar has-hidden-links">
                         <li class="user-bar__button">
                             <a href="{% url 'trail__edit' trail.id %}">{% trans 'Edit' %}</a>
                         </li>
                         <li class="user-bar__button is-right is-danger">
-                             <a href="{% url 'trail__delete' trail.id %}">{% trans 'Delete' %}</a>
+                            <a href="{% url 'trail__delete' trail.id %}">{% trans 'Delete' %}</a>
                         </li>
                     </ul>
                     <p><!-- empty --></p>
