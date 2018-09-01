@@ -77,7 +77,8 @@ def delete(request):
 
 
 def discover(request):
-    last_trails = Trail.objects.filter(pub_date__lte=timezone.now())[:30]
+    current_user = request.user
+    last_trails = Trail.objects.filter(pub_date__lte=timezone.now()).exclude(user=current_user)[:30]
     context = {
         'last_trails': last_trails,
     }
