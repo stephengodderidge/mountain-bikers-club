@@ -19,6 +19,9 @@
                         <li class="user-bar__button">
                             <a href="{% url 'member__edit' %}">{% trans 'Edit profile' %}</a>
                         </li>
+                        <li class="user-bar__button">
+                            <a href="{% url 'password_change' %}">{% trans 'Change password' %}</a>
+                        </li>
                         <li class="user-bar__button is-right">
                              <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
                         </li>
