@@ -104,10 +104,10 @@ IGNORABLE_404_URLS = [
 # Mail
 
 DEFAULT_FROM_EMAIL = 'hello+support@mountainbikers.club'
-EMAIL_HOST = os.environ.get('SMTP_SERVER')
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('SMTP_LOGIN')
-EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD')
+EMAIL_HOST = os.environ.get('SPARKPOST_SMTP_HOST')
+EMAIL_PORT = os.environ.get('SPARKPOST_SMTP_PORT')
+EMAIL_HOST_USER = os.environ.get('SPARKPOST_SMTP_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SPARKPOST_SMTP_PASSWORD')
 EMAIL_USE_TLS = True
 
 
