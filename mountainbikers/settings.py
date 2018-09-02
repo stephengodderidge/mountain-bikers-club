@@ -1,6 +1,7 @@
 import os
 import django_heroku
 import storages
+import re
 
 from django.utils.translation import gettext_lazy as _
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
     # cacheMiddleware here
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -86,6 +88,26 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+# Reports
+
+ADMINS = [('Cédric', 'bugs+django@mountainbikers.club')]
+MANAGERS = [('Cédric', 'bugs+django@mountainbikers.club')]
+SERVER_EMAIL = 'django@mountainbikers.club'
+
+IGNORABLE_404_URLS = [
+    re.compile(r'^/favicon\.ico$'),
+]
+
+
+# Mail
+
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 # Password validation
@@ -165,6 +187,6 @@ if not DEBUG:
     X_FRAME_OPTIONS = 'DENY'
 
 
-# Heroku config
+# Heroku config override
 
 django_heroku.settings(locals())
