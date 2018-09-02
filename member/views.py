@@ -28,7 +28,7 @@ def register(request):
         if form.is_valid():
             user = User.objects.create_user(
                 request.POST['username'],
-                None,
+                request.POST['email'],
                 request.POST['password1']
             )
             user.save()
