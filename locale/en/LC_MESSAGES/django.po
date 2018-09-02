@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-31 16:29+0000\n"
+"POT-Creation-Date: 2018-09-01 21:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,11 +37,7 @@ msgstr ""
 msgid "Upload a GPX file"
 msgstr ""
 
-#: home/forms.py:21 home/forms.py:35
-msgid "This username is forbidden."
-msgstr ""
-
-#: home/templates/home/base.html:56
+#: discover/templates/home/base.html:56
 msgid ""
 "Developing and hosting a great web applicable is fun, but not free. If you "
 "love Mountain Bikers Club please consider <a href=\"https://www.buymeacoffee."
@@ -49,73 +45,74 @@ msgid ""
 "few cafes</a>. Thank you very much!"
 msgstr ""
 
-#: home/templates/home/base.html:75 home/templates/home/discover.html:4
-#: home/templates/home/discover.html:10
+#: discover/templates/home/base.html:75 discover/templates/home/discover.html:4
+#: discover/templates/home/discover.html:10
 msgid "Discover"
 msgstr ""
 
-#: home/templates/home/base.html:82 home/templates/home/index.html:30
-#: home/templates/home/login.html:4 home/templates/home/login.html:11
+#: discover/templates/home/base.html:82 discover/templates/home/index.html:30
+#: discover/templates/home/login.html:4 discover/templates/home/login.html:11
 msgid "Sign in"
 msgstr ""
 
-#: home/templates/home/base.html:82
+#: discover/templates/home/base.html:82
 msgid "or"
 msgstr ""
 
-#: home/templates/home/base.html:83 home/templates/home/index.html:54
-#: home/templates/home/register.html:17
+#: discover/templates/home/base.html:83 discover/templates/home/index.html:54
+#: discover/templates/home/register.html:17
 msgid "Sign up"
 msgstr ""
 
-#: home/templates/home/discover.html:5
+#: discover/templates/home/discover.html:5
 msgid "Discover new trails"
 msgstr ""
 
-#: home/templates/home/edit.html:4 home/templates/home/edit.html:9
+#: discover/templates/home/edit.html:4 discover/templates/home/edit.html:9
 #, python-format
 msgid "%(user)s's profile"
 msgstr ""
 
-#: home/templates/home/edit.html:18 trail/templates/trail/edit.html:19
+#: discover/templates/home/edit.html:18 trail/templates/trail/edit.html:19
 #: trail/templates/trail/new.html:17
 msgid "Save"
 msgstr ""
 
-#: home/templates/home/edit.html:22 trail/templates/trail/edit.html:23
+#: discover/templates/home/edit.html:22 trail/templates/trail/edit.html:23
 msgid "Cancel"
 msgstr ""
 
-#: home/templates/home/edit.html:29
+#: discover/templates/home/edit.html:29
 msgid "Delete my account"
 msgstr ""
 
-#: home/templates/home/index.html:4
+#: discover/templates/home/index.html:4
 msgid "Home"
 msgstr ""
 
-#: home/templates/home/index.html:5 home/templates/home/index.html:12
+#: discover/templates/home/index.html:5 discover/templates/home/index.html:12
 msgid "For the love of mountain biking and wild nature"
 msgstr ""
 
-#: home/templates/home/index.html:14
+#: discover/templates/home/index.html:14
 msgid "Welcome back"
 msgstr ""
 
-#: home/templates/home/index.html:15
+#: discover/templates/home/index.html:15
 msgid "Hello"
 msgstr ""
 
-#: home/templates/home/index.html:22
+#: discover/templates/home/index.html:22
 msgid "Go to your dashboard"
 msgstr ""
 
-#: home/templates/home/index.html:35 home/templates/home/index.html:48
-#: home/templates/home/register.html:4 home/templates/home/register.html:11
+#: discover/templates/home/index.html:35 discover/templates/home/index.html:48
+#: discover/templates/home/register.html:4
+#: discover/templates/home/register.html:11
 msgid "Create an account"
 msgstr ""
 
-#: home/templates/home/index.html:42
+#: discover/templates/home/index.html:42
 msgid "This is the multiline welcome message"
 msgstr ""
 "<p>This web application is dedicated to mountain biking. This is a <a href="
@@ -132,16 +129,24 @@ msgstr ""
 "read it!</p><p>Respect nature, plants and animals. Priority for walkers. "
 "Have fun!</p>"
 
-#: home/templates/home/login.html:17
+#: discover/templates/home/login.html:17
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/register.html:22
+#: discover/templates/home/register.html:22
 msgid "Welcome"
 msgstr ""
 
-#: home/templates/home/register.html:23
+#: discover/templates/home/register.html:23
 msgid "Welcome to the Mountain Bikers Club."
+msgstr ""
+
+#: member/forms.py:22 member/forms.py:36
+msgid "This username is forbidden."
+msgstr ""
+
+#: member/models.py:9
+msgid "email address"
 msgstr ""
 
 #: member/templates/member/headerlinks.html:48
@@ -159,7 +164,19 @@ msgid "Edit profile"
 msgstr ""
 
 #: member/templates/member/main.html:23
+msgid "Change password"
+msgstr ""
+
+#: member/templates/member/main.html:26
 msgid "Logout"
+msgstr ""
+
+#: member/templates/member/main.html:32
+msgid "Trails"
+msgstr ""
+
+#: member/templates/member/main.html:40
+msgid "Favorites"
 msgstr ""
 
 #: mountainbikers/settings.py:122
@@ -207,11 +224,11 @@ msgstr ""
 msgid "Published by <a href=\"%(link)s\">@%(user)s</a> on %(date)s."
 msgstr ""
 
-#: trail/templates/trail/main.html:22
+#: trail/templates/trail/main.html:35
 msgid "Edit"
 msgstr ""
 
-#: trail/templates/trail/main.html:25
+#: trail/templates/trail/main.html:38
 msgid "Delete"
 msgstr ""
 
