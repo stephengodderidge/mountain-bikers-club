@@ -42,7 +42,7 @@ def register(request):
         'form': form,
     }
 
-    return render(request, 'home/register.html', context)
+    return render(request, 'member/register.html', context)
 
 
 @login_required
@@ -64,7 +64,7 @@ def edit(request):
         'form': form,
     }
 
-    return render(request, 'home/edit.html', context)
+    return render(request, 'member/edit.html', context)
 
 
 @login_required

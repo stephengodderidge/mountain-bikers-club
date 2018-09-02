@@ -1,4 +1,4 @@
-{% extends 'home/base.html' %}
+{% extends 'discover/base.html' %}
 {% load i18n tpl_button %}
 
 {% block title %}{% blocktrans with user=user.get_full_name|default:user.username %}{{ user }}'s profile{% endblocktrans %}{% endblock %}

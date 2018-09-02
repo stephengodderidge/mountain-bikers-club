@@ -16,7 +16,7 @@ def index(request):
         'form_register': form_register,
     }
 
-    return render(request, 'home/index.html', context)
+    return render(request, 'discover/index.html', context)
 
 
 def discover(request):
@@ -30,4 +30,4 @@ def discover(request):
         'last_trails': last_trails[:30],
     }
 
-    return render(request, 'home/discover.html', context)
+    return render(request, 'discover/discover.html', context)
