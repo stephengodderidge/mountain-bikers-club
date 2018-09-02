@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-01 21:48+0000\n"
+"POT-Creation-Date: 2018-09-02 13:54+0000\n"
 "PO-Revision-Date: 2018-08-18 21:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,13 +141,17 @@ msgstr "Willkommen"
 msgid "Welcome to the Mountain Bikers Club."
 msgstr "Willkommen im Mountain Biker Club."
 
-#: member/forms.py:22 member/forms.py:36
+#: member/forms.py:23 member/forms.py:37
 msgid "This username is forbidden."
 msgstr "Dieser Benutzername ist verboten."
 
-#: member/models.py:9
+#: member/models.py:10
 msgid "email address"
 msgstr ""
+
+#: member/models.py:14
+msgid "A user with that email address already exists."
+msgstr "Ein Benutzer mit dieser E-Mail-Adresse existiert bereits."
 
 #: member/templates/member/headerlinks.html:48
 #: member/templates/member/main.html:4
@@ -179,15 +183,15 @@ msgstr "Trails"
 msgid "Favorites"
 msgstr "Favoriten"
 
-#: mountainbikers/settings.py:122
+#: mountainbikers/settings.py:146
 msgid "French"
 msgstr "Französisch"
 
-#: mountainbikers/settings.py:123
+#: mountainbikers/settings.py:147
 msgid "English"
 msgstr "Englisch"
 
-#: mountainbikers/settings.py:124
+#: mountainbikers/settings.py:148
 msgid "German"
 msgstr "Deutsch"
 
