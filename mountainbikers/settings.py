@@ -103,13 +103,12 @@ IGNORABLE_404_URLS = [
 
 # Mail
 
+DEFAULT_FROM_EMAIL = 'hello+support@mountainbikers.club'
 EMAIL_HOST = os.environ.get('SMTP_SERVER')
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('SMTP_LOGIN')
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD')
 EMAIL_USE_TLS = True
-EMAIL_TIMEOUT = 60
-DEFAULT_FROM_EMAIL = 'hello+support@mountainbikers.club'
 
 
 # Password validation
