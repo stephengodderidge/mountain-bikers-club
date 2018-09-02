@@ -7,6 +7,7 @@ from .models import User
 
 forbidden_username = [
     'superuser',
+    'member'
 ]
 
 
@@ -32,7 +33,7 @@ class UserProfileForm(forms.ModelForm):
     def clean_username(self):
         username = self.cleaned_data['username']
 
-        if username in forbidden_username or username.startswith('admin'):
+        if username in forbidden_username or username.lower().startswith('admin'):
             raise forms.ValidationError(_("This username is forbidden."))
 
         return username
