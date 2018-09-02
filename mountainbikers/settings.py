@@ -103,11 +103,12 @@ IGNORABLE_404_URLS = [
 
 # Mail
 
-EMAIL_USE_SSL = True
-EMAIL_PORT = 465
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = 465
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = True
+EMAIL_TIMEOUT = 60
 
 
 # Password validation
