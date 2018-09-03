@@ -19,7 +19,7 @@
                     {% if user.is_authenticated %}
                         <div class="o-flex-inline has-gutter">
                             <div>
-                                {% trans 'Go to your dashboard' as button_label %}
+                                {% trans 'Go to my dashboard' as button_label %}
                                 {% url 'dashboard__main' as button_link %}
                                 {% tpl_button button_label button_link %}
                             </div>

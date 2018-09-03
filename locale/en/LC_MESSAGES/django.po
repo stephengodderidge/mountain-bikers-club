@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-02 18:41+0000\n"
+"POT-Creation-Date: 2018-09-03 07:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,15 +23,15 @@ msgstr ""
 msgid "%(user)s's dashborad"
 msgstr ""
 
-#: dashboard/templates/dashboard/index.html:13
+#: dashboard/templates/dashboard/index.html:15
 msgid "Dashboard"
 msgstr ""
 
-#: dashboard/templates/dashboard/index.html:14
-msgid "Your last trails"
+#: dashboard/templates/dashboard/index.html:18
+msgid "My last trails"
 msgstr ""
 
-#: dashboard/templates/dashboard/index.html:22
+#: dashboard/templates/dashboard/index.html:32
 #: member/templates/member/headerlinks.html:37
 #: trail/templates/trail/new.html:11
 msgid "Upload a GPX file"
@@ -89,7 +89,8 @@ msgid "Hello"
 msgstr ""
 
 #: discover/templates/discover/index.html:22
-msgid "Go to your dashboard"
+#: member/templates/member/password_change_done.html:12
+msgid "Go to my dashboard"
 msgstr ""
 
 #: discover/templates/discover/index.html:35
@@ -128,9 +129,9 @@ msgstr ""
 msgid "A user with that email address already exists."
 msgstr ""
 
-#: member/templates/member/edit.html:4 member/templates/member/edit.html:9
-#, python-format
-msgid "%(user)s's profile"
+#: member/templates/member/edit.html:4 member/templates/member/edit.html:10
+#: member/templates/member/main.html:29
+msgid "Edit profile"
 msgstr ""
 
 #: member/templates/member/edit.html:18 trail/templates/trail/edit.html:19
@@ -138,16 +139,13 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: member/templates/member/edit.html:22 trail/templates/trail/edit.html:23
+#: member/templates/member/edit.html:22
+#: member/templates/member/password_change.html:23
+#: trail/templates/trail/edit.html:23
 msgid "Cancel"
 msgstr ""
 
-#: member/templates/member/edit.html:29
-msgid "Delete my account"
-msgstr ""
-
 #: member/templates/member/headerlinks.html:48
-#: member/templates/member/main.html:4
 msgid "Profile"
 msgstr ""
 
@@ -159,29 +157,55 @@ msgstr ""
 msgid "Forgotten your password?"
 msgstr ""
 
-#: member/templates/member/main.html:11
+#: member/templates/member/main.html:5 member/templates/member/main.html:14
+#, python-format
+msgid "%(user)s's profile"
+msgstr ""
+
+#: member/templates/member/main.html:19
 #, python-format
 msgid "Member since %(date)s."
 msgstr ""
 
-#: member/templates/member/main.html:20
-msgid "Edit profile"
-msgstr ""
-
-#: member/templates/member/main.html:23
-msgid "Change password"
-msgstr ""
-
-#: member/templates/member/main.html:26
+#: member/templates/member/main.html:32
 msgid "Logout"
 msgstr ""
 
-#: member/templates/member/main.html:32
+#: member/templates/member/main.html:38
 msgid "Trails"
 msgstr ""
 
-#: member/templates/member/main.html:40
+#: member/templates/member/main.html:46
 msgid "Favorites"
+msgstr ""
+
+#: member/templates/member/main.html:60
+#: member/templates/member/password_change.html:4
+#: member/templates/member/password_change.html:10
+msgid "Change password"
+msgstr ""
+
+#: member/templates/member/main.html:68
+msgid "Delete my account"
+msgstr ""
+
+#: member/templates/member/password_change.html:11
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: member/templates/member/password_change.html:19
+msgid "Change my password"
+msgstr ""
+
+#: member/templates/member/password_change_done.html:4
+#: member/templates/member/password_change_done.html:10
+msgid "Password changed successfully."
+msgstr ""
+
+#: member/templates/member/password_change_done.html:11
+msgid "Your password was changed."
 msgstr ""
 
 #: member/templates/member/register.html:22
@@ -237,12 +261,12 @@ msgstr ""
 msgid "Published by <a href=\"%(link)s\">@%(user)s</a> on %(date)s."
 msgstr ""
 
-#: trail/templates/trail/main.html:35
-msgid "Edit"
+#: trail/templates/trail/main.html:36
+msgid "Edit trail"
 msgstr ""
 
-#: trail/templates/trail/main.html:38
-msgid "Delete"
+#: trail/templates/trail/main.html:43
+msgid "Delete trail"
 msgstr ""
 
 #: trail/templates/trail/new.html:22
