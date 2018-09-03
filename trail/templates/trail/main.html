@@ -28,17 +28,15 @@
                 </span>
             </p>
             {% if user.is_authenticated and user == trail.author %}
-                <div>
+                <div class="o-flex-inline has-gutter has-hidden-links">
                     <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
-                    <ul class="user-bar has-hidden-links">
-                        <li class="user-bar__button">
-                            <a href="{% url 'trail__edit' trail.id %}">{% trans 'Edit' %}</a>
-                        </li>
-                        <li class="user-bar__button is-right is-danger">
-                            <a href="{% url 'trail__delete' trail.id %}">{% trans 'Delete' %}</a>
-                        </li>
-                    </ul>
-                    <p><!-- empty --></p>
+                    <div>
+                        <ul class="user-bar">
+                            <li class="user-bar__button">
+                                <a href="{% url 'trail__edit' trail.id %}">{% trans 'Edit trail' %}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             {% endif %}
             <ul class="trail__statistics-grid">
@@ -110,6 +108,19 @@
             <p><!-- empty --></p>
             {% if trail.description %}
                 <p>{{ trail.description }}</p>
+            {% endif %}
+            {% if user.is_authenticated and user == trail.author %}
+                <div class="o-flex-inline has-gutter has-hidden-links is-right">
+                    <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
+                    {# TODO delete page #}
+                    <div>
+                        <ul class="user-bar is-danger">
+                            <li class="user-bar__button">
+                                <a href="{% url 'trail__delete' trail.id %}">{% trans 'Delete trail' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             {% endif %}
         </div>
     </div>

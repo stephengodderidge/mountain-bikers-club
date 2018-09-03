@@ -1,17 +1,16 @@
 .user-bar {
-    --border-color: var(--base07);
+    --border-color: hsla(40, 100%, 70%, 0.65);
 
-    width: 100%;
-    color: var(--base00);
-    background: linear-gradient(to top, var(--base06), var(--border-color));
+    background: hsla(40, 100%, 70%, 0.03);
     border: 1px solid var(--border-color);
     border-radius: 3px;
     margin-bottom: var(--layout-gutter-height);
-    overflow: hidden;
+    display: inline-flex;
 }
 
 .user-bar__button {
     display: inline-block;
+    color: var(--base05);
     border-radius: 1px;
 }
 
@@ -20,26 +19,27 @@
     padding: 10px 20px;
 }
 
-.user-bar__button:not(.is-right) {
+.user-bar__button:not(:last-child) {
     /* border-right: solid 1px var(--base06); */
-    box-shadow: 1px 0 0 0 var(--base06);
-}
-
-.user-bar__button.is-right {
-    float: right;
-    /* border-left: solid 1px var(--base06); */
-    box-shadow: -1px 0 0 0 var(--base06);
+    box-shadow: 1px 0 0 0 var(--border-color);
 }
 
 .user-bar__button:hover {
-    background: var(--border-color);
+    background: var(--yellow);
+    color: var(--base00);
+    box-shadow: 0 0 0 1px var(--yellow);
 }
 
-.user-bar__button.is-danger {
+.user-bar.is-danger {
+    --border-color: hsla(359, 83%, 71%, 0.65);
+    background: hsla(359, 83%, 71%, 0.07);
+}
+
+.is-danger .user-bar__button{
     color: var(--red);
 }
 
-.user-bar__button.is-danger:hover {
+.is-danger .user-bar__button:hover {
     color: white;
     background: var(--red);
     box-shadow: 0 0 0 1px var(--red);

@@ -1,32 +1,38 @@
 {% extends 'discover/base.html' %}
 {% load static i18n tpl_button tpl_trail_preview %}
 
-{% block title %}{% trans 'Profile' %}{% endblock %}
+{% block title %}
+    {% blocktrans trimmed with user=member.get_full_name|default:member.username %}
+        {{ user }}'s profile
+    {% endblocktrans %}
+{% endblock %}
 
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
-            <h1 class="has-no-bottom-space">{{ member.first_name|default:member.username }} {{ member.last_name|default:'' }}</h1>
+            <h1 class="has-no-bottom-space">
+                {% blocktrans trimmed with user=member.get_full_name|default:member.username %}
+                    {{ user }}'s profile
+                {% endblocktrans %}
+            </h1>
             <p class="trail__published">
                 {% blocktrans trimmed with date=member.date_joined|date %}
                     Member since {{ date }}.
                 {% endblocktrans %}
             </p>
             {% if user.is_authenticated and user == member %}
-                <div>
+                <div class="o-flex-inline has-gutter has-hidden-links">
                     <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
-                    <ul class="user-bar has-hidden-links">
-                        <li class="user-bar__button">
-                            <a href="{% url 'member__edit' %}">{% trans 'Edit profile' %}</a>
-                        </li>
-                        <li class="user-bar__button">
-                            <a href="{% url 'password_change' %}">{% trans 'Change password' %}</a>
-                        </li>
-                        <li class="user-bar__button is-right">
-                            <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
-                        </li>
-                    </ul>
-                    <p><!-- empty --></p>
+                    <div>
+                        <ul class="user-bar">
+                            <li class="user-bar__button">
+                                <a href="{% url 'member__edit' %}">{% trans 'Edit profile' %}</a>
+                            </li>
+                            <li class="user-bar__button">
+                                <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             {% endif %}
             <h2>{% trans 'Trails' %}</h2>
@@ -44,6 +50,27 @@
                     {% tpl_trail_preview trail trail_url '1of3' %}
                 {% endfor %}
             </ul>
+            {% if user.is_authenticated and user == member %}
+                <p><!-- empty --></p>
+                <div class="o-flex-inline has-gutter has-hidden-links is-right">
+                    <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
+                    <div>
+                        <ul class="user-bar">
+                            <li class="user-bar__button">
+                                <a href="{% url 'password_change' %}">{% trans 'Change password' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {# TODO delete page #}
+                    <div>
+                        <ul class="user-bar is-danger">
+                            <li class="user-bar__button is-right">
+                                <a href="{% url 'member__delete' %}">{% trans 'Delete my account' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

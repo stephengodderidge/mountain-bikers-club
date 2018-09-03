@@ -10,18 +10,33 @@
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
-            <h1>{% trans 'Dashboard' %}</h1>
-            <h2>{% trans 'Your last trails' %}</h2>
-            <ul class="o-flex has-gutter is-multiline">
-                {% for trail in user_trails %}
-                    {% url 'trail__main' trail.id as trail_url %}
-                    {% tpl_trail_preview trail trail_url '1of3' %}
-                {% endfor %}
-            </ul>
-            <p><!-- empty --></p>
-            {% trans 'Upload a GPX file' as button_label %}
-            {% url 'trail__new' as button_link %}
-            {% tpl_button button_label button_link class='is-warning' %}
+            <div class="o-flex has-gutter">
+                <div class="cell-2of3">
+                    <h1>{% trans 'Dashboard' %}</h1>
+                </div>
+                <div class="cell-1of3">
+                    <h2>{% trans 'My last trails' %}</h2>
+                    <ul class="o-flex has-gutter is-multiline">
+                        {% for trail in user_trails %}
+                            {% url 'trail__main' trail.id as trail_url %}
+                            {% tpl_trail_preview trail trail_url '1of1' %}
+                        {% endfor %}
+                    </ul>
+                    <p><!-- empty --></p>
+                    {% if user.is_authenticated %}
+                        <div class="o-flex-inline has-gutter has-hidden-links">
+                            <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
+                            <div>
+                                <ul class="user-bar">
+                                    <li class="user-bar__button">
+                                        <a href="{% url 'trail__new' %}">{% trans 'Upload a GPX file' %}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
