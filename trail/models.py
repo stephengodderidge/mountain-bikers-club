@@ -1,3 +1,4 @@
+import math
 import uuid
 
 from django.conf import settings
@@ -6,7 +7,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 import trail.gpx as gpx
-import gpxpy
 
 
 def user_directory_path(instance, filename):
@@ -75,15 +75,9 @@ class Trail(models.Model):
                 self.distance = distance / 1000
                 self.max_speed = max_speed * 3600. / 1000.
 
-                gpx_old = gpxpy.parse(gpx_file.decode('utf-8'))
-                track_old = gpx_old.tracks[0] if len(gpx_old.tracks) > 0 else None
-                if track_old:
-                    moving_time, stopped_time, moving_distance, stopped_distance, max_speed = track_old.get_moving_data()
-
-                    # self.total_time = 0
-                    self.moving_time = moving_time
-
-                    # Speed
-                    self.average_speed = (moving_distance / moving_time) * 3600. / 1000.
+                # FIXME moving_time != total_time
+                total_time = math.fabs((end_time - start_time).total_seconds())
+                self.moving_time = total_time
+                self.average_speed = (distance / total_time) * 3600. / 1000.
 
                 super().save(*args, **kwargs)

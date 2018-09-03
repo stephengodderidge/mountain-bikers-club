@@ -21,22 +21,28 @@ class GPXParser:
         self.points = self.__parse()
 
     @staticmethod
-    def haversine_distance(point1, point2):
-        # https://www.movable-type.co.uk/scripts/latlong.html
-        latitude_1 = point1['lat']
-        latitude_2 = point2['lat']
-        longitude_1 = point1['lon']
-        longitude_2 = point2['lon']
+    def cheap_ruler_distance(points):
+        # https://github.com/mapbox/cheap-ruler
+        cos = math.cos(points[0]['lat'] * math.pi / 180)
+        cos2 = 2 * cos * cos - 1
+        cos3 = 2 * cos * cos2 - cos
+        cos4 = 2 * cos * cos3 - cos2
+        cos5 = 2 * cos * cos4 - cos3
 
-        delta_latitude = math.radians(latitude_2 - latitude_1)
-        delta_longitude = math.radians(longitude_2 - longitude_1)
+        kx = 1000 * (111.41513 * cos - 0.09455 * cos3 + 0.00012 * cos5)
+        ky = 1000 * (111.13209 - 0.56605 * cos2 + 0.0012 * cos4)
 
-        a = math.sin(delta_latitude / 2) * math.sin(delta_latitude / 2) + \
-            math.cos(math.radians(latitude_1)) * math.cos(math.radians(longitude_2)) * \
-            math.sin(delta_longitude / 2) * math.sin(delta_longitude / 2)
-        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+        size = len(points)
+        distance = 0.0
 
-        return 6371e3 * c
+        for n, point in enumerate(points):
+            if n < size - 1:
+                dx = (points[n]['lon'] - points[n+1]['lon']) * kx
+                dy = (points[n]['lat'] - points[n+1]['lat']) * ky
+
+                distance += math.sqrt(dx * dx + dy * dy)
+
+        return distance
 
     def __parse(self):
         all_points = []
@@ -132,8 +138,8 @@ class GPXParser:
                     delta_time = previous_time - next_time
                     delta_time = math.fabs(delta_time.total_seconds())
 
-                    distance1 = self.haversine_distance(self.points[n - 1], self.points[n])
-                    distance2 = self.haversine_distance(self.points[n], self.points[n + 1])
+                    distance1 = self.cheap_ruler_distance([self.points[n - 1], self.points[n]])
+                    distance2 = self.cheap_ruler_distance([self.points[n], self.points[n + 1]])
                     distance = distance1 + distance2
 
                     speed = distance / delta_time
@@ -186,15 +192,9 @@ class GPXParser:
         return min_elevation, max_elevation, uphill, downhill
 
     def get_moving_data(self):
-        size = len(self.points)
-
         smoothed_speeds = self.__smoothed_speeds()
-        distance = 0.
         moving_time = 0.
         max_speed = max(smoothed_speeds)
-
-        for n, point in enumerate(self.points):
-            if n < size - 2:
-                distance += self.haversine_distance(point, self.points[n + 1])
+        distance = self.cheap_ruler_distance(self.points)
 
         return distance, moving_time, max_speed
