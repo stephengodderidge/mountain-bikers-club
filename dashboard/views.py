@@ -6,7 +6,7 @@ from trail.models import Trail
 
 @login_required
 def main(request):
-    user_trails = Trail.objects.filter(author=request.user)
+    user_trails = Trail.objects.filter(author=request.user)[:3]
     context = {
         'user_trails': user_trails
     }
