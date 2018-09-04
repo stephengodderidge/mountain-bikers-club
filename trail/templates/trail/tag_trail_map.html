@@ -2,11 +2,11 @@
 {% if file %}
     <div id="map-{{ uid }}" style="height: {{ css_height|default:'54vh' }}; max-height: 825px;" class="trail-map"></div>
     <script type="module">
-        import { loadJS, loadCSS } from '{% static 'discover/scripts/library/async-loader.js' %}';
+        import { loadJS, loadCSS } from '{% static 'shell/scripts/library/async-loader.js' %}';
 
         (async function() {
-            await loadCSS('{% static 'trail/leaflet.css' %}');
-            await loadJS('{% static 'trail/leaflet.js' %}');
+            await loadCSS('{% static 'shell/scripts/vendor/leaflet.css' %}');
+            await loadJS('{% static 'shell/scripts/vendor/leaflet.js' %}');
             // TODO build our own loader from DB
             await loadJS('https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.4.0/gpx.min.js', true);
 
@@ -42,8 +42,8 @@
                             endIconUrl: '',
                         {% else %}
 
-                            startIconUrl: '{% static 'trail/pin_start.svg' %}',
-                            endIconUrl: '{% static 'trail/pin_end.svg' %}',
+                            startIconUrl: '{% static 'shell/assets/pin_start.svg' %}',
+                            endIconUrl: '{% static 'shell/assets/pin_end.svg' %}',
                         {% endif %}
                         iconSize: [30, 30],
                         iconAnchor: [15, 30],

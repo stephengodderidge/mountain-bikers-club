@@ -30,21 +30,21 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-tap-highlight" content="no">
 
-    <link rel="preload" href="{% static 'discover/styles/shell.css' %}" as="style">
-    <link rel="preload" href="{% static 'discover/styles/base.css' %}" as="style">
-    <link rel="preload" href="{% static 'discover/styles/trail.css' %}" as="style">
-    <link rel="preload" href="{% static 'discover/webfonts/3755DA_2_0.woff2' %}" as="font">
-    <link rel="preload" href="{% static 'discover/scripts/main.js' %}" as="script">
+    <link rel="preload" href="{% static 'shell/styles/shell.css' %}" as="style">
+    <link rel="preload" href="{% static 'shell/styles/base.css' %}" as="style">
+    <link rel="preload" href="{% static 'shell/styles/trail.css' %}" as="style">
+    <link rel="preload" href="{% static 'shell/webfonts/3755DA_2_0.woff2' %}" as="font">
+    <link rel="preload" href="{% static 'shell/scripts/main.js' %}" as="script">
 
-    <link rel="stylesheet" href="{% static 'discover/styles/shell.css' %}">
-    <link rel="stylesheet" href="{% static 'discover/styles/base.css' %}">
-    <link rel="stylesheet" href="{% static 'discover/styles/trail.css' %}">
+    <link rel="stylesheet" href="{% static 'shell/styles/shell.css' %}">
+    <link rel="stylesheet" href="{% static 'shell/styles/base.css' %}">
+    <link rel="stylesheet" href="{% static 'shell/styles/trail.css' %}">
 
     <!-- Web App Manifest -->
     {# <link rel="manifest" href="{% static "hello/webapp.manifest" %}">#}
 </head>
 <body>
-{% include 'discover/symbols.html' %}
+{% include 'shell/symbols.html' %}
 <div class="o-view">
     <div class="support-bar o-flex-inline">
         <div class="o-flex-middle" style="flex: 0; margin-right: 10px;">
@@ -76,7 +76,7 @@
             </li>
         </ul>
         {% if user.is_authenticated %}
-            {% include 'member/headerlinks.html' with user=user %}
+            {% include 'shell/headerlinks.html' with user=user %}
         {% else %}
             <div class="has-semihidden-links">
                 <a href="{% url 'login' %}">{% trans 'Sign in'|lower %}</a> {% trans 'or' %}
@@ -140,5 +140,5 @@
         </ul>
     </footer>
 </div>
-<script async type="module" src="{% static "discover/scripts/main.js" %}"></script>
+<script async type="module" src="{% static "shell/scripts/main.js" %}"></script>
 </body>

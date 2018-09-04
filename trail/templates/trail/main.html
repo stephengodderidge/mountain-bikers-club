@@ -1,4 +1,4 @@
-{% extends 'discover/base.html' %}
+{% extends 'shell/base.html' %}
 {% load static i18n tpl_button tpl_trail_map filter_gpx %}
 
 {% block title %}{{ trail.name|default:'Trail' }}{% endblock %}
@@ -29,7 +29,7 @@
             </p>
             {% if user.is_authenticated and user == trail.author %}
                 <div class="o-flex-inline has-gutter has-hidden-links">
-                    <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
+                    <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
                     <div>
                         <ul class="user-bar">
                             <li class="user-bar__button">
@@ -148,7 +148,7 @@
             <p><!-- empty --></p>
             {% if user.is_authenticated and user == trail.author %}
                 <div class="o-flex-inline has-gutter has-hidden-links is-right">
-                    <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
+                    <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
                     {# TODO delete page #}
                     <div>
                         <ul class="user-bar is-danger">

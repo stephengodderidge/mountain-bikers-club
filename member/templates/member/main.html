@@ -1,4 +1,4 @@
-{% extends 'discover/base.html' %}
+{% extends 'shell/base.html' %}
 {% load static i18n tpl_button tpl_trail_preview %}
 
 {% block title %}
@@ -22,7 +22,7 @@
             </p>
             {% if user.is_authenticated and user == member %}
                 <div class="o-flex-inline has-gutter has-hidden-links">
-                    <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
+                    <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
                     <div>
                         <ul class="user-bar">
                             <li class="user-bar__button">
@@ -53,7 +53,7 @@
             {% if user.is_authenticated and user == member %}
                 <p><!-- empty --></p>
                 <div class="o-flex-inline has-gutter has-hidden-links is-right">
-                    <link rel="stylesheet" href="{% static 'discover/styles/user_bar.css' %}">
+                    <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
                     <div>
                         <ul class="user-bar">
                             <li class="user-bar__button">
