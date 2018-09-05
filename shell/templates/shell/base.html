@@ -40,8 +40,9 @@
     <link rel="stylesheet" href="{% static 'shell/styles/base.css' %}">
     <link rel="stylesheet" href="{% static 'shell/styles/trail.css' %}">
 
-    <!-- Web App Manifest -->
+    <!-- Web App -->
     {# <link rel="manifest" href="{% static "hello/webapp.manifest" %}">#}
+    <script async type="module" src="{% static "shell/scripts/main.js" %}"></script>
 </head>
 <body>
 {% include 'shell/symbols.html' %}
@@ -89,7 +90,7 @@
         {% endblock %}
     </main>
     <footer class="main-footer has-hidden-links">
-        <div class="o-wave" style="background: var(--page-background)" aria-hidden="true"></div>
+        <section-wave data-color="var(--page-background)"></section-wave>
         {% load flatpages %}
         {% get_flatpages as flatpages %}
         <ul class="o-flex-inline has-gutter is-middle is-center main-footer__links">
@@ -140,5 +141,4 @@
         </ul>
     </footer>
 </div>
-<script async type="module" src="{% static "shell/scripts/main.js" %}"></script>
 </body>

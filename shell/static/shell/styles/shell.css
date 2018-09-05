@@ -117,7 +117,7 @@ a.has-semihidden-links:hover {
 }
 
 *:not(body) {
-    background: no-repeat center center;
+    /* background: no-repeat center center; */
     background-size: cover;
 }
 
