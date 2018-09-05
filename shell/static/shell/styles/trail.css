@@ -82,6 +82,7 @@
     border-radius: 3px;
     overflow: hidden;
     height: 54vh;
+    min-height: 480px;
     max-height: 825px;
 }
 
@@ -89,6 +90,7 @@
     border-radius: 0;
     z-index: 0;
     height: 180px;
+    min-height: unset;
 }
 
 
