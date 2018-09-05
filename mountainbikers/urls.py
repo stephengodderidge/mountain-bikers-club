@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
-from django.conf.urls.i18n import i18n_patterns
 from django.urls import path, include
 from django.conf.urls.static import static
 
@@ -33,15 +32,12 @@ urlpatterns = [
     path('robots.txt', include('robots.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
-]
-
-urlpatterns += i18n_patterns(
     path('@<str:username>/', member_views.main, name='member__main'),
     path('dashboard/', include('dashboard.urls')),
     path('trail/', include('trail.urls')),
     path('member/', include('member.urls')),
     path('', include('discover.urls')),
-)
+]
 
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
