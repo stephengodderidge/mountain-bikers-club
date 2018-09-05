@@ -203,7 +203,7 @@ CSP_SCRIPT_SRC = ("'self'", 'cdnjs.cloudflare.com')
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com')
 CSP_FONT_SRC = ("'self'", '')
 CSP_IMG_SRC = ("'self'", '*.tile.opentopomap.org')
-CSP_CONNECT_SRC = ("'self'", 'wss:')
+CSP_CONNECT_SRC = ("'self'", 'wss:', 'mountain-bikers-club.s3.amazonaws.com')
 CSP_FRAME_ANCESTORS = ("'none'",)
 
 
