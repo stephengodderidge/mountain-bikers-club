@@ -4,7 +4,7 @@ register = template.Library()
 
 
 @register.inclusion_tag('trail/tag_trail_preview.html')
-def tpl_trail_preview(trail, url, cell=None):
+def tpl_trail_preview(trail, url=None, cell=None):
     return {
         'trail': trail,
         'url': url,

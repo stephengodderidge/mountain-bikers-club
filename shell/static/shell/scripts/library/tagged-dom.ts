@@ -114,10 +114,10 @@ export default function dom(strings: TemplateStringsArray, ...expressions: any[]
 
 /**
  * Specific tag replaced by the promise result
- * @param {string} tagName
+ * @param {string} [tagName="dompr"]
  * @returns {Function}
  */
-function promiseTagger(tagName = "dompr") {
+function promiseTagger(tagName: string = "dompr") {
     /** @type {Map<string, Promise<*>>} */
     const map = new Map();
     let index = 0;
@@ -126,7 +126,7 @@ function promiseTagger(tagName = "dompr") {
      * @param {Promise} [promise]
      * @returns {string|Map<string, Promise<*>>}
      */
-    return function(promise) {
+    return function(promise?: Promise<any>) {
         const tag = `${tagName}-${index}`;
 
         if (promise == undefined) {
@@ -193,7 +193,7 @@ function isDomObject(obj) {
  * @param {*[]|Set<*>} [arr=[]] An array may hide other arrays
  * @returns {*[]}
  */
-function flatten(arr = []) {
+function flatten(arr: any[]|Set<any> = []) {
     let list = [];
 
     for (let v of arr) {

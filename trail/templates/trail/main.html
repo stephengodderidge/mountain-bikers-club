@@ -1,5 +1,5 @@
 {% extends 'shell/base.html' %}
-{% load static i18n tpl_button tpl_trail_map filter_gpx %}
+{% load static i18n tpl_button filter_gpx %}
 
 {% block title %}{{ trail.name|default:'Trail' }}{% endblock %}
 {% block description %}{{ trail.description|default:'' }}{% endblock %}
@@ -74,7 +74,7 @@
                 </ul>
             </div>
             <p><!-- empty --></p>
-            {% tpl_trail_map trail.file '84vh' %}
+            <trail-map class="trail-map" data-url="{{ trail.file.url }}" data-has-interface="true"></trail-map>
             <p><!-- empty --></p>
             {% if trail.description %}
                 <p>{{ trail.description }}</p>

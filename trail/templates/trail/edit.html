@@ -1,5 +1,5 @@
 {% extends 'shell/base.html' %}
-{% load static i18n tpl_button tpl_trail_map %}
+{% load static i18n tpl_button tpl_trail_preview %}
 
 {% block title %}Edit a GPX file{% endblock %}
 
@@ -29,7 +29,10 @@
                 </div>
                 <div class="cell-1of3">
                     <h2>Map</h2>
-                    {% tpl_trail_map trail.file '280px' %}
+                    <ul>
+                        {% url 'trail__main' trail.id as trail_url %}
+                        {% tpl_trail_preview trail %}
+                    </ul>
                 </div>
             </div>
         </div>

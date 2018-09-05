@@ -42,7 +42,7 @@
     transition: 350ms;
 }
 
-.trail-preview:hover .trail-preview__map::after {
+.trail-preview:not(.has-no-hover):hover .trail-preview__map::after {
     opacity: 0.82;
 }
 
@@ -59,7 +59,7 @@
     transition: 350ms;
 }
 
-.trail-preview:hover .trail-preview__title {
+.trail-preview:not(.has-no-hover):hover .trail-preview__title {
     opacity: 1;
     transform: translate3d(0, 0, 0);
 }
@@ -77,14 +77,18 @@
 /* --- Trail Map --- */
 
 .trail-map {
+    display: block;
     width: 100%;
     border-radius: 3px;
     overflow: hidden;
+    height: 54vh;
+    max-height: 825px;
 }
 
 .trail-preview .trail-map {
     border-radius: 0;
     z-index: 0;
+    height: 180px;
 }
 
 
