@@ -93,6 +93,10 @@
     min-height: unset;
 }
 
+.trail-preview img.trail-map {
+    object-fit: cover;
+}
+
 
 /* --- Trail View --- */
 

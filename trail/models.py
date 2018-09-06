@@ -1,3 +1,4 @@
+import io
 import math
 import uuid
 
@@ -5,6 +6,7 @@ from django.conf import settings
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from staticmap import StaticMap, Line
 
 import trail.gpx as gpx
 
@@ -21,10 +23,11 @@ class Trail(models.Model):
     # Info
     name = models.CharField(_('Title'), max_length=255, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
-    location = models.CharField(_('Location'), max_length=255, blank=True, null=True)
     file = models.FileField(_('GPX file'), upload_to=user_directory_path, validators=[FileExtensionValidator(['gpx'])])
+    thumbnail = models.FileField(upload_to=user_directory_path, null=True)
 
     # Track
+    location = models.CharField(max_length=255, blank=True, null=True)
     distance = models.FloatField(blank=True, null=True)
     uphill = models.FloatField(blank=True, null=True)
     downhill = models.FloatField(blank=True, null=True)
@@ -79,5 +82,14 @@ class Trail(models.Model):
                 total_time = math.fabs((end_time - start_time).total_seconds())
                 self.moving_time = total_time
                 self.average_speed = (distance / total_time) * 3600. / 1000.
+
+                points = parser.get_points()
+                m = StaticMap(int(355 * 1.2), int(180 * 1.2), 10, 10, 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png')
+                m.add_line(Line(points, 'crimson', 4))
+                image = m.render()
+                f = io.BytesIO(b'')
+                image.save(f, format='JPEG', optimize=True, progressive=True)
+                self.thumbnail.delete(save=False)
+                self.thumbnail.save('thumbnail.jpg', f, save=False)
 
                 super().save(*args, **kwargs)

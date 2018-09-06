@@ -198,3 +198,9 @@ class GPXParser:
         distance = self.cheap_ruler_distance(self.points)
 
         return distance, moving_time, max_speed
+
+    def get_points(self):
+        def __filter(point):
+            return point['lon'], point['lat']
+
+        return tuple(map(__filter, self.points))

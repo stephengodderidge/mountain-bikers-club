@@ -6,7 +6,11 @@
         <div class="trail-preview has-no-hover">
     {% endif %}
     <div class="trail-preview__map">
-        <trail-map class="trail-map" data-url="{{ trail.file.url }}"></trail-map>
+        {% if trail.thumbnail %}
+            <img class="trail-map" src="{{ trail.thumbnail.url }}">
+        {% else %}
+            <trail-map class="trail-map" data-url="{{ trail.file.url }}"></trail-map>
+        {% endif %}
         <h3 class="trail-preview__title">{{ trail.name|default:'Unnamed trail' }}</h3>
     </div>
     {% if trail.location or trail.distance or trail.uphill %}
