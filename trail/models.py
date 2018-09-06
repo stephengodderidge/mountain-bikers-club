@@ -85,7 +85,8 @@ class Trail(models.Model):
 
                 points = parser.get_points()
                 m = StaticMap(int(355 * 1.2), int(180 * 1.2), 10, 10, 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png')
-                m.add_line(Line(points, 'crimson', 4))
+                m.add_line(Line(points, 'white', 9))
+                m.add_line(Line(points, '#6699cc', 5))
                 image = m.render()
                 f = io.BytesIO(b'')
                 image.save(f, format='JPEG', optimize=True, progressive=True)
