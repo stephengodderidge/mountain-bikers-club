@@ -10,8 +10,9 @@ class User(AbstractUser):
         _('email address'),
         unique=True,
         blank=False,
+        help_text=_('Required. No bullshit, I promise.'),
         error_messages={
-            'unique': _("A user with that email address already exists."),
+            'unique': _('A user with that email address already exists.'),
         },
     )
     favorite_trails = models.ManyToManyField(Trail, related_name='favorite_by')
