@@ -17,12 +17,13 @@ class GpxUploadForm(forms.ModelForm):
 
 
 class GpxEditForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['autofocus'] = 'true'
+
     class Meta:
         model = Trail
         fields = ('name', 'description')
-        widgets = {
-            'name': TextInput(attrs={'autofocus': True})
-        }
 
     def save(self, commit=True):
         trail = super().save(commit=False)
