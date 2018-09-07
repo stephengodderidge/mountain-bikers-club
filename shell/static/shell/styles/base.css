@@ -216,17 +216,22 @@
 
 /* --- Forms --- */
 
-.django__form > li {
+.django__form .errorlist {
+    color: var(--red);
+    margin-bottom: 10px;
+}
+
+.django__form__list > li {
     margin-bottom: 20px;
 }
 
-.django__form label {
+.django__form__list label {
     display: block;
     font-size: 90%;
 }
 
-.django__form input,
-.django__form textarea {
+.django__form__list input,
+.django__form__list textarea {
     border: solid 1px white;
     padding: 8px;
     border-radius: 3px;
@@ -240,19 +245,19 @@
     font-family: inherit;
 }
 
-.django__form input:-moz-ui-invalid {
+.django__form__list input:-moz-ui-invalid {
     border-color: var(--red);
     box-shadow: 0 0 0 2px #404040, 0 0 0 5px #f2777a4d;
 }
 
-.django__form input:focus,
-.django__form textarea:focus {
+.django__form__list input:focus,
+.django__form__list textarea:focus {
     outline: 0;
     border-color: var(--blue);
     box-shadow: 0 0 0 2px #404040, 0 0 0 5px #6699cc4d;
 }
 
-.django__form input[type="file"] {
+.django__form__list input[type="file"] {
     border: 0;
     font-size: initial;
     border-left: solid 3px;
@@ -260,12 +265,12 @@
     border-bottom-left-radius: 0;;
 }
 
-.django__form .helptext {
+.django__form__list .helptext {
     display: block;
     font-size: 70%;
 }
 
-.django__form .errorlist {
+.django__form__list .errorlist {
     color: var(--red);
     margin-bottom: 10px;
     font-size: 85%;

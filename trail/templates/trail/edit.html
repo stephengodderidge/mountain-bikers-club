@@ -11,7 +11,7 @@
                     <h1>Edit {{ trail.name|default:'' }}</h1>
                     <form action="{% url 'trail__edit' trail.id %}" method="post">
                         {% csrf_token %}
-                        <ul class="django__form">
+                        <ul class="django__form__list">
                             {{ form.as_ul }}
                         </ul>
                         <div class="o-flex-inline has-horizontal-gutter">

@@ -48,7 +48,7 @@
                         <h2>{% trans 'Create an account' %}</h2>
                         <form method="post" action="{% url 'register' %}">
                             {% csrf_token %}
-                            <ul class="django__form">
+                            <ul class="django__form__list">
                                 {{ form_register.as_ul }}
                             </ul>
                             {% trans 'Sign up' as button_label %}
