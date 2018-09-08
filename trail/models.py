@@ -8,7 +8,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from staticmap import StaticMap, Line
 
-import trail.gpx as gpx
+from .gpx import parse, get_coordinates, get_track_image
 
 
 def user_directory_path(instance, filename):
@@ -57,40 +57,33 @@ class Trail(models.Model):
         if bool(self.file):
             with self.file.open() as file:
                 gpx_file = file.read()
-                parser = gpx.parse(gpx_file.decode('utf-8'))
+                name, description, tracks = parse(gpx_file.decode('utf-8'))
 
-                name, description, start_time, end_time, location = parser.get_metadata()
+                current_track = tracks[0]
+
                 if not self.name:
-                    self.name = name or _('Unnamed Trail')
+                    self.name = name or current_track['name'] or _('Unnamed Trail')
                 if not self.description:
-                    self.description = description
-                self.start_datetime = start_time
-                self.end_datetime = end_time
-                self.location = location
+                    self.description = description or current_track['description'] or None
 
-                min_elevation, max_elevation, uphill, downhill = parser.get_elevation_data()
-                self.min_altitude = min_elevation
-                self.max_altitude = max_elevation
-                self.uphill = uphill
-                self.downhill = downhill
+                current_points = current_track['points']
 
-                distance, time, max_speed = parser.get_moving_data()
-                self.distance = distance / 1000
-                self.max_speed = max_speed * 3600. / 1000.
+                self.start_datetime = current_points[0]['time']
+                self.end_datetime = current_points[-1]['time']
+                self.location = current_track['location']
+                self.min_altitude = min(current_track['smoothed_elevations'])
+                self.max_altitude = max(current_track['smoothed_elevations'])
+                self.uphill = current_track['uphill']
+                self.downhill = current_track['downhill']
+                self.distance = current_track['distance'] / 1000.
+                self.max_speed = max(current_track['smoothed_speeds']) * 3600. / 1000.
 
                 # FIXME moving_time != total_time
-                total_time = math.fabs((end_time - start_time).total_seconds())
+                total_time = current_track['total_time']
                 self.moving_time = total_time
-                self.average_speed = (distance / total_time) * 3600. / 1000.
+                self.average_speed = (current_track['distance'] / total_time) * 3600. / 1000.
 
-                points = parser.get_points()
-                m = StaticMap(int(355 * 1.2), int(180 * 1.2), 10, 10, 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png')
-                m.add_line(Line(points, 'white', 11))
-                m.add_line(Line(points, '#2E73B8', 5))
-                image = m.render()
-                f = io.BytesIO(b'')
-                image.save(f, format='JPEG', optimize=True, progressive=True)
                 self.thumbnail.delete(save=False)
-                self.thumbnail.save('thumbnail.jpg', f, save=False)
+                self.thumbnail.save('thumbnail.jpg', get_track_image(current_points, 360, 180), save=False)
 
                 super().save(*args, **kwargs)
