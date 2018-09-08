@@ -1,13 +1,13 @@
-import dom from "../library/tagged-dom.js";
 export default class Wave extends HTMLElement {
     constructor() {
-        super(...arguments);
-        this.shadow = this.attachShadow({ mode: "open" });
+        super();
+        this.shadow =  this.attachShadow({ mode: "open" });
         this.color = this.dataset.color;
         this.height = this.dataset.height;
     }
+
     connectedCallback() {
-        const html = dom `
+        this.shadow.innerHTML = `
             <style>
                 :host {
                     display: block;
@@ -21,8 +21,7 @@ export default class Wave extends HTMLElement {
                 }
             </style>
         `;
+
         this.setAttribute("aria-hidden", String(true));
-        html.render(this.shadow);
     }
 }
-//# sourceMappingURL=section-wave.js.map
