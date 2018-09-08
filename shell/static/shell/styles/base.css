@@ -219,6 +219,8 @@
 .django__form .errorlist {
     color: var(--red);
     margin-bottom: 10px;
+    font-size: 85%;
+    padding-top: 5px;
 }
 
 .django__form__list > li {
@@ -268,11 +270,4 @@
 .django__form__list .helptext {
     display: block;
     font-size: 70%;
-}
-
-.django__form__list .errorlist {
-    color: var(--red);
-    margin-bottom: 10px;
-    font-size: 85%;
-    padding-top: 5px;
 }
