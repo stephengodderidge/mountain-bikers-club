@@ -1,4 +1,4 @@
-import {loadJS, loadCSS} from '../library/async-loader.js';
+import { loadJS, loadCSS } from '../library/async-loader.js';
 
 export default class Map extends HTMLElement {
     constructor() {
@@ -37,24 +37,24 @@ export default class Map extends HTMLElement {
         const myMap = window.L.map(this, mapOptions);
 
         window.L.tileLayer('https://a.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
             maxZoom: 17,
         }).addTo(myMap);
 
-        new window.L.GPX(
-            this.url,
-            {
-                async: true,
-                polyline_options: {
-                    color: 'crimson',
-                    opacity: 0.75,
-                    weight: 4,
-                    lineCap: 'round',
-                },
-                marker_options: markerOptions,
+        new window.L.GPX(this.url, {
+            async: true,
+            polyline_options: {
+                color: 'crimson',
+                opacity: 0.75,
+                weight: 4,
+                lineCap: 'round',
             },
-        ).on('loaded', function (e) {
-            myMap.fitBounds(e.target.getBounds());
-        }).addTo(myMap);
+            marker_options: markerOptions,
+        })
+            .on('loaded', function(e) {
+                myMap.fitBounds(e.target.getBounds());
+            })
+            .addTo(myMap);
     }
 }

@@ -1,7 +1,7 @@
 export default class Button extends HTMLElement {
     constructor() {
         super();
-        this.shadow =  this.attachShadow({ mode: "open" });
+        this.shadow = this.attachShadow({ mode: 'open' });
         this.isTouch = false;
     }
 
