@@ -82,9 +82,11 @@ def get_smoothed_speed(points):
         if current_time is None:
             return False
 
+        current_time = parse_time(points[n]['time'])
+
         if 0 < n < size - 1:
-            previous_time = points[n - 1]['time']
-            next_time = points[n + 1]['time']
+            previous_time = parse_time(points[n - 1]['time'])
+            next_time = parse_time(points[n + 1]['time'])
 
             if previous_time is not None and current_time is not None and next_time is not None:
                 delta_time = previous_time - next_time
@@ -145,7 +147,7 @@ def parse(xml):
                     'lat': float(point.attrib['lat']),
                     'lon': float(point.attrib['lon']),
                     'ele': float(elevation.text) if elevation is not None else None,
-                    'time': parse_time(time.text) if time is not None else None,
+                    'time': time.text if time is not None else None,
                 }
 
                 parsed_points.append(current_point)
@@ -154,20 +156,19 @@ def parse(xml):
         smoothed_elevations = get_smoothed_data(parsed_points, 'ele')
         uphill, downhill = get_uphill_downhill(smoothed_elevations)
 
+        track_name = track.find('name')
+        track_description = track.find('desc')
+
+        # TODO: Moving time?
         parsed_tracks.append({
-            'name': track.find('name'),
-            'description': track.find('desc'),
+            'name': track_name.text if track_name else None,
+            'description': track_description.text if track_description else None,
             'location': get_location(parsed_points[0]),
-            # 'start_time': parsed_points[0]['time'],
-            # 'end_time': parsed_points[-1]['time'],
-            'total_time': math.fabs((parsed_points[-1]['time'] - parsed_points[0]['time']).total_seconds()),
             'distance': cheap_ruler_distance(parsed_points),
             'uphill': uphill,
             'downhill': downhill,
             'points': parsed_points,
             'smoothed_elevations': smoothed_elevations,
-            # 'min_elevation': min(smoothed_elevations),
-            # 'max_elevation': max(smoothed_elevations),
             'smoothed_speeds': smoothed_speeds,
         })
 
@@ -188,3 +189,33 @@ def get_track_image(points, width, height):
     image.save(f, format='JPEG', optimize=True, progressive=True)
 
     return f
+
+
+def get_track_details(track):
+    start_datetime = track['points'][0]['time']
+    end_datetime = track['points'][-1]['time']
+
+    total_time = None
+    average_speed = None
+
+    if start_datetime and end_datetime:
+        start_datetime = parse_time(start_datetime)
+        end_datetime = parse_time(end_datetime)
+        total_time = math.fabs((end_datetime - start_datetime).total_seconds())
+        average_speed = (track['distance'] / total_time) * 3600. / 1000.
+
+    return {
+        'name': track['name'],
+        'description': track['description'],
+        'location': track['location'],
+        'distance': track['distance'] / 1000.,
+        'uphill': track['uphill'],
+        'downhill': track['downhill'],
+        'start_datetime': start_datetime,
+        'end_datetime': end_datetime,
+        'min_altitude': min(track['smoothed_elevations']),
+        'max_altitude': max(track['smoothed_elevations']),
+        'max_speed': max(track['smoothed_speeds']) * 3600. / 1000.,
+        'total_time': total_time,
+        'average_speed': average_speed,
+    }
