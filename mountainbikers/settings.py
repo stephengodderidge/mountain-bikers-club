@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.sitemaps',
-    'channels',
     'storages',
     'robots',
     'shell',
@@ -80,7 +79,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mountainbikers.wsgi.application'
-ASGI_APPLICATION = 'mountainbikers.routing.application'
 
 
 # Database
@@ -96,15 +94,6 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
-}
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
-        },
-    },
 }
 
 
