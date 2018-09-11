@@ -85,7 +85,8 @@ ASGI_APPLICATION = 'mountainbikers.routing.application'
 
 # Database
 
-CONN_MAX_AGE = 600
+# Keeps the number of connexion as low as possible because of small DB sever (max 20 connexions)
+CONN_MAX_AGE = 0  # 600
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
