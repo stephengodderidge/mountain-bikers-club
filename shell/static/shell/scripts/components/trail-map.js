@@ -74,7 +74,7 @@ export default class Map extends HTMLElement {
 
             myMap.fitBounds(polylineBack.getBounds());
             new window.L.Control.MiniMap(tileLayer, {
-                zoomLevelFixed: 5,
+                zoomLevelOffset: -6,
             }).addTo(myMap);
         }
     }
