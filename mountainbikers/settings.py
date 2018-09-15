@@ -211,6 +211,12 @@ CSP_CONNECT_SRC = ("'self'", 'wss:', 'mountain-bikers-club.s3.amazonaws.com')
 CSP_FRAME_ANCESTORS = ("'none'",)
 
 
+# Celery
+
+CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
+CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://localhost:6379')
+CELERY_TASK_SERIALIZER = 'json'
+
 # Heroku config override
 
 django_heroku.settings(locals())
