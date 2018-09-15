@@ -50,13 +50,15 @@
     font-weight: 500;
     position: absolute;
     bottom: 0;
-    left: var(--h2-margin-bottom);
+    left: 0;
     color: var(--base07);
     z-index: 2;
     opacity: 0;
     will-change: opacity;
     transform: translate3d(0, 10px, 0);
     transition: 350ms;
+    width: 100%;
+    padding: 0 var(--h2-margin-bottom);
 }
 
 .trail-preview:not(.has-no-hover):hover .trail-preview__title {
