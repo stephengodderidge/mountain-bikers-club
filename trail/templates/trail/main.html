@@ -94,7 +94,11 @@
                         {% endwith %}
                     {% endif %}
                     {# FIXME show only the track #}
-                    <trail-map class="trail-map" data-url="{{ trail.file.url }}" data-has-interface="true"></trail-map>
+                    <trail-map class="trail-map"
+                               data-has-interface="true"
+                               data-trail="{{ trail.id }}"
+                               data-track="{{ forloop.counter0 }}">
+                    </trail-map>
                     <p><!-- empty --></p>
                     <div>
                         <ul class="trail__statistics-grid">
