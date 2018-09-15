@@ -7,7 +7,8 @@
 {% block content %}
     <div class="o-section">
         <div class="o-group is-large">
-            <h1 class="has-no-bottom-space">{{ trail.name|default:'Unnamed trail' }}</h1>
+            {% trans 'Unnamed Trail' as trail_noname %}
+            <h1 class="has-no-bottom-space">{{ trail.name|default:trail_noname }}</h1>
             <p class="trail__published has-hidden-links">
                 {% url 'member__main' username=trail.author.username as link %}
                 {% blocktrans trimmed with user=trail.author.username date=trail.pub_date|date link=link %}

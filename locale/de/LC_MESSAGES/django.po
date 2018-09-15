@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-06 21:57+0000\n"
+"POT-Creation-Date: 2018-09-13 22:21+0000\n"
 "PO-Revision-Date: 2018-08-18 21:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Sign up"
 msgstr "Eintragen"
 
-#: member/forms.py:23 member/forms.py:37
+#: member/forms.py:32 member/forms.py:55
 msgid "This username is forbidden."
 msgstr "Dieser Benutzername ist verboten."
 
@@ -167,7 +167,6 @@ msgstr "Favoriten"
 
 #: member/templates/member/main.html:60
 #: member/templates/member/password_change.html:4
-#: member/templates/member/password_change.html:10
 msgid "Change password"
 msgstr ""
 
@@ -182,16 +181,80 @@ msgid ""
 msgstr ""
 
 #: member/templates/member/password_change.html:19
+#: member/templates/member/password_reset_confirm.html:27
 msgid "Change my password"
 msgstr ""
 
 #: member/templates/member/password_change_done.html:4
-#: member/templates/member/password_change_done.html:10
 msgid "Password changed successfully."
 msgstr ""
 
 #: member/templates/member/password_change_done.html:11
 msgid "Your password was changed."
+msgstr ""
+
+#: member/templates/member/password_reset.html:4
+#: member/templates/member/password_reset_complete.html:4
+#: member/templates/member/password_reset_done.html:4
+msgid "Password reset"
+msgstr ""
+
+#: member/templates/member/password_reset.html:11
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: member/templates/member/password_reset.html:17
+msgid "Email address:"
+msgstr ""
+
+#: member/templates/member/password_reset.html:21
+msgid "Reset my password"
+msgstr ""
+
+#: member/templates/member/password_reset_complete.html:11
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: member/templates/member/password_reset_complete.html:12
+msgid "Log in"
+msgstr ""
+
+#: member/templates/member/password_reset_confirm.html:4
+msgid "Password reset confirmation"
+msgstr ""
+
+#: member/templates/member/password_reset_confirm.html:12
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: member/templates/member/password_reset_confirm.html:18
+msgid "New password:"
+msgstr ""
+
+#: member/templates/member/password_reset_confirm.html:23
+msgid "Confirm password:"
+msgstr ""
+
+#: member/templates/member/password_reset_confirm.html:31
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: member/templates/member/password_reset_done.html:11
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+
+#: member/templates/member/password_reset_done.html:12
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
 msgstr ""
 
 #: member/templates/member/register.html:22
@@ -202,15 +265,15 @@ msgstr "Willkommen"
 msgid "Welcome to the Mountain Bikers Club."
 msgstr "Willkommen im Mountain Biker Club."
 
-#: mountainbikers/settings.py:147
+#: mountainbikers/settings.py:152
 msgid "French"
 msgstr "Französisch"
 
-#: mountainbikers/settings.py:148
+#: mountainbikers/settings.py:153
 msgid "English"
 msgstr "Englisch"
 
-#: mountainbikers/settings.py:149
+#: mountainbikers/settings.py:154
 msgid "German"
 msgstr "Deutsch"
 
@@ -256,15 +319,15 @@ msgstr "Profil"
 msgid "Update from GPX"
 msgstr "Update von GPX"
 
-#: trail/models.py:21
+#: trail/models.py:18
 msgid "Date published"
 msgstr "Veröffentlichungstermin"
 
-#: trail/models.py:24
+#: trail/models.py:21
 msgid "Title"
 msgstr "Titel"
 
-#: trail/models.py:25
+#: trail/models.py:22
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -272,20 +335,20 @@ msgstr "Beschreibung"
 msgid "GPX file"
 msgstr "GPX Datei"
 
-#: trail/models.py:64
+#: trail/tasks.py:40 trail/templates/trail/main.html:10
 msgid "Unnamed Trail"
 msgstr "Unbenannte Trail"
 
-#: trail/templates/trail/main.html:13
+#: trail/templates/trail/main.html:14
 #, python-format
 msgid "Published by <a href=\"%(link)s\">@%(user)s</a> on %(date)s."
 msgstr "Gepostet von <a href=\"%(link)s\">@%(user)s</a> am %(date)s."
 
-#: trail/templates/trail/main.html:36
+#: trail/templates/trail/main.html:37
 msgid "Edit trail"
 msgstr "Trail ändern"
 
-#: trail/templates/trail/main.html:156
+#: trail/templates/trail/main.html:181
 msgid "Delete trail"
 msgstr "Trail löschen"
 
