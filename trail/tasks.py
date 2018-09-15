@@ -46,4 +46,4 @@ def parse_gpx(trail_id):
             # TODO Send an email to notify the user the work is done.
 
             # Asynchronous Thumbnail
-            create_thumbnail.delay(trail.id, first_track['points'], 360, 180)
+            create_thumbnail.delay(trail.id, first_track['points'], 425, 225)
