@@ -98,6 +98,9 @@
                                data-has-interface="true"
                                data-trail="{{ trail.id }}"
                                data-track="{{ forloop.counter0 }}">
+                        <noscript>
+                            <img class="trail-map__fallback" src="{{ trail.thumbnail.url }}">
+                        </noscript>
                     </trail-map>
                     <p><!-- empty --></p>
                     <div>
