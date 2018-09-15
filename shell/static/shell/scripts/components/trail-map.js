@@ -21,9 +21,6 @@ export default class Map extends HTMLElement {
 
         const mapOptions = {
             scrollWheelZoom: false,
-            fullscreenControl: {
-                pseudoFullscreen: true,
-            },
         };
         const markerOptions = {
             iconSize: [30, 30],
@@ -36,6 +33,9 @@ export default class Map extends HTMLElement {
             mapOptions['dragging'] = !window.L.Browser.mobile;
             markerOptions['startIconUrl'] = ''; // '{% static 'shell/assets/pin_start.svg' %}';
             markerOptions['endIconUrl'] = ''; // '{% static 'shell/assets/pin_end.svg' %}';
+            markerOptions['fullscreenControl'] = {
+                pseudoFullscreen: true,
+            };
         } else {
             mapOptions['zoomControl'] = false;
             mapOptions['attributionControl'] = false;
@@ -73,9 +73,12 @@ export default class Map extends HTMLElement {
             window.L.polyline(points, polylineOptionsFront).addTo(myMap);
 
             myMap.fitBounds(polylineBack.getBounds());
-            new window.L.Control.MiniMap(tileLayer, {
-                zoomLevelOffset: -6,
-            }).addTo(myMap);
+
+            if (this.hasInterface) {
+                new window.L.Control.MiniMap(tileLayer, {
+                    zoomLevelOffset: -6,
+                }).addTo(myMap);
+            }
         }
     }
 }
