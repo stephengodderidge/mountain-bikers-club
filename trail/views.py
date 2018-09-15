@@ -1,27 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
 from .forms import GpxUploadForm, GpxEditForm
 from .models import Trail
-
-
-def main(request, trail_id):
-    current_user = request.user
-    trail = get_object_or_404(Trail, pk=trail_id)
-    is_favorite = False
-
-    if current_user.is_authenticated:
-        is_favorite = current_user in trail.favorite_by.all()
-
-    context = {
-        'trail': trail,
-        'is_favorite': is_favorite,
-    }
-
-    return render(request, 'trail/main.html', context)
+from .tasks import parse_gpx
 
 
 @login_required
@@ -36,6 +21,7 @@ def new(request):
             f.author = current_user
             f.pub_date = timezone.now()
             f.save()
+            parse_gpx.delay(f.id)
 
             return HttpResponseRedirect(reverse('trail__main', args=[f.id]))
 
@@ -92,3 +78,29 @@ def delete(request, trail_id):
     current_trail.delete()
 
     return HttpResponseRedirect(reverse('dashboard__main'))
+
+
+def main(request, trail_id):
+    current_user = request.user
+    trail = get_object_or_404(Trail, pk=trail_id)
+    is_favorite = False
+
+    if current_user.is_authenticated:
+        is_favorite = current_user in trail.favorite_by.all()
+
+    context = {
+        'trail': trail,
+        'is_favorite': is_favorite,
+    }
+
+    return render(request, 'trail/main.html', context)
+
+
+def track_json(request, trail_id, track_id):
+    trail = get_object_or_404(Trail, pk=trail_id)
+    try:
+        points = trail.tracks[track_id] or {}
+    except IndexError:
+        raise Http404("Track index is out of range")
+
+    return JsonResponse(points, safe=False)

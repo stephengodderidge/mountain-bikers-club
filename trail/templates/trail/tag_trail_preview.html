@@ -1,4 +1,4 @@
-{% load i18n filter_gpx %}
+{% load i18n %}
 <li class="trail-preview__outer cell-{{ cell|default:'1of1' }} has-hidden-links">
     {% if url %}
         <a href="{{ url|default:'' }}" class="trail-preview">
@@ -14,7 +14,7 @@
         <h3 class="trail-preview__title">{{ trail.name|default:'Unnamed trail' }}</h3>
     </div>
     {% if trail.tracks|length > 0 %}
-        {% with trail.tracks|first|details as track %}
+        {% with trail.tracks|first as track %}
             {% if track.location or track.distance or track.uphill %}
                 <ul class="trail-preview__info-grid">
                     <li class="is-left" style="grid-column-end: span 2;">

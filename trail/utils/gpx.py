@@ -11,7 +11,7 @@ from staticmap import StaticMap, Line
 
 def cheap_ruler_distance(points):
     # https://github.com/mapbox/cheap-ruler
-    cos = math.cos(points[0]['lat'] * math.pi / 180)
+    cos = math.cos(points[0]['latitude'] * math.pi / 180)
     cos2 = 2 * cos * cos - 1
     cos3 = 2 * cos * cos2 - cos
     cos4 = 2 * cos * cos3 - cos2
@@ -23,10 +23,10 @@ def cheap_ruler_distance(points):
     size = len(points)
     distance = 0.0
 
-    for n, point in enumerate(points):
+    for n in range(len(points)):
         if n < size - 1:
-            dx = (points[n]['lon'] - points[n+1]['lon']) * kx
-            dy = (points[n]['lat'] - points[n+1]['lat']) * ky
+            dx = (points[n]['longitude'] - points[n+1]['longitude']) * kx
+            dy = (points[n]['latitude'] - points[n+1]['latitude']) * ky
 
             distance += math.sqrt(dx * dx + dy * dy)
 
@@ -34,12 +34,12 @@ def cheap_ruler_distance(points):
 
 
 def get_location(point):
-    url = 'https://nominatim.openstreetmap.org/reverse?lon=' + str(point['lon']) + '&lat=' + str(point['lat'])
+    url = 'https://nominatim.openstreetmap.org/reverse?lon=' + str(point['longitude']) + '&lat=' + str(point['latitude'])
     headers = {'User-Agent': 'mountainbikers.club'}
     req = urllib.request.Request(url, headers=headers)
     location = None
 
-    # FIXME Manage errors
+    # FIXME Manage errors or use requests
     with urllib.request.urlopen(req) as response:
         reverse_xml = response.read()
         reverse_root = ET.fromstring(reverse_xml)
@@ -80,25 +80,26 @@ def get_smoothed_speed(points):
         current_time = points[n]['time']
 
         if current_time is None:
-            return False
+            return 0.
 
         current_time = parse_time(points[n]['time'])
 
         if 0 < n < size - 1:
-            previous_time = parse_time(points[n - 1]['time'])
-            next_time = parse_time(points[n + 1]['time'])
+            previous_time = points[n - 1]['time']
+            next_time = points[n + 1]['time']
+
+            if previous_time is None or next_time is None:
+                return 0.
+
+            previous_time = parse_time(previous_time)
+            next_time = parse_time(next_time)
 
             if previous_time is not None and current_time is not None and next_time is not None:
-                delta_time = previous_time - next_time
-                delta_time = math.fabs(delta_time.total_seconds())
+                time = math.fabs((previous_time - next_time).total_seconds())
+                distance = cheap_ruler_distance([points[n - 1], points[n]]) + \
+                           cheap_ruler_distance([points[n], points[n + 1]])
 
-                distance1 = cheap_ruler_distance([points[n - 1], points[n]])
-                distance2 = cheap_ruler_distance([points[n], points[n + 1]])
-                distance = distance1 + distance2
-
-                speed = distance / delta_time
-
-                return speed
+                return distance / time if time > 0 else 0.
 
         return 0.
 
@@ -109,9 +110,9 @@ def get_uphill_downhill(elevations):
     uphill = 0.0
     downhill = 0.0
 
-    for n, elevation in enumerate(elevations):
+    for n in range(len(elevations)):
         if n > 0:
-            d = elevation - elevations[n - 1]
+            d = elevations[n] - elevations[n - 1]
             if d > 0:
                 uphill += d
             else:
@@ -120,7 +121,41 @@ def get_uphill_downhill(elevations):
     return uphill, downhill
 
 
+def get_moving_data(parsed_points):
+    moving_time = 0
+    moving_points = []
+
+    for n in range(len(parsed_points)):
+        current_point = parsed_points[n]
+        current_time = current_point['time']
+        current_time = parse_time(current_time) if current_time else None
+
+        if current_point['speed'] > 1 and n > 1 and current_time:
+            previous_time = parse_time(parsed_points[n - 1]['time'])
+            time = math.fabs((current_time - previous_time).total_seconds())
+            moving_time += time
+
+            moving_points.append(current_point)
+
+    moving_distance = cheap_ruler_distance(moving_points)
+
+    return moving_time, moving_distance
+
+
 def parse(xml):
+    def __filter(n):
+        p = parsed_points[n]
+        # p['smoothed_elevation'] = smoothed_elevations[n]
+        p['speed'] = smoothed_speeds[n]
+
+        cheap_distance = 0
+        if n > 1:
+            cheap_distance = cheap_ruler_distance([parsed_points[n - 1], p])
+
+        p['distance'] = cheap_distance
+
+        return p
+
     # Remove namespace to ease nodes selection
     gpx_xml = re.sub(' xmlns="[^"]+"', '', xml, count=1)
     root = ET.fromstring(gpx_xml)
@@ -129,7 +164,10 @@ def parse(xml):
         print('Not a GPX 1.1')
 
     name = root.find('metadata/name') or root.find('trk/name')
+    name = name.text if name is not None else None
+
     description = root.find('metadata/desc') or root.find('trk/desc')
+    description = description.text if description is not None else None
 
     parsed_tracks = []
     tracks = root.findall('trk')
@@ -144,78 +182,60 @@ def parse(xml):
 
                 # TODO parse extensions
                 current_point = {
-                    'lat': float(point.attrib['lat']),
-                    'lon': float(point.attrib['lon']),
-                    'ele': float(elevation.text) if elevation is not None else None,
+                    'latitude': float(point.attrib['lat']),
+                    'longitude': float(point.attrib['lon']),
+                    'elevation': float(elevation.text) if elevation is not None else None,
                     'time': time.text if time is not None else None,
                 }
 
                 parsed_points.append(current_point)
 
-        smoothed_speeds = get_smoothed_speed(parsed_points)
-        smoothed_elevations = get_smoothed_data(parsed_points, 'ele')
-        uphill, downhill = get_uphill_downhill(smoothed_elevations)
-
         track_name = track.find('name')
         track_description = track.find('desc')
 
-        # TODO: Moving time?
+        smoothed_speeds = get_smoothed_speed(parsed_points)
+        smoothed_elevations = get_smoothed_data(parsed_points, 'elevation')
+        uphill, downhill = get_uphill_downhill(smoothed_elevations)
+
+        start_datetime = parsed_points[0]['time']
+        end_datetime = parsed_points[-1]['time']
+        distance = cheap_ruler_distance(parsed_points)
+        total_time = None
+        average_speed = None
+
+        if start_datetime and end_datetime:
+            parsed_start_datetime = parse_time(start_datetime)
+            parsed_end_datetime = parse_time(end_datetime)
+            total_time = math.fabs((parsed_end_datetime - parsed_start_datetime).total_seconds())
+            average_speed = (distance / total_time) * 3600. / 1000.
+
+        parsed_points = list(map(__filter, range(len(parsed_points))))
+
+        moving_time, moving_distance = get_moving_data(parsed_points)
+        average_moving_speed = (moving_distance / moving_time) * 3600. / 1000.
+
         parsed_tracks.append({
             'name': track_name.text if track_name else None,
             'description': track_description.text if track_description else None,
+            'start_datetime': start_datetime,
+            'end_datetime': end_datetime,
             'location': get_location(parsed_points[0]),
-            'distance': cheap_ruler_distance(parsed_points),
+            'distance': distance / 1000.,
+            'moving_distance': moving_distance / 1000.,
             'uphill': uphill,
             'downhill': downhill,
+            'min_altitude': min(smoothed_elevations),
+            'max_altitude': max(smoothed_elevations),
+            'max_speed': max(smoothed_speeds) * 3600. / 1000.,
+            'total_time': total_time,
+            'moving_time': moving_time,
+            'average_speed': average_speed,
+            'average_moving_speed': average_moving_speed,
             'points': parsed_points,
-            'smoothed_elevations': smoothed_elevations,
-            'smoothed_speeds': smoothed_speeds,
         })
 
     return name, description, parsed_tracks
 
 
 def get_coordinates(points):
-    return list(map(lambda p: (p['lon'], p['lat']), points))
-
-
-def get_track_image(points, width, height):
-    coordinates = get_coordinates(points)
-    m = StaticMap(int(width), int(height), 10, 10, 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png')
-    m.add_line(Line(coordinates, 'white', 11))
-    m.add_line(Line(coordinates, '#2E73B8', 5))
-    image = m.render()
-    f = io.BytesIO(b'')
-    image.save(f, format='JPEG', optimize=True, progressive=True)
-
-    return f
-
-
-def get_track_details(track):
-    start_datetime = track['points'][0]['time']
-    end_datetime = track['points'][-1]['time']
-
-    total_time = None
-    average_speed = None
-
-    if start_datetime and end_datetime:
-        start_datetime = parse_time(start_datetime)
-        end_datetime = parse_time(end_datetime)
-        total_time = math.fabs((end_datetime - start_datetime).total_seconds())
-        average_speed = (track['distance'] / total_time) * 3600. / 1000.
-
-    return {
-        'name': track['name'],
-        'description': track['description'],
-        'location': track['location'],
-        'distance': track['distance'] / 1000.,
-        'uphill': track['uphill'],
-        'downhill': track['downhill'],
-        'start_datetime': start_datetime,
-        'end_datetime': end_datetime,
-        'min_altitude': min(track['smoothed_elevations']),
-        'max_altitude': max(track['smoothed_elevations']),
-        'max_speed': max(track['smoothed_speeds']) * 3600. / 1000.,
-        'total_time': total_time,
-        'average_speed': average_speed,
-    }
+    return list(map(lambda p: (p['longitude'], p['latitude']), points))

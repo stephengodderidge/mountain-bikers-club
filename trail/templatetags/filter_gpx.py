@@ -1,14 +1,15 @@
 import math
 
+from dateutil.parser import parse
 from django import template
-from ..utils.gpx import get_track_details
+
 
 register = template.Library()
 
 
 @register.filter
 def format_time(time):
-    if not time:
+    if time is None:
         return 'n/a'
 
     time_s = float(time)
@@ -18,5 +19,8 @@ def format_time(time):
 
 
 @register.filter
-def details(track):
-    return get_track_details(track)
+def parse_time(time):
+    if time is None:
+        return None
+
+    return parse(time)
