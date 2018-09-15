@@ -18,7 +18,9 @@ class UserCreateForm(DefaultUserCreationForm):
             self.fields[field].widget.attrs['autocapitalize'] = 'off'
             self.fields[field].widget.attrs['autocorrect'] = 'off'
             self.fields[field].widget.attrs['spellcheck'] = 'false'
-            if not field.startswith('pass'):
+            if field.startswith('password'):
+                self.fields[field].widget.attrs['autocomplete'] = 'new-password'
+            else:
                 self.fields[field].widget.attrs['autocomplete'] = field
 
     class Meta:
