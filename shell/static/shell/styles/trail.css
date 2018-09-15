@@ -82,6 +82,9 @@
     border-radius: 3px;
     overflow: hidden;
     height: 54vh;
+}
+
+.trail-map:not(.leaflet-fullscreen-on) {
     min-height: 480px;
     max-height: 825px;
 }
