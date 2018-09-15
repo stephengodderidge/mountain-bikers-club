@@ -9,12 +9,17 @@ export default class Map extends HTMLElement {
 
     async connectedCallback() {
         await loadCSS('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css', 'anonymous');
+        await loadCSS('https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css', 'anonymous');
         await loadJS('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js', 'anonymous');
+        await loadJS('https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js', 'anonymous');
         // TODO build our own loader from DB
         await loadJS('https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.4.0/gpx.min.js', 'anonymous');
 
         const mapOptions = {
             scrollWheelZoom: false,
+            fullscreenControl: {
+                pseudoFullscreen: true,
+            },
         };
         const markerOptions = {
             iconSize: [30, 30],
@@ -36,7 +41,7 @@ export default class Map extends HTMLElement {
         }
         const myMap = window.L.map(this, mapOptions);
 
-        window.L.tileLayer('https://a.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        window.L.tileLayer('https://b.tile.opentopomap.org/{z}/{x}/{y}.png', {
             attribution:
                 '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
             maxZoom: 17,
