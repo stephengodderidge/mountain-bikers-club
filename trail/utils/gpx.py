@@ -1,12 +1,9 @@
-import io
 import math
 import xml.etree.ElementTree as ET
 import re
-import urllib.request
-import urllib.parse
 
+import requests
 from dateutil.parser import parse as parse_time
-from staticmap import StaticMap, Line
 
 
 def cheap_ruler_distance(points):
@@ -34,22 +31,19 @@ def cheap_ruler_distance(points):
 
 
 def get_location(point):
-    url = 'https://nominatim.openstreetmap.org/reverse?lon=' + str(point['longitude']) + '&lat=' + str(point['latitude'])
-    headers = {'User-Agent': 'mountainbikers.club'}
-    req = urllib.request.Request(url, headers=headers)
     location = None
 
-    # FIXME Manage errors or use requests
-    with urllib.request.urlopen(req) as response:
-        reverse_xml = response.read()
-        reverse_root = ET.fromstring(reverse_xml)
+    payload = {'lon': str(point['longitude']), 'lat': str(point['latitude'])}
+    headers = {'user-agent': 'mountainbikers.club'}
 
-        if reverse_root is not None and reverse_root.tag == 'reversegeocode':
-            location = reverse_root.find('addressparts/village')
-            if location is None:
-                location = reverse_root.find('addressparts/town')
+    try:
+        r = requests.get('https://photon.komoot.de/reverse', params=payload, headers=headers, timeout=60)
+        location = r.json()
+        location = location['features'][0]['properties']['city']
+    except:
+        return None
 
-    return location.text if location is not None else None
+    return location
 
 
 def get_smoothed_data(points, key=None, fn=lambda p, c, n: p * .3 + c * .4 + n * .3):
