@@ -37,6 +37,8 @@
     <!-- Web App -->
     {# <link rel="manifest" href="{% static "hello/webapp.manifest" %}">#}
     <script async type="module" src="{% static "shell/scripts/main.js" %}"></script>
+
+    {% block social %}{% endblock %}
 </head>
 <body>
 {% include 'shell/symbols.html' %}
