@@ -32,7 +32,7 @@ def create_thumbnail(trail_id, points, width, height):
 
     to = mail(
         trail.name,
-        'You\'re trail is ready.\n' +
+        'Your trail is ready.\n' +
         'https://mountainbikers.club' +
         reverse('trail__main', args=[trail.id])
     )
