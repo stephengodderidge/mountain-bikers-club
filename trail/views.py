@@ -1,5 +1,8 @@
+import os
+
+import requests
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse, Http404
+from django.http import HttpResponseRedirect, JsonResponse, Http404, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
@@ -104,3 +107,14 @@ def track_json(request, trail_id, track_id):
         raise Http404("Track index is out of range")
 
     return JsonResponse(points, safe=False)
+
+
+def tile(request, z, x, y):
+    # Fallback to OpenCycleMap
+    urlTopo = 'https://b.tile.opentopomap.org/{}/{}/{}.png'.format(z, x, y)
+    urlCycle = 'https://tile.thunderforest.com/cycle/{}/{}/{}.png?apikey={}'.format(z, x, y, os.environ.get('OPEN_CYCLE_MAP'))
+    r = requests.get(urlTopo, timeout=60)
+    if r.status_code != 200:
+        r = requests.get(urlCycle)
+
+    return HttpResponse(r.content, content_type='image/png')
