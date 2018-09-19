@@ -22,8 +22,8 @@ def cheap_ruler_distance(points):
 
     for n in range(len(points)):
         if n < size - 1:
-            dx = (points[n]['longitude'] - points[n+1]['longitude']) * kx
-            dy = (points[n]['latitude'] - points[n+1]['latitude']) * ky
+            dx = (points[n]['longitude'] - points[n + 1]['longitude']) * kx
+            dy = (points[n]['latitude'] - points[n + 1]['latitude']) * ky
 
             distance += math.sqrt(dx * dx + dy * dy)
 
@@ -137,16 +137,31 @@ def get_moving_data(parsed_points):
 
 
 def parse(xml):
+    parsed_start_datetime = None
+    total_distance = {'value': 0.}
+
     def __filter(n):
+        df = parsed_start_datetime
         p = parsed_points[n]
+        cheap_distance = 0
+
         # p['smoothed_elevation'] = smoothed_elevations[n]
         p['speed'] = smoothed_speeds[n]
 
-        cheap_distance = 0
-        if n > 1:
+        if n < 1:
+            p['total_distance'] = 0.
+
+        if n >= 1:
             cheap_distance = cheap_ruler_distance([parsed_points[n - 1], p])
+            total_distance['value'] += cheap_distance / 1000.
+            p['total_distance'] = total_distance['value']
 
         p['distance'] = cheap_distance
+
+        if parsed_start_datetime is not None and p['time'] is not None:
+            p['duration'] = (parse_time(p['time']) - parsed_start_datetime).total_seconds()
+        else:
+            p['duration'] = 0
 
         return p
 
@@ -193,9 +208,16 @@ def parse(xml):
 
         start_datetime = parsed_points[0]['time']
         end_datetime = parsed_points[-1]['time']
-        distance = cheap_ruler_distance(parsed_points)
+        # distance = cheap_ruler_distance(parsed_points)
         total_time = None
         average_speed = None
+
+        total_distance['value'] = 0.
+        parsed_points = list(map(__filter, range(len(parsed_points))))
+
+        moving_time, moving_distance = get_moving_data(parsed_points)
+        average_moving_speed = (moving_distance / moving_time) * 3600. / 1000.
+        distance = parsed_points[-1]['total_distance']
 
         if start_datetime and end_datetime:
             parsed_start_datetime = parse_time(start_datetime)
@@ -203,18 +225,13 @@ def parse(xml):
             total_time = math.fabs((parsed_end_datetime - parsed_start_datetime).total_seconds())
             average_speed = (distance / total_time) * 3600. / 1000.
 
-        parsed_points = list(map(__filter, range(len(parsed_points))))
-
-        moving_time, moving_distance = get_moving_data(parsed_points)
-        average_moving_speed = (moving_distance / moving_time) * 3600. / 1000.
-
         parsed_tracks.append({
             'name': track_name.text if track_name else None,
             'description': track_description.text if track_description else None,
             'start_datetime': start_datetime,
             'end_datetime': end_datetime,
             'location': get_location(parsed_points[0]),
-            'distance': distance / 1000.,
+            'distance': distance,
             'moving_distance': moving_distance / 1000.,
             'uphill': uphill,
             'downhill': downhill,
