@@ -1,4 +1,5 @@
-import { loadJS, loadCSS } from '../library/async-loader.js';
+import { Browser, tileLayer, polyline, map } from '../leaflet/leaflet.min.js';
+import '../leaflet/fullscreen.js';
 
 export default class Map extends HTMLElement {
     constructor() {
@@ -9,13 +10,6 @@ export default class Map extends HTMLElement {
     }
 
     async connectedCallback() {
-        await loadCSS('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css', 'anonymous');
-        await loadCSS('https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css', 'anonymous');
-        await loadCSS('https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.min.css', 'anonymous');
-        await loadJS('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js', 'anonymous');
-        await loadJS('https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js', 'anonymous');
-        await loadJS('https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.min.js', 'anonymous');
-
         const data = await fetch(`/trail/api/${this.trail_id}/track/${this.track_id}`)
             .then(response => response.json());
 
@@ -30,12 +24,10 @@ export default class Map extends HTMLElement {
         };
 
         if (this.hasInterface) {
-            mapOptions['dragging'] = !window.L.Browser.mobile;
+            mapOptions['dragging'] = !Browser.mobile;
+            mapOptions['fullscreenControl'] = true;
             markerOptions['startIconUrl'] = ''; // '{% static 'shell/assets/pin_start.svg' %}';
             markerOptions['endIconUrl'] = ''; // '{% static 'shell/assets/pin_end.svg' %}';
-            markerOptions['fullscreenControl'] = {
-                pseudoFullscreen: true,
-            };
         } else {
             mapOptions['zoomControl'] = false;
             mapOptions['attributionControl'] = false;
@@ -43,42 +35,93 @@ export default class Map extends HTMLElement {
             markerOptions['startIconUrl'] = '';
             markerOptions['endIconUrl'] = '';
         }
-        const myMap = window.L.map(this, mapOptions);
+        const myMap = map(this, mapOptions);
 
-        const tileLayer = new window.L.tileLayer('https://a.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: false,
-            maxZoom: 17,
-        });
-
-        new window.L.tileLayer('https://b.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        tileLayer('/trail/api/tile/{z}/{x}/{y}.png', {
             attribution:
-                '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
-            maxZoom: 17,
+                '&copy; <a href="https://www.openstreetmap.org">OpenStreetMap</a> contributors, &copy; <a href="https://opentopomap.org">OpenTopoMap</a>, &copy; <a href="https://opencyclemap.org">OpenCycleMap</a>',
+            // maxZoom: 17,
         }).addTo(myMap);
 
         if (data.points && data.points.length > 3) {
             const points = data.points.map(p => [p.latitude, p.longitude]);
             const polylineOptionsBack = {
                 color: 'white',
-                opacity: 0.75,
+                opacity: 0.65,
                 weight: 11,
                 lineCap: 'round',
             };
-            const polylineOptionsFront = {
-                color: '#2E73B8',
+            const polylineBack = polyline(points, polylineOptionsBack).addTo(myMap);
+
+            let uphillParts = [];
+            let downhillParts = [];
+            let uphill = true;
+            let currentParts = [];
+            let previousElevation = 0;
+
+            for (let i = 0, s = data.points.length; i < s; i += 1) {
+                const currentPoint = data.points[i];
+                const currentElevation = currentPoint.elevation;
+
+                if (i === 0) {
+                    previousElevation = currentElevation;
+                    continue;
+                }
+
+                const previousPoint = data.points[i - 1];
+                currentParts.push(previousPoint);
+
+                const lastDistance = currentParts[currentParts.length - 1].total_distance;
+                const firstDistance = currentParts[0].total_distance;
+
+                // if (lastDistance - firstDistance > 0.01) {
+                    if (currentElevation >= previousElevation) {
+                        // uphill
+                        if (!uphill && lastDistance - firstDistance > 0.01) {
+                            currentParts.push(currentPoint);
+                            downhillParts.push(currentParts);
+                            currentParts = [];
+                        }
+                    } else {
+                        // downhill
+                        if (uphill && lastDistance - firstDistance > 0.005) {
+                            currentParts.push(currentPoint);
+                            uphillParts.push(currentParts);
+                            currentParts = [];
+                        }
+                    }
+
+                    uphill = currentElevation >= previousElevation;
+                //}
+
+                previousElevation = currentPoint.elevation;
+            }
+
+            if (uphill) {
+                uphillParts.push(currentParts);
+            } else {
+                downhillParts.push(currentParts);
+            }
+
+            const polylineOptions = {
+                color: '#f0484e',
                 weight: 5,
                 lineCap: 'round',
             };
-            const polylineBack = window.L.polyline(points, polylineOptionsBack).addTo(myMap);
-            window.L.polyline(points, polylineOptionsFront).addTo(myMap);
+
+            for (const p of uphillParts) {
+                const p1 = p.map(p => [p.latitude, p.longitude]);
+                polyline(p1, polylineOptions).addTo(myMap);
+            }
+
+            polylineOptions['color'] = '#3d85cc';
+
+            for (const p of downhillParts) {
+                const p2 = p.map(p => [p.latitude, p.longitude]);
+                polyline(p2, polylineOptions).addTo(myMap);
+            }
 
             myMap.fitBounds(polylineBack.getBounds());
-
-            if (this.hasInterface) {
-                new window.L.Control.MiniMap(tileLayer, {
-                    zoomLevelOffset: -6,
-                }).addTo(myMap);
-            }
         }
     }
 }
