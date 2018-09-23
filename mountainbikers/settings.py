@@ -182,6 +182,16 @@ LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
 
+# Cache
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'mountainbikers_cache',
+    }
+}
+
+
 # Sitemaps and Robots
 
 ROBOTS_SITEMAP_URLS = ['https://mountainbikers.club/sitemap.xml']

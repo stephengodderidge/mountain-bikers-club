@@ -1,12 +1,14 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.utils import timezone
 from django.urls import reverse
+from django.views.decorators.cache import cache_page
 
 from trail.models import Trail
 from member.forms import UserCreateForm
 
 
+@cache_page(60 * 60 * 24)
 def index(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('dashboard__main'))
@@ -19,6 +21,7 @@ def index(request):
     return render(request, 'discover/index.html', context)
 
 
+@cache_page(60 * 15)
 def discover(request):
     current_user = request.user
     last_trails = Trail.objects.filter(pub_date__lte=timezone.now(), is_draft=False)
