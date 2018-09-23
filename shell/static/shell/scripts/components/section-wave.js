@@ -2,11 +2,12 @@ export default class Wave extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
-        this.color = this.dataset.color;
-        this.height = this.dataset.height;
     }
 
     connectedCallback() {
+        this.color = this.dataset.color;
+        this.height = this.dataset.height;
+
         this.shadow.innerHTML = `
             <style>
                 :host {

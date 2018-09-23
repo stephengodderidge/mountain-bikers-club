@@ -4,12 +4,13 @@ import '../leaflet/fullscreen.js';
 export default class Map extends HTMLElement {
     constructor() {
         super();
-        this.hasInterface = Boolean(this.dataset.hasInterface);
-        this.trail_id = this.dataset.trail;
-        this.track_id = this.dataset.track;
     }
 
     async connectedCallback() {
+        this.hasInterface = Boolean(this.dataset.hasInterface);
+        this.trail_id = this.dataset.trail;
+        this.track_id = this.dataset.track;
+
         const data = await fetch(`/trail/api/${this.trail_id}/track/${this.track_id}`)
             .then(response => response.json());
 
