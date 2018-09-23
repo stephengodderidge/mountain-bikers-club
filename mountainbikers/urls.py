@@ -13,7 +13,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('.admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('robots.txt', include('robots.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
@@ -24,5 +24,6 @@ urlpatterns = [
     path('', include('discover.urls')),
 ]
 
+# Otherwise served via Amazon S3
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
