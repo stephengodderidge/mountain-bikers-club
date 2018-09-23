@@ -218,6 +218,7 @@ CSP_FRAME_ANCESTORS = ("'none'",)
 CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
 CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://localhost:6379')
 CELERY_TASK_SERIALIZER = 'json'
+CELERY_SEND_TASK_ERROR_EMAILS = True
 
 # Heroku config override
 
