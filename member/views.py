@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 from trail.models import Trail
 from .models import User
@@ -10,8 +11,8 @@ from .forms import UserCreateForm, UserProfileForm
 
 def main(request, username):
     member = get_object_or_404(User, username=username)
-    member_trails = Trail.objects.filter(author=member)
-    member_favorite_trails = Trail.objects.filter(favorite_by=member)
+    member_trails = Trail.objects.filter(author=member, is_draft=False, pub_date__lte=timezone.now())
+    member_favorite_trails = Trail.objects.filter(favorite_by=member, is_draft=False, pub_date__lte=timezone.now())
     context = {
         'member': member,
         'member_trails': member_trails,
