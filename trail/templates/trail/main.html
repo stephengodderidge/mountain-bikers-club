@@ -54,7 +54,7 @@
                     {{ trail.favorite_by.all|length }}
                 </span>
             </p>
-            {% if user.is_authenticated and user == trail.author %}
+            {% if user.is_authenticated and user == trail.author and trail.is_draft is False %}
                 <div class="o-flex-inline has-gutter has-hidden-links">
                     <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
                     <div>
@@ -133,6 +133,16 @@
                     <p><!-- empty --></p>
                 {% endwith %}
             {% endif %}
+            {% if trail.is_draft is True %}
+                <h2>{% trans 'Analyzing...' %}</h2>
+                {% url 'trail__new' as url_trail_new %}
+                <p>{% blocktrans trimmed %}
+                    Your trail is currently analyzed. It will take a few minutes.
+                    Once completed, you will receive an email.<br>
+                    You can continue to navigate on Mountain Bikers Club or
+                    <a href="{{ url_trail_new }}">upload a new trail</a>.
+                {% endblocktrans %}</p>
+                {% endif %}
             {% if trail.description %}
                 {# TODO Styling as quote? #}
                 <p>{{ trail.description }}</p>
@@ -158,6 +168,9 @@
                             </noscript>
                         {% endif %}
                     </trail-map>
+                    <p><!-- empty --></p>
+                    <!--trail-charts class="trail-charts" data-trail="{{ trail.id }}"
+                                  data-track="{{ forloop.counter0 }}"></trail-charts-->
                     <p><!-- empty --></p>
                 {% endwith %}
             {% endfor %}

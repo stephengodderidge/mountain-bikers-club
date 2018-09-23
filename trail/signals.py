@@ -10,3 +10,4 @@ def trail_delete_handler(sender, **kwargs):
     instance = kwargs['instance']
     instance.file.delete()
     instance.thumbnail.delete()
+    instance.hero.delete()

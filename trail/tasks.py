@@ -12,31 +12,51 @@ from shell.utils.mail import mail
 
 
 @app.task
-def create_thumbnail(trail_id, points, width, height):
+def create_staticmaps(trail_id):
     from .models import Trail
     current_site = Site.objects.get_current()
+    current_trail = Trail.objects.get(pk=trail_id)
 
     h = 'http' if settings.DEBUG else 'https'
 
-    coordinates = get_coordinates(points)
-    m = StaticMap(int(width), int(height), 10, 10, h + '://' + current_site.domain + '/trail/api/tile/{z}/{x}/{y}.png')
-    m.add_line(Line(coordinates, 'white', 11))
-    m.add_line(Line(coordinates, '#2E73B8', 5))
-    image = m.render()
-    f = io.BytesIO(b'')
-    image.save(f, format='JPEG', optimize=True, progressive=True)
+    static_thumbnail = StaticMap(425, 225, 10, 10, h + '://' + current_site.domain + '/trail/api/tile/{z}/{x}/{y}.png')
+    static_hero = StaticMap(1280, 480, 10, 10, h + '://' + current_site.domain + '/trail/api/tile/{z}/{x}/{y}.png')
 
-    trail = Trail.objects.get(pk=trail_id)
-    trail.thumbnail.delete(save=False)
-    trail.thumbnail.save('thumbnail.jpg', f)
+    for track in current_trail.tracks:
+        coordinates = get_coordinates(track['points'])
+
+        static_thumbnail.add_line(Line(coordinates, 'white', 11))
+        static_thumbnail.add_line(Line(coordinates, '#2E73B8', 5))
+
+        static_hero.add_line(Line(coordinates, 'white', 11))
+        static_hero.add_line(Line(coordinates, '#2E73B8', 5))
+
+    image_thumbnail = static_thumbnail.render()
+    image_hero = static_hero.render()
+
+    file_thumbnail = io.BytesIO(b'')
+    file_hero = io.BytesIO(b'')
+
+    image_thumbnail.save(file_thumbnail, format='JPEG', optimize=True, progressive=True)
+    image_hero.save(file_hero, format='JPEG', optimize=True, progressive=True)
+
+    current_trail.thumbnail.delete(save=False)
+    current_trail.thumbnail.save('thumbnail.jpg', file_thumbnail)
+
+    current_trail.hero.delete(save=False)
+    current_trail.hero.save('hero.jpg', file_hero)
+
+    current_trail.is_draft = False
+    current_trail.save()
 
     to = mail(
-        trail.name,
-        'Your trail is ready.\n' +
+        current_trail.name,
+        'Your trail is ready.\n\n' +
         'https://mountainbikers.club' +
-        reverse('trail__main', args=[trail.id])
+        reverse('trail__main', args=[current_trail.id])
     )
-    to([trail.author.email])
+    to([current_trail.author.email])
+
 
 @app.task
 def parse_gpx(trail_id):
@@ -53,11 +73,9 @@ def parse_gpx(trail_id):
 
             # FIXME gettext doesn't seem to work
             trail.name = name or first_track['name'] or _('Unnamed Trail')
-            trail.description = description or first_track['description'] or None
+            trail.description = description or first_track['description'] or ''
             trail.tracks = tracks
-            # TODO Change the pub_date (or set it up). Remove it from view.
             trail.save()
-            # TODO Send an email to notify the user the work is done.
 
             # Asynchronous Thumbnail
-            create_thumbnail.delay(trail.id, first_track['points'], 425, 225)
+            create_staticmaps.delay(trail.id)

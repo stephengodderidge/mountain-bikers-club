@@ -131,7 +131,7 @@ def get_moving_data(parsed_points):
 
             moving_points.append(current_point)
 
-    moving_distance = cheap_ruler_distance(moving_points)
+    moving_distance = cheap_ruler_distance(moving_points) if len(moving_points) > 2 else 0.
 
     return moving_time, moving_distance
 
@@ -176,7 +176,7 @@ def parse(xml):
     name = name.text if name is not None else None
 
     description = root.find('metadata/desc') or root.find('trk/desc')
-    description = description.text if description is not None else None
+    description = description.text if description is not None else ''
 
     parsed_tracks = []
     tracks = root.findall('trk')
@@ -216,7 +216,7 @@ def parse(xml):
         parsed_points = list(map(__filter, range(len(parsed_points))))
 
         moving_time, moving_distance = get_moving_data(parsed_points)
-        average_moving_speed = (moving_distance / moving_time) * 3600. / 1000.
+        average_moving_speed = (moving_distance / moving_time) * 3600. / 1000. if moving_time > 0 else 0.
         distance = parsed_points[-1]['total_distance']
 
         if start_datetime and end_datetime:

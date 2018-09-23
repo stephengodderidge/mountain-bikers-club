@@ -6,7 +6,7 @@ from .models import Trail
 class GpxUploadForm(forms.ModelForm):
     class Meta:
         model = Trail
-        fields = ('file',)
+        fields = ('file', 'is_private')
 
     def save(self, commit=True):
         trail = super().save(commit=False)
