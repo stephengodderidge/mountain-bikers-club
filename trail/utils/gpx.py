@@ -141,12 +141,11 @@ def parse(xml):
     total_distance = {'value': 0.}
 
     def __filter(n):
-        df = parsed_start_datetime
         p = parsed_points[n]
         cheap_distance = 0
 
         # p['smoothed_elevation'] = smoothed_elevations[n]
-        p['speed'] = smoothed_speeds[n]
+        p['speed'] = smoothed_speeds[n] * 3600. / 1000.
 
         if n < 1:
             p['total_distance'] = 0.
