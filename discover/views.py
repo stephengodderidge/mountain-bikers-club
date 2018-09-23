@@ -21,7 +21,7 @@ def index(request):
 
 def discover(request):
     current_user = request.user
-    last_trails = Trail.objects.filter(pub_date__lte=timezone.now())
+    last_trails = Trail.objects.filter(pub_date__lte=timezone.now(), is_draft=False)
 
     if current_user.is_authenticated:
         last_trails = last_trails.exclude(author=current_user)
