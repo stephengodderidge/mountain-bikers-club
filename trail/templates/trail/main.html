@@ -1,5 +1,5 @@
 {% extends 'shell/base.html' %}
-{% load static i18n tpl_button filter_gpx %}
+{% load static i18n tpl_button filter_gpx index %}
 
 {% block title %}{{ trail.name|default:'' }}{% endblock %}
 {% block description %}{{ trail.description|default:'' }}{% endblock %}
@@ -148,6 +148,8 @@
                 <p>{{ trail.description }}</p>
             {% endif %}
             <p><!-- empty --></p>
+            <link rel="stylesheet" href="{% url 'bokeh__css' %}">
+            <script src="{% url 'bokeh__js' %}"></script>
             {% for trail_track in trail.tracks %}
                 {% with trail_track as track %}
                     {% if trail.tracks|length > 1 %}
@@ -157,21 +159,26 @@
                             {% endwith %}
                         {% endwith %}
                     {% endif %}
-                    {# FIXME show only the track #}
                     <trail-map class="trail-map"
                                data-has-interface="true"
                                data-trail="{{ trail.id }}"
                                data-track="{{ forloop.counter0 }}">
                         {% if trail.thumbnail %}
                             <noscript>
-                                <img class="trail-map__fallback" src="{{ trail.thumbnail.url }}">
+                                <img class="trail-map__fallback" src="{{ trail.hero.url }}">
                             </noscript>
                         {% endif %}
                     </trail-map>
                     <p><!-- empty --></p>
-                    <!--trail-charts class="trail-charts" data-trail="{{ trail.id }}"
-                                  data-track="{{ forloop.counter0 }}"></trail-charts-->
-                    <p><!-- empty --></p>
+                    {% with charts|index:forloop.counter0 as chart %}
+                        {% if chart.div is not None and chart.script is not None %}
+                            <div class="trail-map__chart">
+                                {{ chart.div|safe }}
+                                {{ chart.script|safe }}
+                            </div>
+                            <p><!-- empty --></p>
+                        {% endif %}
+                    {% endwith %}
                 {% endwith %}
             {% endfor %}
             {% if user.is_authenticated and user == trail.author %}
