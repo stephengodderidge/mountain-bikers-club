@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-13 22:21+0000\n"
+"POT-Creation-Date: 2018-09-23 21:08+0000\n"
 "PO-Revision-Date: 2018-08-22 15:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,7 +38,7 @@ msgstr "Charger un fichier GPX"
 
 #: discover/templates/discover/discover.html:4
 #: discover/templates/discover/discover.html:10
-#: shell/templates/shell/base.html:74
+#: shell/templates/shell/base.html:58
 msgid "Discover"
 msgstr "Découvrir"
 
@@ -70,7 +70,7 @@ msgstr "Mon tableau de bord"
 
 #: discover/templates/discover/index.html:30
 #: member/templates/member/login.html:4 member/templates/member/login.html:11
-#: shell/templates/shell/base.html:81
+#: shell/templates/shell/base.html:65
 msgid "Sign in"
 msgstr "Se logger"
 
@@ -101,11 +101,11 @@ msgstr ""
 "vous!</p>"
 
 #: discover/templates/discover/index.html:54
-#: member/templates/member/register.html:17 shell/templates/shell/base.html:82
+#: member/templates/member/register.html:17 shell/templates/shell/base.html:66
 msgid "Sign up"
 msgstr "S'enregistrer"
 
-#: member/forms.py:32 member/forms.py:55
+#: member/forms.py:34 member/forms.py:57
 msgid "This username is forbidden."
 msgstr "Ce nom d'utilisateur est interdit."
 
@@ -267,15 +267,15 @@ msgstr "Bienvenue"
 msgid "Welcome to the Mountain Bikers Club."
 msgstr "Bienvenue au Mountain Bikers Club."
 
-#: mountainbikers/settings.py:152
+#: mountainbikers/settings.py:155
 msgid "French"
 msgstr "Français"
 
-#: mountainbikers/settings.py:153
+#: mountainbikers/settings.py:156
 msgid "English"
 msgstr "Anglais"
 
-#: mountainbikers/settings.py:154
+#: mountainbikers/settings.py:157
 msgid "German"
 msgstr "Allemand"
 
@@ -301,7 +301,11 @@ msgid ""
 "email and should be fixed shortly. Thanks for your patience."
 msgstr ""
 
-#: shell/templates/shell/base.html:55
+#: shell/templates/shell/base.html:65
+msgid "or"
+msgstr "ou"
+
+#: shell/templates/shell/base.html:132
 msgid ""
 "Developing and hosting a great web applicable is fun, but not free. If you "
 "love Mountain Bikers Club please consider <a href=\"https://www.buymeacoffee."
@@ -312,10 +316,6 @@ msgstr ""
 "pas gratuit. Si vous aimez Mountain Bikers Club, pensez à <a href=\"https://"
 "www.buymeacoffee.com/cedeber\" target=\"_blank\" rel=\"noopener\">m'aider "
 "pour le prix de quelques cafés</a>. Merci beaucoup !"
-
-#: shell/templates/shell/base.html:81
-msgid "or"
-msgstr "ou"
 
 #: shell/templates/shell/headerlinks.html:48
 msgid "Profile"
@@ -329,38 +329,86 @@ msgstr "Mise à jour depuis le GPX"
 msgid "Date published"
 msgstr "Date de publication"
 
-#: trail/models.py:21
+#: trail/models.py:19
+msgid "Draft"
+msgstr "Brouillon"
+
+#: trail/models.py:20
+msgid "Private"
+msgstr "Privé"
+
+#: trail/models.py:20
+msgid "Only you can see this trail"
+msgstr "Seulement vous pouvez voir ce trail"
+
+#: trail/models.py:23
 msgid "Title"
 msgstr "Titre"
 
-#: trail/models.py:22
+#: trail/models.py:24
 msgid "Description"
 msgstr "Description"
 
-#: trail/models.py:26
+#: trail/models.py:28
 msgid "GPX file"
 msgstr "Fichier GPX"
 
-#: trail/tasks.py:40 trail/templates/trail/main.html:10
+#: trail/tasks.py:76 trail/templates/trail/main.html:36
 msgid "Unnamed Trail"
 msgstr "Trail sans nom"
 
-#: trail/templates/trail/main.html:14
+#: trail/templates/trail/main.html:40
 #, python-format
 msgid "Published by <a href=\"%(link)s\">@%(user)s</a> on %(date)s."
 msgstr "Publié par <a href=\"%(link)s\">@%(user)s</a> le %(date)s."
 
-#: trail/templates/trail/main.html:37
+#: trail/templates/trail/main.html:63
 msgid "Edit trail"
 msgstr "Modifier le trail"
 
-#: trail/templates/trail/main.html:181
+#: trail/templates/trail/main.html:137
+msgid "Analyzing..."
+msgstr "Analyse en cours..."
+
+#: trail/templates/trail/main.html:139
+#, python-format
+msgid ""
+"Your trail is currently analyzed. It will take a few minutes. Once "
+"completed, you will receive an email.<br> You can continue to navigate on "
+"Mountain Bikers Club or <a href=\"%(url_trail_new)s\">upload a new trail</a>."
+msgstr ""
+"Votre trail est actuellement en cours d'analyse. Ceci va prendre quelques "
+"minutes. Une fois effectuée, vous recevrez un courrier électronique.<br> "
+"Vous pouvez continuer à naviger sur Mountain Bikers Club ou <a href="
+"\"%(url_trail_new)s\">enregistrer un nouveau trail</a>."
+
+#: trail/templates/trail/main.html:191
 msgid "Delete trail"
 msgstr "Supprimer le trail"
 
 #: trail/templates/trail/new.html:22
 msgid "Share the fun of the trail"
 msgstr "Partager le fun de ce Trail"
+
+#: trail/views.py:116
+msgid "Elevation and Speed"
+msgstr "Elvation et Vitesse"
+
+#: trail/views.py:117
+msgid "Distance"
+msgstr "Distance"
+
+#: trail/views.py:118 trail/views.py:130
+msgid "Elevation"
+msgstr "Elevation"
+
+#: trail/views.py:128 trail/views.py:131
+msgid "Speed"
+msgstr "Vitesse"
+
+#: trail/views.py:155
+msgid "Track index is out of range"
+msgstr "L'index du circuit est hors de portée"
 
 #~ msgid "Location"
 #~ msgstr "Lieu"

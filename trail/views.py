@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect, JsonResponse, Http404, HttpRespons
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from bokeh.plotting import figure
 from bokeh.embed import components
 from scipy.signal import savgol_filter
@@ -112,9 +113,9 @@ def main(request, trail_id):
                 sizing_mode='scale_width',
                 plot_width=1100,
                 plot_height=400,
-                title="Elevation and Speed",
-                x_axis_label='Distance (km)',
-                y_axis_label='Elevation (m)',
+                title=_('Elevation and Speed'),
+                x_axis_label=_('Distance') + ' (km)',
+                y_axis_label=_('Elevation') + ' (m)',
                 toolbar_location='above',
             )
 
@@ -124,10 +125,11 @@ def main(request, trail_id):
 
             plot.y_range = Range1d(start=min(y_elevation) - 30, end=max(y_elevation) + 30)
             plot.extra_y_ranges['speed'] = Range1d(start=min(y_speed), end=max(y_speed) + 3)
-            plot.add_layout(LinearAxis(y_range_name='speed', axis_label='Speed (km/h)'), 'right')
+            plot.add_layout(LinearAxis(y_range_name='speed', axis_label=_('Speed') + ' (km/h)'), 'right')
 
-            plot.line(x_distance, y_elevation, legend="Elevation", line_width=3, color='#3d85cc')
-            plot.line(x_distance, savgol_filter(y_speed, window, order), legend="Speed", line_width=1, y_range_name='speed', color='#66cc66')
+            plot.line(x_distance, y_elevation, legend=_('Elevation'), line_width=3, color='#3d85cc')
+            plot.line(x_distance, savgol_filter(y_speed, window, order), legend=_('Speed'), line_width=1,
+                      y_range_name='speed', color='#66cc66')
 
             script, div = components(plot)
 
@@ -150,7 +152,7 @@ def track_json(request, trail_id, track_id):
     try:
         points = trail.tracks[track_id] or {}
     except IndexError:
-        raise Http404("Track index is out of range")
+        raise Http404(_('Track index is out of range'))
 
     return JsonResponse(points, safe=False)
 
@@ -158,7 +160,8 @@ def track_json(request, trail_id, track_id):
 def tile(request, z, x, y):
     # Fallback to OpenCycleMap
     urlTopo = 'https://b.tile.opentopomap.org/{}/{}/{}.png'.format(z, x, y)
-    urlCycle = 'https://tile.thunderforest.com/cycle/{}/{}/{}.png?apikey={}'.format(z, x, y, os.environ.get('OPEN_CYCLE_MAP'))
+    urlCycle = 'https://tile.thunderforest.com/cycle/{}/{}/{}.png?apikey={}'.format(z, x, y,
+                                                                                    os.environ.get('OPEN_CYCLE_MAP'))
     r = requests.get(urlTopo, timeout=60)
     if r.status_code != 200:
         r = requests.get(urlCycle)
