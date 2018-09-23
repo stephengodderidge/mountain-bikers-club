@@ -24,11 +24,12 @@ def create_staticmaps(trail_id):
 
     for track in current_trail.tracks:
         coordinates = get_coordinates(track['points'])
-
         static_thumbnail.add_line(Line(coordinates, 'white', 11))
-        static_thumbnail.add_line(Line(coordinates, '#2E73B8', 5))
-
         static_hero.add_line(Line(coordinates, 'white', 11))
+
+    for track in current_trail.tracks:
+        coordinates = get_coordinates(track['points'])
+        static_thumbnail.add_line(Line(coordinates, '#2E73B8', 5))
         static_hero.add_line(Line(coordinates, '#2E73B8', 5))
 
     image_thumbnail = static_thumbnail.render()
