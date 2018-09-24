@@ -6,9 +6,9 @@ from trail.models import Trail
 
 @login_required
 def main(request):
-    user_trails = Trail.objects.filter(author=request.user)[:3]
+    last_user_trails = Trail.objects.filter(author=request.user)[:3]
     context = {
-        'user_trails': user_trails
+        'last_user_trails': last_user_trails
     }
 
     return render(request, 'dashboard/index.html', context)

@@ -17,7 +17,7 @@
                 <div class="cell-1of3">
                     <h2>{% trans 'My last trails' %}</h2>
                     <ul class="o-flex has-gutter is-multiline">
-                        {% for trail in user_trails %}
+                        {% for trail in last_user_trails %}
                             {% url 'trail__main' trail.id as trail_url %}
                             {% tpl_trail_preview trail trail_url '1of1' %}
                         {% endfor %}
