@@ -59,7 +59,7 @@
             </li>
         </ul>
         {% if user.is_authenticated %}
-            {% include 'shell/headerlinks.html' with user=user %}
+            {% include 'shell/member_headerlinks.html' with user=user %}
         {% else %}
             <div class="has-semihidden-links">
                 <a href="{% url 'login' %}">{% trans 'Sign in'|lower %}</a> {% trans 'or' %}
@@ -68,8 +68,7 @@
         {% endif %}
     </header>
     <main class="main-content">
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
     <footer class="main-footer has-hidden-links">
         <section-wave data-color="var(--page-background)"></section-wave>
@@ -124,16 +123,18 @@
     </footer>
     <div class="support-bar o-flex-inline">
         <div class="o-flex-middle" style="flex: 0; margin-right: 10px;">
-        <svg width="24" height="24">
-            <use xlink:href="#bag-euro"></use>
-        </svg>
+            <svg width="24" height="24">
+                <use xlink:href="#bag-euro"></use>
+            </svg>
         </div>
         <p>
-        {% blocktrans trimmed %}
-            Developing and hosting a great web applicable is fun, but not free. If you love Mountain Bikers Club please consider
-            <a href="https://www.buymeacoffee.com/cedeber" target="_blank" rel="noopener">helping me for the price of few cafes</a>.
-            Thank you very much!
-        {% endblocktrans %}
+            {% blocktrans trimmed %}
+                Developing and hosting a great web applicable is fun, but not free. If you love Mountain Bikers Club
+                please consider
+                <a href="https://www.buymeacoffee.com/cedeber" target="_blank" rel="noopener">helping me for the price
+                    of few cafes</a>.
+                Thank you very much!
+            {% endblocktrans %}
         </p>
     </div>
 </div>
