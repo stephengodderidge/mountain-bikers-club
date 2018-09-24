@@ -7,6 +7,7 @@ from django.views.decorators.cache import cache_page
 from trail.models import Trail
 from member.forms import UserCreateForm
 
+
 # FIXME user is still connected while disconnected
 # @cache_page(60 * 60 * 24)
 def index(request):
