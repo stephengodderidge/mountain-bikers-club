@@ -24,16 +24,9 @@
                     </ul>
                     <p><!-- empty --></p>
                     {% if user.is_authenticated %}
-                        <div class="o-flex-inline has-gutter has-hidden-links">
-                            <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
-                            <div>
-                                <ul class="user-bar">
-                                    <li class="user-bar__button">
-                                        <a href="{% url 'trail__new' %}">{% trans 'Upload a GPX file' %}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        {% trans 'Upload a GPX file' as button_label %}
+                        {% url 'trail__new' as button_link %}
+                        {% tpl_button button_label button_link %}
                     {% endif %}
                 </div>
             </div>
