@@ -84,8 +84,7 @@ WSGI_APPLICATION = 'mountainbikers.wsgi.application'
 
 # Database
 
-# Keeps the number of connexion as low as possible because of small DB sever (max 20 connexions)
-CONN_MAX_AGE = 0  # 600
+CONN_MAX_AGE = 600
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
