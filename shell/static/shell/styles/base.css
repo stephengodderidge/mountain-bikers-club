@@ -175,6 +175,12 @@
     text-decoration: none;
 }
 
+.main-header__logo svg {
+    position: relative;
+    bottom: 3px;
+    margin-right: 10px;
+}
+
 .main-header__icons {
     font-size: 20px;
     line-height: 1;
