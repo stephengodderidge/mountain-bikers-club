@@ -47,7 +47,12 @@
         <ul class="o-flex-inline has-gutter has-hidden-links">
             <li>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'dashboard__main' %}" class="main-header__logo">Mountain Bikers Club</a>
+                    <a href="{% url 'dashboard__main' %}" class="main-header__logo">
+                        <svg width="50" height="28">
+                            <use xlink:href="#mini-logo"></use>
+                        </svg>
+                        Mountain Bikers Club
+                    </a>
                 {% else %}
                     <a href="{% url 'home' %}" class="main-header__logo">
                         <svg width="50" height="28">
