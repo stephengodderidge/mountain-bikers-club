@@ -22,18 +22,20 @@
             </p>
             {% if user.is_authenticated and user == member %}
                 <div class="o-flex-inline has-gutter has-hidden-links">
-                    <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
-                    <div>
-                        <ul class="user-bar">
-                            <li class="user-bar__button">
-                                <a href="{% url 'member__edit' %}">{% trans 'Edit profile' %}</a>
-                            </li>
-                            <li class="user-bar__button">
-                                <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
-                            </li>
-                        </ul>
+                    <div class="o-flex-inline has-horizontal-gutter">
+                        <div>
+                            {% trans 'Edit profile' as button_label %}
+                            {% url 'member__edit' as button_link %}
+                            {% tpl_button button_label button_link %}
+                        </div>
+                        <div>
+                            {% trans 'Logout' as button_label %}
+                            {% url 'logout' as button_link %}
+                            {% tpl_button button_label button_link class='is-secondary' %}
+                        </div>
                     </div>
                 </div>
+                <p><!-- empty --></p>
             {% endif %}
             <h2>{% trans 'Trails' %}</h2>
             <ul class="o-flex has-gutter is-multiline">
@@ -52,22 +54,16 @@
             </ul>
             {% if user.is_authenticated and user == member %}
                 <p><!-- empty --></p>
-                <div class="o-flex-inline has-gutter has-hidden-links is-right">
-                    <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
+                <div class="o-flex-inline has-horizontal-gutter is-right">
                     <div>
-                        <ul class="user-bar">
-                            <li class="user-bar__button">
-                                <a href="{% url 'password_change' %}">{% trans 'Change password' %}</a>
-                            </li>
-                        </ul>
+                        {% trans 'Change password' as button_label %}
+                        {% url 'password_change' as button_link %}
+                        {% tpl_button button_label button_link class="is-warning" %}
                     </div>
-                    {# TODO delete page #}
                     <div>
-                        <ul class="user-bar is-danger">
-                            <li class="user-bar__button is-right">
-                                <a href="{% url 'member__delete' %}">{% trans 'Delete my account' %}</a>
-                            </li>
-                        </ul>
+                        {% trans 'Delete my account' as button_label %}
+                        {% url 'member__delete' as button_link %}
+                        {% tpl_button button_label button_link class='is-danger' %}
                     </div>
                 </div>
             {% endif %}
