@@ -16,3 +16,5 @@ class User(AbstractUser):
         },
     )
     favorite_trails = models.ManyToManyField(Trail, related_name='favorite_by')
+    is_premium = models.BooleanField(_('Premium member'), default=False)
+    premium_until = models.DateField(_('Premium until'), null=True)
