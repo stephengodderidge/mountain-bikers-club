@@ -22,7 +22,7 @@ class GpxEditForm(forms.ModelForm):
 
     class Meta:
         model = Trail
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'is_private')
 
     def save(self, commit=True):
         trail = super().save(commit=False)
