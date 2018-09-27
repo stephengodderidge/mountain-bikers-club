@@ -83,7 +83,7 @@
     line-height: 0;
 
     position: relative;
-    left: 5px;
+    margin: 0 5px;
 }
 
 .button__outer.is-secondary {
@@ -129,6 +129,15 @@
     background: radial-gradient(circle closest-side, var(--button-color), transparent);
     transform: translate(-50%, -50%);
     transition: transform 200ms ease;
+}
+
+.is-danger .button {
+    background: hsla(359, 83%, 71%, 0.07);
+    color: var(--button-color);
+}
+
+.is-warning .button {
+    color: var(--button-color);
 }
 
 .button:hover,
