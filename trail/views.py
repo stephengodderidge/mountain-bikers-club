@@ -159,11 +159,11 @@ def track_json(request, trail_id, track_id):
 
 def tile(request, z, x, y):
     # Fallback to OpenCycleMap
-    urlTopo = 'https://b.tile.opentopomap.org/{}/{}/{}.png'.format(z, x, y)
-    urlCycle = 'https://tile.thunderforest.com/cycle/{}/{}/{}.png?apikey={}'.format(z, x, y,
-                                                                                    os.environ.get('OPEN_CYCLE_MAP'))
-    r = requests.get(urlTopo, timeout=60)
+    url_topo = 'https://b.tile.opentopomap.org/{}/{}/{}.png'.format(z, x, y)
+    url_cycle = 'https://tile.thunderforest.com/cycle/{}/{}/{}.png?apikey={}'\
+        .format(z, x, y, os.environ.get('OPEN_CYCLE_MAP'))
+    r = requests.get(url_topo, timeout=60)
     if r.status_code != 200:
-        r = requests.get(urlCycle)
+        r = requests.get(url_cycle)
 
     return HttpResponse(r.content, content_type='image/png')
