@@ -27,13 +27,13 @@
                         <svg width="15" height="15" class="trail__icon">
                             <use xlink:href="#distance"></use>
                         </svg>
-                        {{ track.distance|floatformat }}km
+                        {{ track.distance|default:0|floatformat }}km
                     </li>
                     <li class="is-right">
                         <svg width="15" height="15" class="trail__icon">
                             <use xlink:href="#rocket"></use>
                         </svg>
-                        {{ track.uphill|floatformat:"0" }}m
+                        {{ track.uphill|default:0|floatformat:"0" }}m
                     </li>
                 </ul>
             {% endif %}
