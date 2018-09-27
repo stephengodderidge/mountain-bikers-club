@@ -10,6 +10,7 @@
             <div class="o-flex-inline has-gutter">
                 <div class="cell-2of3">
                     <h1>{% trans 'For the love of mountain biking and wild nature' %}.</h1>
+                    <img src="{% static 'shell/assets/mtbc.svg' %}" width="300px" style="margin: 50px auto; display: block; box-shadow: 0 0 0 10px var(--base07); border-radius: 150px;">
                     <p>
                         {% if user.is_authenticated %}{% trans 'Welcome back' %},
                             {% else %}{% trans 'Hello' %},
