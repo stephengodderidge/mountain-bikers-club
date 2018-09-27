@@ -42,12 +42,13 @@
                 {% endblocktrans %}
                 ・
                 <span class="trail__favorite">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'trail__favorite' trail.id %}" class="{% if is_favorite %}is-favorite{% endif %}">
-                {% endif %}
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'trail__favorite' trail.id %}"
+                           class="{% if is_favorite %}is-favorite{% endif %}">
+                    {% endif %}
                     <svg width="20" height="20" class="trail__icon">
-                    <use xlink:href="#heart"></use>
-                </svg>
+                        <use xlink:href="#heart"></use>
+                    </svg>
                     {% if user.is_authenticated %}
                         </a>
                     {% endif %}
@@ -55,16 +56,12 @@
                 </span>
             </p>
             {% if user.is_authenticated and user == trail.author and trail.is_draft is False %}
-                <div class="o-flex-inline has-gutter has-hidden-links">
-                    <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
-                    <div>
-                        <ul class="user-bar">
-                            <li class="user-bar__button">
-                                <a href="{% url 'trail__edit' trail.id %}">{% trans 'Edit trail' %}</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div>
+                    {% trans 'Edit trail' as button_label %}
+                    {% url 'trail__edit' trail.id as button_link %}
+                    {% tpl_button button_label button_link class='is-warning' %}
                 </div>
+                <p><!-- empty --></p>
             {% endif %}
             {% if trail.tracks|length is 1 %}
                 {% with trail.tracks|first as track %}
@@ -142,7 +139,7 @@
                     You can continue to navigate on Mountain Bikers Club or
                     <a href="{{ url_trail_new }}">upload a new trail</a>.
                 {% endblocktrans %}</p>
-                {% endif %}
+            {% endif %}
             {% if trail.description %}
                 {# TODO Styling as quote? #}
                 <p>{{ trail.description }}</p>
@@ -182,16 +179,10 @@
                 {% endwith %}
             {% endfor %}
             {% if user.is_authenticated and user == trail.author %}
-                <div class="o-flex-inline has-gutter has-hidden-links is-right">
-                    <link rel="stylesheet" href="{% static 'shell/styles/user_bar.css' %}">
-                    {# TODO delete page #}
-                    <div>
-                        <ul class="user-bar is-danger">
-                            <li class="user-bar__button">
-                                <a href="{% url 'trail__delete' trail.id %}">{% trans 'Delete trail' %}</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="is-right">
+                    {% trans 'Delete trail' as button_label %}
+                    {% url 'trail__delete' trail.id as button_link %}
+                    {% tpl_button button_label button_link class='is-danger' %}
                 </div>
             {% endif %}
         </div>
