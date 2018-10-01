@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-23 21:08+0000\n"
+"POT-Creation-Date: 2018-10-01 16:10+0000\n"
 "PO-Revision-Date: 2018-08-22 15:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,14 +31,15 @@ msgstr "Tableau de bord"
 msgid "My last trails"
 msgstr "Mes derniers trails"
 
-#: dashboard/templates/dashboard/index.html:32
-#: shell/templates/shell/headerlinks.html:37 trail/templates/trail/new.html:11
+#: dashboard/templates/dashboard/index.html:27
+#: shell/templates/shell/member_headerlinks.html:37
+#: trail/templates/trail/new.html:11
 msgid "Upload a GPX file"
 msgstr "Charger un fichier GPX"
 
 #: discover/templates/discover/discover.html:4
 #: discover/templates/discover/discover.html:10
-#: shell/templates/shell/base.html:58
+#: shell/templates/shell/base.html:98
 msgid "Discover"
 msgstr "Découvrir"
 
@@ -55,33 +56,33 @@ msgstr "Accueil"
 msgid "For the love of mountain biking and wild nature"
 msgstr "Pour l'amour du VTT et de la nature sauvage"
 
-#: discover/templates/discover/index.html:14
+#: discover/templates/discover/index.html:15
 msgid "Welcome back"
 msgstr "Bon retour parmi nous"
 
-#: discover/templates/discover/index.html:15
+#: discover/templates/discover/index.html:16
 msgid "Hello"
 msgstr "Bonjour"
 
-#: discover/templates/discover/index.html:22
+#: discover/templates/discover/index.html:23
 #: member/templates/member/password_change_done.html:12
 msgid "Go to my dashboard"
 msgstr "Mon tableau de bord"
 
-#: discover/templates/discover/index.html:30
+#: discover/templates/discover/index.html:31
 #: member/templates/member/login.html:4 member/templates/member/login.html:11
-#: shell/templates/shell/base.html:65
+#: shell/templates/shell/base.html:105
 msgid "Sign in"
 msgstr "Se logger"
 
-#: discover/templates/discover/index.html:35
-#: discover/templates/discover/index.html:48
+#: discover/templates/discover/index.html:36
+#: discover/templates/discover/index.html:49
 #: member/templates/member/register.html:4
 #: member/templates/member/register.html:11
 msgid "Create an account"
 msgstr "Créer un compte"
 
-#: discover/templates/discover/index.html:42
+#: discover/templates/discover/index.html:43
 msgid "This is the multiline welcome message"
 msgstr ""
 "<p>Cette application web est dédiée à la pratique du vélo tout terrain. "
@@ -100,10 +101,26 @@ msgstr ""
 "p><p>Respectez la nature, plantes et animaux. Priorité aux marcheurs. Amusez-"
 "vous!</p>"
 
-#: discover/templates/discover/index.html:54
-#: member/templates/member/register.html:17 shell/templates/shell/base.html:66
+#: discover/templates/discover/index.html:55
+#: member/templates/member/register.html:17 shell/templates/shell/base.html:106
 msgid "Sign up"
 msgstr "S'enregistrer"
+
+#: member/admin.py:15
+msgid "Personal info"
+msgstr ""
+
+#: member/admin.py:16 member/templates/member/main.html:40
+msgid "Trails"
+msgstr "Trails"
+
+#: member/admin.py:17
+msgid "Important dates"
+msgstr ""
+
+#: member/admin.py:18
+msgid "Permissions"
+msgstr ""
 
 #: member/forms.py:34 member/forms.py:57
 msgid "This username is forbidden."
@@ -121,8 +138,16 @@ msgstr "Requis. Pas de connerie, promis."
 msgid "A user with that email address already exists."
 msgstr "Un utilisateur avec cette adresse électronique existe déjà."
 
+#: member/models.py:19
+msgid "Premium member"
+msgstr "Membre Premium"
+
+#: member/models.py:20
+msgid "Premium until"
+msgstr "Premium jusqu'au"
+
 #: member/templates/member/edit.html:4 member/templates/member/edit.html:10
-#: member/templates/member/main.html:29
+#: member/templates/member/main.html:27
 msgid "Edit profile"
 msgstr "Modifier le profil"
 
@@ -159,20 +184,16 @@ msgstr "Membre depuis le %(date)s."
 msgid "Logout"
 msgstr "Se déconnecter"
 
-#: member/templates/member/main.html:38
-msgid "Trails"
-msgstr "Trails"
-
-#: member/templates/member/main.html:46
+#: member/templates/member/main.html:48
 msgid "Favorites"
 msgstr "Favoris"
 
-#: member/templates/member/main.html:60
+#: member/templates/member/main.html:59
 #: member/templates/member/password_change.html:4
 msgid "Change password"
 msgstr ""
 
-#: member/templates/member/main.html:68
+#: member/templates/member/main.html:64
 msgid "Delete my account"
 msgstr "Supprimer mon compte"
 
@@ -267,15 +288,15 @@ msgstr "Bienvenue"
 msgid "Welcome to the Mountain Bikers Club."
 msgstr "Bienvenue au Mountain Bikers Club."
 
-#: mountainbikers/settings.py:155
+#: mountainbikers/settings.py:154
 msgid "French"
 msgstr "Français"
 
-#: mountainbikers/settings.py:156
+#: mountainbikers/settings.py:155
 msgid "English"
 msgstr "Anglais"
 
-#: mountainbikers/settings.py:157
+#: mountainbikers/settings.py:156
 msgid "German"
 msgstr "Allemand"
 
@@ -301,11 +322,11 @@ msgid ""
 "email and should be fixed shortly. Thanks for your patience."
 msgstr ""
 
-#: shell/templates/shell/base.html:65
+#: shell/templates/shell/base.html:105
 msgid "or"
 msgstr "ou"
 
-#: shell/templates/shell/base.html:132
+#: shell/templates/shell/base.html:171
 msgid ""
 "Developing and hosting a great web applicable is fun, but not free. If you "
 "love Mountain Bikers Club please consider <a href=\"https://www.buymeacoffee."
@@ -317,13 +338,9 @@ msgstr ""
 "www.buymeacoffee.com/cedeber\" target=\"_blank\" rel=\"noopener\">m'aider "
 "pour le prix de quelques cafés</a>. Merci beaucoup !"
 
-#: shell/templates/shell/headerlinks.html:48
+#: shell/templates/shell/member_headerlinks.html:48
 msgid "Profile"
 msgstr "Profil"
-
-#: trail/admin.py:16
-msgid "Update from GPX"
-msgstr "Mise à jour depuis le GPX"
 
 #: trail/models.py:18
 msgid "Date published"
@@ -362,15 +379,15 @@ msgstr "Trail sans nom"
 msgid "Published by <a href=\"%(link)s\">@%(user)s</a> on %(date)s."
 msgstr "Publié par <a href=\"%(link)s\">@%(user)s</a> le %(date)s."
 
-#: trail/templates/trail/main.html:63
+#: trail/templates/trail/main.html:60
 msgid "Edit trail"
 msgstr "Modifier le trail"
 
-#: trail/templates/trail/main.html:137
+#: trail/templates/trail/main.html:134
 msgid "Analyzing..."
 msgstr "Analyse en cours..."
 
-#: trail/templates/trail/main.html:139
+#: trail/templates/trail/main.html:136
 #, python-format
 msgid ""
 "Your trail is currently analyzed. It will take a few minutes. Once "
@@ -382,33 +399,39 @@ msgstr ""
 "Vous pouvez continuer à naviger sur Mountain Bikers Club ou <a href="
 "\"%(url_trail_new)s\">enregistrer un nouveau trail</a>."
 
-#: trail/templates/trail/main.html:191
+#: trail/templates/trail/main.html:183
 msgid "Delete trail"
 msgstr "Supprimer le trail"
 
-#: trail/templates/trail/new.html:22
-msgid "Share the fun of the trail"
-msgstr "Partager le fun de ce Trail"
+#: trail/views.py:98 trail/views.py:154
+msgid "Trail does not exist"
+msgstr "Le trail est introuvable"
+
+#: trail/views.py:115
+msgid "Elevation and Speed"
+msgstr "Elévation et Vitesse"
 
 #: trail/views.py:116
-msgid "Elevation and Speed"
-msgstr "Elvation et Vitesse"
-
-#: trail/views.py:117
 msgid "Distance"
 msgstr "Distance"
 
-#: trail/views.py:118 trail/views.py:130
+#: trail/views.py:117 trail/views.py:129
 msgid "Elevation"
 msgstr "Elevation"
 
-#: trail/views.py:128 trail/views.py:131
+#: trail/views.py:127 trail/views.py:130
 msgid "Speed"
 msgstr "Vitesse"
 
-#: trail/views.py:155
+#: trail/views.py:159
 msgid "Track index is out of range"
 msgstr "L'index du circuit est hors de portée"
+
+#~ msgid "Update from GPX"
+#~ msgstr "Mise à jour depuis le GPX"
+
+#~ msgid "Share the fun of the trail"
+#~ msgstr "Partager le fun de ce Trail"
 
 #~ msgid "Location"
 #~ msgstr "Lieu"

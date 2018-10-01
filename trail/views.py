@@ -95,7 +95,7 @@ def main(request, trail_id):
     charts = []
 
     if trail.is_private and not (current_user.is_authenticated and trail.author == current_user):
-        raise Http404(_('Trail doesnt\'t exist'))
+        raise Http404(_('Trail does not exist'))
 
     if current_user.is_authenticated:
         is_favorite = current_user in trail.favorite_by.all()
@@ -155,7 +155,7 @@ def track_json(request, trail_id, track_id):
     trail = get_object_or_404(Trail, pk=trail_id)
 
     if trail.is_private and not (current_user.is_authenticated and trail.author == current_user):
-        raise Http404(_('Trail doesnt\'t exist'))
+        raise Http404(_('Trail does not exist'))
 
     try:
         points = trail.tracks[track_id] or {}
