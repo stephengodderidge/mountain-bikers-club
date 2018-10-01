@@ -5,14 +5,13 @@
 {% block description %}{{ trail.description|default:'' }}{% endblock %}
 
 {% block social %}
+    <meta property="fb:app_id" content="422665564930714">
+    <meta property="og:type" content="fitness:course">
     <meta property="og:title" content="{{ trail.name|default:'Trail' }}">
     <meta property="og:description" content="{{ trail.description|default:'' }}">
-
     <meta property="og:url" content="https://mountainbikers.club{{ request.path }}">
     <meta property="og:site_name" content="Mountain Bikers Club">
     <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
-
-    <meta property="og:type" content="fitness.course">
 
     {% if trail.thumbnail %}
         <meta property="og:image" content="{{ trail.hero.url }}">
@@ -20,7 +19,6 @@
         <meta property="og:image:height" content="480">
     {% endif %}
 
-    <meta property="fb:app_id" content="422665564930714">
 
     {% if trail.tracks %}
         {% with trail.tracks|first as track %}
