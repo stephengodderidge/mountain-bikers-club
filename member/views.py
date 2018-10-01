@@ -10,9 +10,15 @@ from .forms import UserCreateForm, UserProfileForm
 
 
 def main(request, username):
+    current_user = request.user
     member = get_object_or_404(User, username=username)
-    member_trails = Trail.objects.filter(author=member, is_draft=False, pub_date__lte=timezone.now())
-    member_favorite_trails = Trail.objects.filter(favorite_by=member, is_draft=False, pub_date__lte=timezone.now())
+    member_trails = Trail.objects.filter(author=member, pub_date__lte=timezone.now(), is_draft=False)
+    member_favorite_trails = Trail.objects.filter(favorite_by=member, pub_date__lte=timezone.now(), is_draft=False)
+
+    if not current_user == member:
+        member_trails = member_trails.filter(is_private=False)
+        member_favorite_trails = member_favorite_trails.filter(is_private=False)
+
     context = {
         'member': member,
         'member_trails': member_trails,
