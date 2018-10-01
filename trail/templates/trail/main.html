@@ -18,6 +18,8 @@
         <meta property="og:image:height" content="225">
     {% endif %}
 
+    <meta property="fb:app_id" content="422665564930714">
+
     {% if trail.tracks %}
         {% with trail.tracks|first as track %}
             <meta property="fitness:distance:value" content="{{ track.distance|default:0|floatformat:"-2" }}">
