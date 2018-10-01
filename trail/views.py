@@ -20,6 +20,7 @@ from .tasks import parse_gpx
 @login_required
 def new(request):
     current_user = request.user
+    base_uri = request.scheme + '://' + request.get_host()
 
     if request.method == 'POST':
         form = GpxUploadForm(data=request.POST, files=request.FILES)
@@ -29,7 +30,7 @@ def new(request):
             f.author = current_user
             f.pub_date = timezone.now()
             f.save()
-            parse_gpx.delay(f.id)
+            parse_gpx.delay(f.id, base_uri)
 
             return HttpResponseRedirect(reverse('trail__main', args=[f.id]))
 

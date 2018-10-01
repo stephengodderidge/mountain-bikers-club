@@ -1,9 +1,7 @@
 import io
 
-from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.contrib.sites.models import Site
 from staticmap import StaticMap, Line
 
 from mountainbikers.celery import app
@@ -12,34 +10,35 @@ from shell.utils.mail import mail
 
 
 @app.task
-def create_staticmaps(trail_id):
+def create_staticmaps(trail_id, base_uri):
     from .models import Trail
-    current_site = Site.objects.get_current()
     current_trail = Trail.objects.get(pk=trail_id)
 
-    h = 'http' if settings.DEBUG else 'https'
+    try:
+        static_thumbnail = StaticMap(425, 225, 10, 10, base_uri + '/trail/api/tile/{z}/{x}/{y}.png', tile_request_timeout=60)
+        static_hero = StaticMap(1280, 480, 10, 10, base_uri + '/trail/api/tile/{z}/{x}/{y}.png', tile_request_timeout=60)
 
-    static_thumbnail = StaticMap(425, 225, 10, 10, h + '://' + current_site.domain + '/trail/api/tile/{z}/{x}/{y}.png')
-    static_hero = StaticMap(1280, 480, 10, 10, h + '://' + current_site.domain + '/trail/api/tile/{z}/{x}/{y}.png')
+        for track in current_trail.tracks:
+            coordinates = get_coordinates(track['points'])
+            static_thumbnail.add_line(Line(coordinates, 'white', 11))
+            static_hero.add_line(Line(coordinates, 'white', 11))
 
-    for track in current_trail.tracks:
-        coordinates = get_coordinates(track['points'])
-        static_thumbnail.add_line(Line(coordinates, 'white', 11))
-        static_hero.add_line(Line(coordinates, 'white', 11))
+        for track in current_trail.tracks:
+            coordinates = get_coordinates(track['points'])
+            static_thumbnail.add_line(Line(coordinates, '#2E73B8', 5))
+            static_hero.add_line(Line(coordinates, '#2E73B8', 5))
 
-    for track in current_trail.tracks:
-        coordinates = get_coordinates(track['points'])
-        static_thumbnail.add_line(Line(coordinates, '#2E73B8', 5))
-        static_hero.add_line(Line(coordinates, '#2E73B8', 5))
+        image_thumbnail = static_thumbnail.render()
+        image_hero = static_hero.render()
 
-    image_thumbnail = static_thumbnail.render()
-    image_hero = static_hero.render()
+        file_thumbnail = io.BytesIO(b'')
+        file_hero = io.BytesIO(b'')
 
-    file_thumbnail = io.BytesIO(b'')
-    file_hero = io.BytesIO(b'')
-
-    image_thumbnail.save(file_thumbnail, format='JPEG', optimize=True, progressive=True)
-    image_hero.save(file_hero, format='JPEG', optimize=True, progressive=True)
+        image_thumbnail.save(file_thumbnail, format='JPEG', optimize=True, progressive=True)
+        image_hero.save(file_hero, format='JPEG', optimize=True, progressive=True)
+    except:
+        # TODO
+        pass
 
     current_trail.thumbnail.delete(save=False)
     current_trail.thumbnail.save('thumbnail.jpg', file_thumbnail)
@@ -60,7 +59,7 @@ def create_staticmaps(trail_id):
 
 
 @app.task
-def parse_gpx(trail_id):
+def parse_gpx(trail_id, base_uri):
     from .models import Trail
 
     trail = Trail.objects.get(pk=trail_id)
@@ -79,4 +78,4 @@ def parse_gpx(trail_id):
             trail.save()
 
             # Asynchronous Thumbnail
-            create_staticmaps.delay(trail.id)
+            create_staticmaps.delay(trail.id, base_uri)
