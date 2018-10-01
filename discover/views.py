@@ -26,7 +26,7 @@ def index(request):
 # @cache_page(60 * 15)
 def discover(request):
     current_user = request.user
-    last_trails = Trail.objects.filter(pub_date__lte=timezone.now(), is_draft=False)
+    last_trails = Trail.objects.filter(pub_date__lte=timezone.now(), is_draft=False, is_private=False)
 
     if current_user.is_authenticated:
         last_trails = last_trails.exclude(author=current_user)
