@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="Mountain Bikers Club">
     <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
 
-    <meta property="og:type" content="fitness.course">
+    <meta property="og:type" content="fitness.bikes">
 
     {% if trail.thumbnail %}
         <meta property="og:image" content="{{ trail.hero.url }}">
@@ -29,7 +29,8 @@
             <meta property="fitness:duration:value" content="{{ track.moving_time|default:0|floatformat:"0" }}">
             <meta property="fitness:distance:units" content="s">
             <meta property="fitness:speed:value" content="{{ track.average_moving_speed|default:0|floatformat:"-2" }}">
-            <meta property="fitness:speed:units" content=km/"s">
+            <meta property="fitness:speed:units" content="km/h">
+            <meta property="fitness:calories" content="0">
         {% endwith %}
     {% endif %}
 {% endblock %}
