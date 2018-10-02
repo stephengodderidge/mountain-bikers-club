@@ -3,12 +3,20 @@ from django.contrib.auth import views as auth_views
 
 from . import views
 
+
+class AuthenticationForm(auth_views.AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['autocomplete'] = 'username'
+        self.fields['password'].widget.attrs['autocomplete'] = 'current-password'
+
+
 urlpatterns = [
     path('edit/', views.edit, name='member__edit'),
     path('delete/', views.delete, name='member__delete'),
 
     path('register/', views.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='member/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='member/login.html', authentication_form=AuthenticationForm), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('password_change/', auth_views.PasswordChangeView.as_view(template_name='member/password_change.html'), name='password_change'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='member/password_change_done.html'), name='password_change_done'),
