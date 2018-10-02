@@ -167,12 +167,15 @@ def track_json(request, trail_id, track_id):
 
 
 def tile(request, z, x, y):
-    # Fallback to OpenCycleMap
+    url_komoot = 'http://a.tile.komoot.de/komoot-2/{}/{}/{}.png'.format(z, x, y)
     url_topo = 'https://b.tile.opentopomap.org/{}/{}/{}.png'.format(z, x, y)
     url_cycle = 'https://tile.thunderforest.com/cycle/{}/{}/{}.png?apikey={}'\
         .format(z, x, y, os.environ.get('OPEN_CYCLE_MAP'))
-    r = requests.get(url_topo, timeout=60)
+
+    r = requests.get(url_komoot, timeout=60)
     if r.status_code != 200:
-        r = requests.get(url_cycle)
+        r = requests.get(url_topo, timeout=60)
+    if r.status_code != 200:
+        r = requests.get(url_cycle, timeout=60)
 
     return HttpResponse(r.content, content_type='image/png')
