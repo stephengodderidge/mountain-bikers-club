@@ -108,12 +108,8 @@ def main(request, trail_id):
             y_elevation = list(map(lambda p: p['elevation'], track['points']))
             y_speed = list(map(lambda p: p['speed'], track['points']))
 
-            window, order = 101, 9
-
-            tools = 'crosshair,pan,wheel_zoom,box_zoom,reset'
-
             plot = figure(
-                tools=tools,
+                tools='crosshair,pan,wheel_zoom,box_zoom,reset',
                 sizing_mode='scale_width',
                 plot_width=1100,
                 plot_height=400,
@@ -132,7 +128,7 @@ def main(request, trail_id):
             plot.add_layout(LinearAxis(y_range_name='speed', axis_label=_('Speed') + ' (km/h)'), 'right')
 
             plot.line(x_distance, y_elevation, legend=_('Elevation'), line_width=3, color='#3d85cc')
-            plot.line(x_distance, savgol_filter(y_speed, window, order), legend=_('Speed'), line_width=1,
+            plot.line(x_distance, savgol_filter(y_speed, 101, 9), legend=_('Speed'), line_width=1,
                       y_range_name='speed', color='#66cc66')
 
             script, div = components(plot)
