@@ -36,15 +36,15 @@ def create_staticmaps(trail_id, base_uri):
 
         image_thumbnail.save(file_thumbnail, format='JPEG', optimize=True, progressive=True)
         image_hero.save(file_hero, format='JPEG', optimize=True, progressive=True)
+
+        current_trail.thumbnail.delete(save=False)
+        current_trail.thumbnail.save('thumbnail.jpg', file_thumbnail)
+
+        current_trail.hero.delete(save=False)
+        current_trail.hero.save('hero.jpg', file_hero)
     except:
         # TODO
         pass
-
-    current_trail.thumbnail.delete(save=False)
-    current_trail.thumbnail.save('thumbnail.jpg', file_thumbnail)
-
-    current_trail.hero.delete(save=False)
-    current_trail.hero.save('hero.jpg', file_hero)
 
     current_trail.is_draft = False
     current_trail.save()
