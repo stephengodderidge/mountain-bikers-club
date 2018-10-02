@@ -15,8 +15,8 @@ def create_staticmaps(trail_id, base_uri):
     current_trail = Trail.objects.get(pk=trail_id)
 
     try:
-        static_thumbnail = StaticMap(425, 225, 10, 10, base_uri + '/trail/api/tile/{z}/{x}/{y}.png', tile_request_timeout=60)
-        static_hero = StaticMap(1280, 480, 10, 10, base_uri + '/trail/api/tile/{z}/{x}/{y}.png', tile_request_timeout=60)
+        static_thumbnail = StaticMap(425, 225, 10, 10, base_uri + '/trail/api/tile/{z}/{x}/{y}.png', tile_request_timeout=180)
+        static_hero = StaticMap(1280, 480, 10, 10, base_uri + '/trail/api/tile/{z}/{x}/{y}.png', tile_request_timeout=180)
 
         for track in current_trail.tracks:
             coordinates = get_coordinates(track['points'])
