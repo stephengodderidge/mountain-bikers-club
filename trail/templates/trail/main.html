@@ -5,21 +5,23 @@
 {% block description %}{{ trail.description|default:'' }}{% endblock %}
 
 {% block social %}
-    {% with trail.tracks|first as track %}
-        <meta property="og:title"
-              content="{{ trail.name|default:'Trail' }} ・ {{ track.location|default:'' }}">
-        <meta property="og:description"
-              content="{% trans 'Distance' %}: {{ track.distance|default:0|floatformat:"-2" }}km ・ {% trans 'Duration' %}: {{ track.moving_time|format_time }} ・ {% trans 'Uphill' %}: {{ track.uphill|default:0|floatformat:"0" }}m">
-    {% endwith %}
-    <meta property="og:url" content="https://mountainbikers.club{{ request.path }}">
-    <meta property="og:site_name" content="Mountain Bikers Club">
-    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
-    <meta property="og:type" content="fitness.course">
+    {% if not trail.is_draft and trail.tracks and trail.tracks|length > 0 %}
+        {% with trail.tracks|first as track %}
+            <meta property="og:title"
+                  content="{{ trail.name|default:'Trail' }} ・ {{ track.location|default:'' }}">
+            <meta property="og:description"
+                  content="{% trans 'Distance' %}: {{ track.distance|default:0|floatformat:"-2" }}km ・ {% trans 'Duration' %}: {{ track.moving_time|format_time }} ・ {% trans 'Uphill' %}: {{ track.uphill|default:0|floatformat:"0" }}m">
+        {% endwith %}
+        <meta property="og:url" content="https://mountainbikers.club{{ request.path }}">
+        <meta property="og:site_name" content="Mountain Bikers Club">
+        <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
+        <meta property="og:type" content="fitness.course">
 
-    {% if trail.thumbnail %}
-        <meta property="og:image" content="{{ trail.hero.url }}">
-        <meta property="og:image:width" content="1280">
-        <meta property="og:image:height" content="480">
+        {% if trail.thumbnail %}
+            <meta property="og:image" content="{{ trail.hero.url }}">
+            <meta property="og:image:width" content="1280">
+            <meta property="og:image:height" content="480">
+        {% endif %}
     {% endif %}
 {% endblock %}
 
