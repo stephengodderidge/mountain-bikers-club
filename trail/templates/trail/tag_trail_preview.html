@@ -6,33 +6,36 @@
         <div class="trail-preview has-no-hover">
     {% endif %}
     <div class="trail-preview__map">
+        <div class="trail-preview__title h3">{{ trail.name|default:'Unnamed trail' }}</div>
         {% if trail.thumbnail %}
-            <img class="trail-map" src="{{ trail.thumbnail.url }}">
+            <img class="trail-map" src="{{ trail.thumbnail.url }}" alt="{% trans 'Map of the trail: '|add:trail.name|default:'' %}">
         {% else %}
             <trail-map class="trail-map" data-trail="{{ trail.id }}" data-track="0"></trail-map>
         {% endif %}
-        <h3 class="trail-preview__title">{{ trail.name|default:'Unnamed trail' }}</h3>
     </div>
     {% if trail.tracks|length > 0 %}
         {% with trail.tracks|first as track %}
             {% if track.location or track.distance or track.uphill %}
                 <ul class="trail-preview__info-grid">
                     <li class="is-left" style="grid-column-end: span 2;">
-                        <svg width="15" height="15" class="trail__icon">
+                        <svg width="15" height="15" class="trail__icon" aria-hidden="true">
                             <use xlink:href="#home"></use>
                         </svg>
+                        <span class="is-visually-hidden">{% trans 'Location' %}:</span>
                         {{ track.location|default:'n/a'|truncatechars:18 }}
                     </li>
                     <li class="is-center">
-                        <svg width="15" height="15" class="trail__icon">
+                        <svg width="15" height="15" class="trail__icon" aria-hidden="true">
                             <use xlink:href="#distance"></use>
                         </svg>
+                        <span class="is-visually-hidden">{% trans 'Distance' %}:</span>
                         {{ track.distance|default:0|floatformat }}km
                     </li>
                     <li class="is-right">
-                        <svg width="15" height="15" class="trail__icon">
+                        <svg width="15" height="15" class="trail__icon" aria-hidden="true">
                             <use xlink:href="#rocket"></use>
                         </svg>
+                        <span class="is-visually-hidden">{% trans 'Uphill' %}:</span>
                         {{ track.uphill|default:0|floatformat:"0" }}m
                     </li>
                 </ul>

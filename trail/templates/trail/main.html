@@ -63,27 +63,31 @@
                     <div>
                         <ul class="trail__statistics-grid">
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#home"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Location' %}:</span>
                                 {{ track.location|default:'n/a'|truncatechars:18 }}
                             </li>
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#enter-down"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Minimum altitude' %}:</span>
                                 {{ track.min_altitude|floatformat:"0" }}m
                             </li>
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#enter-up"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Maximun altidtude' %}:</span>
                                 {{ track.max_altitude|floatformat:"0" }}m
                             </li>
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#calendar"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Start date and time' %}:</span>
                                 {{ track.start_datetime|parse_time|date:"SHORT_DATE_FORMAT" }}
                             </li>
                             <!-- weather -->
@@ -91,33 +95,38 @@
                         <ul class="trail__statistics-grid">
 
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#distance"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Distance' %}:</span>
                                 {{ track.distance|default:0|floatformat:"-2" }}km
                             </li>
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#rocket"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Uphill' %}:</span>
                                 {{ track.uphill|default:0|floatformat:"0" }}m
                             </li>
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#time"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Moving time' %}:</span>
                                 {{ track.moving_time|format_time }}
                             </li>
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#speed-medium"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Average moving speed' %}:</span>
                                 {{ track.average_moving_speed|floatformat:"1" }}km/h
                             </li>
                             <li class="is-left">
-                                <svg width="20" height="20" class="trail__icon">
+                                <svg width="20" height="20" class="trail__icon" aria-hidden="true">
                                     <use xlink:href="#speed-fast"></use>
                                 </svg>
+                                <span class="is-visually-hidden">{% trans 'Maximum speed' %}:</span>
                                 {{ track.max_speed|floatformat:"1" }}km/h
                             </li>
                         </ul>
