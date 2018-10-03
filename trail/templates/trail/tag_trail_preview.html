@@ -7,6 +7,13 @@
     {% endif %}
     <div class="trail-preview__map">
         <div class="trail-preview__title h3">{{ trail.name|default:'Unnamed trail' }}</div>
+        {% if trail.is_private %}
+            <div class="trail-preview__lock" aria-label="{% trans 'This trail is private' %}">
+                <svg width="15" height="15" aria-hidden="true">
+                    <use xlink:href="#lock"></use>
+                </svg>
+            </div>
+        {% endif %}
         {% if trail.thumbnail %}
             <img class="trail-map" src="{{ trail.thumbnail.url }}" alt="{% trans 'Map of the trail: '|add:trail.name|default:'' %}">
         {% else %}

@@ -31,6 +31,11 @@
             {% trans 'Unnamed Trail' as trail_noname %}
             <h1 class="has-no-bottom-space">{{ trail.name|default:trail_noname }}</h1>
             <p class="trail__published has-hidden-links">
+                {% if trail.is_private %}
+                    <svg width="20" height="20" aria-hidden="true" style="vertical-align: text-top">
+                        <use xlink:href="#lock"></use>
+                    </svg>
+                {% endif %}
                 {% url 'member__main' username=trail.author.username as link %}
                 {% blocktrans trimmed with user=trail.author.username date=trail.pub_date|date link=link %}
                     Published by <a href="{{ link }}">@{{ user }}</a> on {{ date }}.

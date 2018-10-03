@@ -66,6 +66,18 @@
     transform: translate3d(0, 0, 0);
 }
 
+.trail-preview__lock {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    padding: 4px 5px 6px 4px;
+    color: white;
+    background: var(--base01);
+    line-height: 0;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
 .trail-preview__info-grid {
     padding: 10px;
     display: grid;
