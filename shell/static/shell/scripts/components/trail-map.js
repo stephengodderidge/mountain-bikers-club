@@ -40,7 +40,7 @@ export default class Map extends HTMLElement {
 
         tileLayer('/trail/api/tile/{z}/{x}/{y}.png', {
             attribution:
-                '&copy; <a href="https://www.openstreetmap.org">OpenStreetMap</a> contributors, &copy; <a href="https://opentopomap.org">OpenTopoMap</a>, &copy; <a href="https://opencyclemap.org">OpenCycleMap</a>',
+                '&copy; <a href="https://www.openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://www.komoot.com">Komoot</a>, <a href="https://opentopomap.org">OpenTopoMap</a>, <a href="https://opencyclemap.org">OpenCycleMap</a>',
             // maxZoom: 17,
         }).addTo(myMap);
 
