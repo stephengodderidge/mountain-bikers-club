@@ -29,7 +29,7 @@ msgstr "Dashboard"
 
 #: dashboard/templates/dashboard/index.html:18
 msgid "My last trails"
-msgstr "Meine letzten Trails"
+msgstr "Meine letzten Strecken"
 
 #: dashboard/templates/dashboard/index.html:27
 #: shell/templates/shell/member_headerlinks.html:37
@@ -45,7 +45,7 @@ msgstr "Entdecken"
 
 #: discover/templates/discover/discover.html:5
 msgid "Discover new trails"
-msgstr "Neue Trails entdecken"
+msgstr "Neue Strecken entdecken"
 
 #: discover/templates/discover/index.html:4
 msgid "Home"
@@ -54,7 +54,7 @@ msgstr "Startseite"
 #: discover/templates/discover/index.html:5
 #: discover/templates/discover/index.html:12
 msgid "For the love of mountain biking and wild nature"
-msgstr "Für die Liebe zum Mountainbiken und zur wilden Natur"
+msgstr "Für die Liebe am Mountainbiken und zur wilden Natur"
 
 #: discover/templates/discover/index.html:15
 msgid "Welcome back"
@@ -106,19 +106,19 @@ msgstr "Eintragen"
 
 #: member/admin.py:15
 msgid "Personal info"
-msgstr ""
+msgstr "Persönliche Informationen"
 
 #: member/admin.py:16 member/templates/member/main.html:40
 msgid "Trails"
-msgstr "Trails"
+msgstr "Strecken"
 
 #: member/admin.py:17
 msgid "Important dates"
-msgstr ""
+msgstr "Wichtige Daten"
 
 #: member/admin.py:18
 msgid "Permissions"
-msgstr ""
+msgstr "Berechtigungen"
 
 #: member/forms.py:34 member/forms.py:57
 msgid "This username is forbidden."
@@ -126,7 +126,7 @@ msgstr "Dieser Benutzername ist verboten."
 
 #: member/models.py:10
 msgid "email address"
-msgstr ""
+msgstr "E-Mail Adresse"
 
 #: member/models.py:13
 msgid "Required. No bullshit, I promise."
@@ -138,11 +138,11 @@ msgstr "Ein Benutzer mit dieser E-Mail-Adresse existiert bereits."
 
 #: member/models.py:19
 msgid "Premium member"
-msgstr ""
+msgstr "Premium Nutzer"
 
 #: member/models.py:20
 msgid "Premium until"
-msgstr ""
+msgstr "Premium bis"
 
 #: member/templates/member/edit.html:4 member/templates/member/edit.html:10
 #: member/templates/member/main.html:27
@@ -158,7 +158,7 @@ msgstr "Speichern"
 #: member/templates/member/password_change.html:23
 #: trail/templates/trail/edit.html:23
 msgid "Cancel"
-msgstr "Absagen"
+msgstr "Abbrechen"
 
 #: member/templates/member/login.html:17
 msgid "Login"
@@ -189,7 +189,7 @@ msgstr "Favoriten"
 #: member/templates/member/main.html:59
 #: member/templates/member/password_change.html:4
 msgid "Change password"
-msgstr ""
+msgstr "Passwort ändern"
 
 #: member/templates/member/main.html:64
 msgid "Delete my account"
@@ -200,83 +200,96 @@ msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
+"Bitte gebe aus Sicherheitsgründen dein altes Passwort einmal und dein "
+"neues Passwort zweimal an, sodass wir sicher gehen können, "
+"dass du es richtig eingegeben hast"
 
 #: member/templates/member/password_change.html:19
 #: member/templates/member/password_reset_confirm.html:27
 msgid "Change my password"
-msgstr ""
+msgstr "Mein Passwort ändern"
 
 #: member/templates/member/password_change_done.html:4
 msgid "Password changed successfully."
-msgstr ""
+msgstr "Passwort erfolgreich geändert."
 
 #: member/templates/member/password_change_done.html:11
 msgid "Your password was changed."
-msgstr ""
+msgstr "Dein Passwort wurde geändert."
 
 #: member/templates/member/password_reset.html:4
 #: member/templates/member/password_reset_complete.html:4
 #: member/templates/member/password_reset_done.html:4
 msgid "Password reset"
-msgstr ""
+msgstr "Passwort zurücksetzen"
 
 #: member/templates/member/password_reset.html:11
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
+"Hast du dein Passwort vergessen? Gebe hier deine E-Mail an und wir schicken dir "
+"eine Anleitung um dein Passwort zu ändern."
 
 #: member/templates/member/password_reset.html:17
 msgid "Email address:"
-msgstr ""
+msgstr "E-Mail Adresse:"
 
 #: member/templates/member/password_reset.html:21
 msgid "Reset my password"
-msgstr ""
+msgstr "Setze mein Passwort zurück"
 
 #: member/templates/member/password_reset_complete.html:11
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "Dein Passwort wurde geändert. Sie mögen sich nun einloggen."
 
 #: member/templates/member/password_reset_complete.html:12
 msgid "Log in"
-msgstr ""
+msgstr "Einloggen"
 
 #: member/templates/member/password_reset_confirm.html:4
 msgid "Password reset confirmation"
-msgstr ""
+msgstr "Bestätigung zur Zurücksetzung ihres Passworts"
 
 #: member/templates/member/password_reset_confirm.html:12
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
+"Bitte geben sie ihr Passwort zweimal an, damit wir sicher gehen können, "
+"dass sie es richtig eingegeben haben."
 
 #: member/templates/member/password_reset_confirm.html:18
 msgid "New password:"
-msgstr ""
+msgstr "Neues Passwort:"
 
 #: member/templates/member/password_reset_confirm.html:23
 msgid "Confirm password:"
-msgstr ""
+msgstr "Passwort bestätigen:"
 
 #: member/templates/member/password_reset_confirm.html:31
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
+"Der Link zum Zurücksetzen ihres Passworts ist ungültig, eventuell weil es "
+"schon benutzt wurde. Bitte fordern sie einen neuen Link an."
 
 #: member/templates/member/password_reset_done.html:11
 msgid ""
 "We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
 msgstr ""
+"Wir haben ihnen eine E-Mail mit einer Anleitung, wie sie ihr neues Passwort setzen, geschickt."
+"Falls ein Account mit dieser E-Mail existiert, sollten sie diese gleich erhalten."
 
 #: member/templates/member/password_reset_done.html:12
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
 msgstr ""
+"Falls sie keine E-Mail erhalten, stellen sie sicher, dass sie sich mit dieser E-Mail Adresse "
+"registriert haben und überprüfen sie ihren Spam-Ordner."
 
 #: member/templates/member/register.html:22
 msgid "Welcome"
@@ -300,25 +313,27 @@ msgstr "Deutsch"
 
 #: shell/templates/404.html:4 shell/templates/404.html:9
 msgid "Page not found"
-msgstr ""
+msgstr "Seite nicht gefunden"
 
 #: shell/templates/404.html:10
 msgid "We're sorry, but the requested page could not be found."
-msgstr ""
+msgstr "Entschuldigung, aber die geforderte Seite gibt es nicht."
 
 #: shell/templates/500.html:4
 msgid "Server error (500)"
-msgstr ""
+msgstr "Server Fehler (500)"
 
 #: shell/templates/500.html:9
 msgid "Server Error <em>(500)</em>"
-msgstr ""
+msgstr "Server Fehler <em>(500)</em>"
 
 #: shell/templates/500.html:10
 msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "email and should be fixed shortly. Thanks for your patience."
 msgstr ""
+"Es gab einen Fehler. Die Administratoren wurden bereits über E-Mail benachrichtigt "
+"und der Fehler sollte bald behoben sein. Vielen Dank für ihr Verständniss."
 
 #: shell/templates/shell/base.html:105
 msgid "or"
@@ -326,7 +341,7 @@ msgstr "oder"
 
 #: shell/templates/shell/base.html:128
 msgid "Facebook page"
-msgstr ""
+msgstr "Facebook Seite"
 
 #: shell/templates/shell/base.html:135
 msgid "Facebook Messenger"
@@ -338,11 +353,11 @@ msgstr ""
 
 #: shell/templates/shell/base.html:149
 msgid "Source Code on Github"
-msgstr ""
+msgstr "Quellcode auf GitHub"
 
 #: shell/templates/shell/base.html:156
 msgid "Buy me a coffee support page"
-msgstr ""
+msgstr "Kauf mir einen Kaffee auf der Spendenseite"
 
 #: shell/templates/shell/base.html:171
 msgid ""
@@ -351,6 +366,10 @@ msgid ""
 "com/cedeber\" target=\"_blank\" rel=\"noopener\">helping me for the price of "
 "few cafes</a>. Thank you very much!"
 msgstr ""
+"Das entwickeln und hosten einer Webapp macht zwar Spaß, ist aber nicht kostenlos. "
+"Falls sie Mountain Bikers Club mögen, denken sie danach <a href=\"https://www.buymeacoffe."
+"com/cedeber\" target=\"_blank\" rel=\"noopener\">mir den ein oder anderen Kaffee zu "
+"bezahlen</a>. Danke!"
 
 #: shell/templates/shell/member_headerlinks.html:48
 msgid "Profile"
@@ -362,15 +381,15 @@ msgstr "Veröffentlichungstermin"
 
 #: trail/models.py:19
 msgid "Draft"
-msgstr ""
+msgstr "Entwurf"
 
 #: trail/models.py:20
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 
 #: trail/models.py:20
 msgid "Only you can see this trail"
-msgstr ""
+msgstr "Nur du kannst diese Strecke sehen"
 
 #: trail/models.py:23
 msgid "Title"
@@ -420,15 +439,15 @@ msgstr "Ort"
 
 #: trail/templates/trail/main.html:76
 msgid "Minimum altitude"
-msgstr ""
+msgstr "Niedrigster Punkt"
 
 #: trail/templates/trail/main.html:83
 msgid "Maximun altidtude"
-msgstr ""
+msgstr "Höchster Punkt"
 
 #: trail/templates/trail/main.html:90
 msgid "Start date and time"
-msgstr ""
+msgstr "Startdatum und -zeit"
 
 #: trail/templates/trail/main.html:115
 msgid "Moving time"
@@ -448,7 +467,7 @@ msgstr "Höchstgeschwindigkeit"
 
 #: trail/templates/trail/main.html:138
 msgid "Analyzing..."
-msgstr ""
+msgstr "Analysieren..."
 
 #: trail/templates/trail/main.html:140
 #, python-format
@@ -457,36 +476,39 @@ msgid ""
 "completed, you will receive an email.<br> You can continue to navigate on "
 "Mountain Bikers Club or <a href=\"%(url_trail_new)s\">upload a new trail</a>."
 msgstr ""
+"Deine Strecke wird im Moment analysiert, welches einige Minuten dauert. "
+"Sobald das Fertig ist, erhalten sie eine E-Mail.<br> Sie können weiterhin im "
+"Mountain Bikers Club navigieren oder <a hreg=\"%(url_trail_new)s\">eine neue Strecke hochladen</a>."
 
 #: trail/templates/trail/main.html:187
 msgid "Delete trail"
-msgstr "Trail löschen"
+msgstr "Strecke löschen"
 
 #: trail/templates/trail/tag_trail_preview.html:11
 #, fuzzy
 #| msgid "Share the fun of the trail"
 msgid "Map of the trail: "
-msgstr "Teil den Spaß am Trail"
+msgstr "Karte der Strecke: "
 
 #: trail/views.py:99 trail/views.py:155
 msgid "Trail does not exist"
-msgstr ""
+msgstr "Strecke existiert nicht"
 
 #: trail/views.py:116
 msgid "Elevation and Speed"
-msgstr ""
+msgstr "Höhe und Geschwindigkeit"
 
 #: trail/views.py:118 trail/views.py:130
 msgid "Elevation"
-msgstr ""
+msgstr "Höhe"
 
 #: trail/views.py:128 trail/views.py:131
 msgid "Speed"
-msgstr ""
+msgstr "Geschwindigkeit"
 
 #: trail/views.py:160
 msgid "Track index is out of range"
-msgstr ""
+msgstr "Streckenindex is nicht verfügbar"
 
 #~ msgid "Update from GPX"
 #~ msgstr "Update von GPX"
@@ -498,7 +520,7 @@ msgstr ""
 #~ msgstr "Bearbeiten"
 
 #~ msgid "Last trails"
-#~ msgstr "Letzten Trails"
+#~ msgstr "Letzten Strecken"
 
 #~ msgid "Downhill"
 #~ msgstr "Abfahrt"
