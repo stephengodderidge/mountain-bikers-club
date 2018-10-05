@@ -29,7 +29,7 @@ msgstr "Dashboard"
 
 #: dashboard/templates/dashboard/index.html:18
 msgid "My last trails"
-msgstr "Meine letzten Strecken"
+msgstr "Meine letzten Trails"
 
 #: dashboard/templates/dashboard/index.html:27
 #: shell/templates/shell/member_headerlinks.html:37
@@ -45,7 +45,7 @@ msgstr "Entdecken"
 
 #: discover/templates/discover/discover.html:5
 msgid "Discover new trails"
-msgstr "Neue Strecken entdecken"
+msgstr "Neue Trails entdecken"
 
 #: discover/templates/discover/index.html:4
 msgid "Home"
@@ -110,7 +110,7 @@ msgstr "Persönliche Informationen"
 
 #: member/admin.py:16 member/templates/member/main.html:40
 msgid "Trails"
-msgstr "Strecken"
+msgstr "Trails"
 
 #: member/admin.py:17
 msgid "Important dates"
@@ -389,7 +389,7 @@ msgstr "Privat"
 
 #: trail/models.py:20
 msgid "Only you can see this trail"
-msgstr "Nur du kannst diese Strecke sehen"
+msgstr "Nur du kannst diesen Trail sehen"
 
 #: trail/models.py:23
 msgid "Title"
@@ -451,7 +451,7 @@ msgstr "Startdatum und -zeit"
 
 #: trail/templates/trail/main.html:115
 msgid "Moving time"
-msgstr ""
+msgstr "Zeit in Bewegung"
 
 #: trail/templates/trail/main.html:122
 #, fuzzy
@@ -476,23 +476,23 @@ msgid ""
 "completed, you will receive an email.<br> You can continue to navigate on "
 "Mountain Bikers Club or <a href=\"%(url_trail_new)s\">upload a new trail</a>."
 msgstr ""
-"Deine Strecke wird im Moment analysiert, welches einige Minuten dauert. "
+"Dein Trail wird im Moment analysiert, welches einige Minuten dauert. "
 "Sobald das Fertig ist, erhalten sie eine E-Mail.<br> Sie können weiterhin im "
-"Mountain Bikers Club navigieren oder <a hreg=\"%(url_trail_new)s\">eine neue Strecke hochladen</a>."
+"Mountain Bikers Club navigieren oder <a hreg=\"%(url_trail_new)s\">einen neuen Trail hochladen</a>."
 
 #: trail/templates/trail/main.html:187
 msgid "Delete trail"
-msgstr "Strecke löschen"
+msgstr "Trail löschen"
 
 #: trail/templates/trail/tag_trail_preview.html:11
 #, fuzzy
 #| msgid "Share the fun of the trail"
 msgid "Map of the trail: "
-msgstr "Karte der Strecke: "
+msgstr "Karte des Trails: "
 
 #: trail/views.py:99 trail/views.py:155
 msgid "Trail does not exist"
-msgstr "Strecke existiert nicht"
+msgstr "Trail existiert nicht"
 
 #: trail/views.py:116
 msgid "Elevation and Speed"
@@ -508,7 +508,7 @@ msgstr "Geschwindigkeit"
 
 #: trail/views.py:160
 msgid "Track index is out of range"
-msgstr "Streckenindex is nicht verfügbar"
+msgstr "Trackindex is nicht verfügbar"
 
 #~ msgid "Update from GPX"
 #~ msgstr "Update von GPX"
@@ -520,7 +520,7 @@ msgstr "Streckenindex is nicht verfügbar"
 #~ msgstr "Bearbeiten"
 
 #~ msgid "Last trails"
-#~ msgstr "Letzten Strecken"
+#~ msgstr "Letzten Trails"
 
 #~ msgid "Downhill"
 #~ msgstr "Abfahrt"
