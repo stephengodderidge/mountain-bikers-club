@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 17:10+0000\n"
+"POT-Creation-Date: 2018-10-05 06:27+0000\n"
 "PO-Revision-Date: 2018-08-18 21:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -200,9 +200,9 @@ msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
-"Bitte gebe aus Sicherheitsgründen dein altes Passwort einmal und dein "
-"neues Passwort zweimal an, sodass wir sicher gehen können, "
-"dass du es richtig eingegeben hast"
+"Bitte gebe aus Sicherheitsgründen dein altes Passwort einmal und dein neues "
+"Passwort zweimal an, sodass wir sicher gehen können, dass du es richtig "
+"eingegeben hast"
 
 #: member/templates/member/password_change.html:19
 #: member/templates/member/password_reset_confirm.html:27
@@ -228,8 +228,8 @@ msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
-"Hast du dein Passwort vergessen? Gebe hier deine E-Mail an und wir schicken dir "
-"eine Anleitung um dein Passwort zu ändern."
+"Hast du dein Passwort vergessen? Gebe hier deine E-Mail an und wir schicken "
+"dir eine Anleitung um dein Passwort zu ändern."
 
 #: member/templates/member/password_reset.html:17
 msgid "Email address:"
@@ -256,8 +256,8 @@ msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
-"Bitte geben sie ihr Passwort zweimal an, damit wir sicher gehen können, "
-"dass sie es richtig eingegeben haben."
+"Bitte geben sie ihr Passwort zweimal an, damit wir sicher gehen können, dass "
+"sie es richtig eingegeben haben."
 
 #: member/templates/member/password_reset_confirm.html:18
 msgid "New password:"
@@ -280,16 +280,17 @@ msgid ""
 "We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
 msgstr ""
-"Wir haben ihnen eine E-Mail mit einer Anleitung, wie sie ihr neues Passwort setzen, geschickt."
-"Falls ein Account mit dieser E-Mail existiert, sollten sie diese gleich erhalten."
+"Wir haben ihnen eine E-Mail mit einer Anleitung, wie sie ihr neues Passwort "
+"setzen, geschickt.Falls ein Account mit dieser E-Mail existiert, sollten sie "
+"diese gleich erhalten."
 
 #: member/templates/member/password_reset_done.html:12
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
 msgstr ""
-"Falls sie keine E-Mail erhalten, stellen sie sicher, dass sie sich mit dieser E-Mail Adresse "
-"registriert haben und überprüfen sie ihren Spam-Ordner."
+"Falls sie keine E-Mail erhalten, stellen sie sicher, dass sie sich mit "
+"dieser E-Mail Adresse registriert haben und überprüfen sie ihren Spam-Ordner."
 
 #: member/templates/member/register.html:22
 msgid "Welcome"
@@ -332,8 +333,9 @@ msgid ""
 "There's been an error. It's been reported to the site administrators via "
 "email and should be fixed shortly. Thanks for your patience."
 msgstr ""
-"Es gab einen Fehler. Die Administratoren wurden bereits über E-Mail benachrichtigt "
-"und der Fehler sollte bald behoben sein. Vielen Dank für ihr Verständniss."
+"Es gab einen Fehler. Die Administratoren wurden bereits über E-Mail "
+"benachrichtigt und der Fehler sollte bald behoben sein. Vielen Dank für ihr "
+"Verständniss."
 
 #: shell/templates/shell/base.html:105
 msgid "or"
@@ -366,10 +368,10 @@ msgid ""
 "com/cedeber\" target=\"_blank\" rel=\"noopener\">helping me for the price of "
 "few cafes</a>. Thank you very much!"
 msgstr ""
-"Das entwickeln und hosten einer Webapp macht zwar Spaß, ist aber nicht kostenlos. "
-"Falls sie Mountain Bikers Club mögen, denken sie danach <a href=\"https://www.buymeacoffe."
-"com/cedeber\" target=\"_blank\" rel=\"noopener\">mir den ein oder anderen Kaffee zu "
-"bezahlen</a>. Danke!"
+"Das entwickeln und hosten einer Webapp macht zwar Spaß, ist aber nicht "
+"kostenlos. Falls sie Mountain Bikers Club mögen, denken sie danach <a href="
+"\"https://www.buymeacoffe.com/cedeber\" target=\"_blank\" rel=\"noopener"
+"\">mir den ein oder anderen Kaffee zu bezahlen</a>. Danke!"
 
 #: shell/templates/shell/member_headerlinks.html:48
 msgid "Profile"
@@ -407,8 +409,8 @@ msgstr "GPX Datei"
 msgid "Unnamed Trail"
 msgstr "Unbenannte Trail"
 
-#: trail/templates/trail/main.html:13 trail/templates/trail/main.html:101
-#: trail/templates/trail/tag_trail_preview.html:31 trail/views.py:117
+#: trail/templates/trail/main.html:13 trail/templates/trail/main.html:106
+#: trail/templates/trail/tag_trail_preview.html:38 trail/views.py:117
 msgid "Distance"
 msgstr "Entfernung"
 
@@ -418,75 +420,78 @@ msgstr "Entfernung"
 msgid "Duration"
 msgstr "Beschreibung"
 
-#: trail/templates/trail/main.html:13 trail/templates/trail/main.html:108
-#: trail/templates/trail/tag_trail_preview.html:38
+#: trail/templates/trail/main.html:13 trail/templates/trail/main.html:113
+#: trail/templates/trail/tag_trail_preview.html:45
 msgid "Uphill"
 msgstr "Bergauf"
 
-#: trail/templates/trail/main.html:35
+#: trail/templates/trail/main.html:40
 #, python-format
 msgid "Published by <a href=\"%(link)s\">@%(user)s</a> on %(date)s."
 msgstr "Gepostet von <a href=\"%(link)s\">@%(user)s</a> am %(date)s."
 
-#: trail/templates/trail/main.html:55
+#: trail/templates/trail/main.html:60
 msgid "Edit trail"
 msgstr "Trail ändern"
 
-#: trail/templates/trail/main.html:69
-#: trail/templates/trail/tag_trail_preview.html:24
+#: trail/templates/trail/main.html:74
+#: trail/templates/trail/tag_trail_preview.html:31
 msgid "Location"
 msgstr "Ort"
 
-#: trail/templates/trail/main.html:76
+#: trail/templates/trail/main.html:81
 msgid "Minimum altitude"
 msgstr "Niedrigster Punkt"
 
-#: trail/templates/trail/main.html:83
+#: trail/templates/trail/main.html:88
 msgid "Maximun altidtude"
 msgstr "Höchster Punkt"
 
-#: trail/templates/trail/main.html:90
+#: trail/templates/trail/main.html:95
 msgid "Start date and time"
 msgstr "Startdatum und -zeit"
 
-#: trail/templates/trail/main.html:115
+#: trail/templates/trail/main.html:120
 msgid "Moving time"
 msgstr "Zeit in Bewegung"
 
-#: trail/templates/trail/main.html:122
+#: trail/templates/trail/main.html:127
 #, fuzzy
 #| msgid "Average speed"
 msgid "Average moving speed"
 msgstr "Durchschnittsgeschwindigkeit"
 
-#: trail/templates/trail/main.html:129
+#: trail/templates/trail/main.html:134
 #, fuzzy
 #| msgid "Max speed"
 msgid "Maximum speed"
 msgstr "Höchstgeschwindigkeit"
 
-#: trail/templates/trail/main.html:138
+#: trail/templates/trail/main.html:143
 msgid "Analyzing..."
 msgstr "Analysieren..."
 
-#: trail/templates/trail/main.html:140
+#: trail/templates/trail/main.html:145
 #, python-format
 msgid ""
 "Your trail is currently analyzed. It will take a few minutes. Once "
 "completed, you will receive an email.<br> You can continue to navigate on "
 "Mountain Bikers Club or <a href=\"%(url_trail_new)s\">upload a new trail</a>."
 msgstr ""
-"Dein Trail wird im Moment analysiert, welches einige Minuten dauert. "
-"Sobald das Fertig ist, erhalten sie eine E-Mail.<br> Sie können weiterhin im "
-"Mountain Bikers Club navigieren oder <a hreg=\"%(url_trail_new)s\">einen neuen Trail hochladen</a>."
+"Dein Trail wird im Moment analysiert, welches einige Minuten dauert. Sobald "
+"das Fertig ist, erhalten sie eine E-Mail.<br> Sie können weiterhin im "
+"Mountain Bikers Club navigieren oder <a hreg=\"%(url_trail_new)s\">einen "
+"neuen Trail hochladen</a>."
 
-#: trail/templates/trail/main.html:187
+#: trail/templates/trail/main.html:192
 msgid "Delete trail"
 msgstr "Trail löschen"
 
 #: trail/templates/trail/tag_trail_preview.html:11
-#, fuzzy
-#| msgid "Share the fun of the trail"
+msgid "This trail is private"
+msgstr "Diesen Trail ist privat"
+
+#: trail/templates/trail/tag_trail_preview.html:18
 msgid "Map of the trail: "
 msgstr "Karte des Trails: "
 
