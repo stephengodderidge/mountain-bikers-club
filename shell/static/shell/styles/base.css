@@ -235,7 +235,8 @@
 
 /* --- Forms --- */
 
-.django__form .errorlist {
+.django__form .errorlist,
+.django__form__list .errorlist {
     color: var(--red);
     margin-bottom: 10px;
     font-size: 85%;
