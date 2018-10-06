@@ -39,7 +39,7 @@ class StaticViewSitemap(Sitemap):
         return reverse(item)
 
 
-class FlatPageSitemap(sitemaps.Sitemap):
+class FlatPageSitemap(Sitemap):
     changefreq = 'daily'
     protocol = 'https'
 
