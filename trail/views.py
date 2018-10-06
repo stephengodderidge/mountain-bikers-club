@@ -4,12 +4,13 @@ from bokeh.models import Range1d, LinearAxis
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse, Http404, HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from bokeh.plotting import figure
 from bokeh.embed import components
+from django.views.generic import DeleteView
 from scipy.signal import savgol_filter
 
 from .forms import GpxUploadForm, GpxEditForm
@@ -81,12 +82,13 @@ def favorite(request, trail_id):
     return HttpResponseRedirect(reverse('trail__main', args=[trail.id]))
 
 
-@login_required
-def delete(request, trail_id):
-    current_trail = get_object_or_404(Trail, pk=trail_id)
-    current_trail.delete()
+class TrailDelete(DeleteView):
+    success_url = reverse_lazy('dashboard__main')
+    model = Trail
 
-    return HttpResponseRedirect(reverse('dashboard__main'))
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(author=self.request.user)
 
 
 def main(request, trail_id):

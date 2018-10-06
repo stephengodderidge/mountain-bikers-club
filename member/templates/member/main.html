@@ -25,7 +25,7 @@
                     <div class="o-flex-inline has-horizontal-gutter">
                         <div>
                             {% trans 'Edit profile' as button_label %}
-                            {% url 'member__edit' as button_link %}
+                            {% url 'member__edit' user.username as button_link %}
                             {% tpl_button button_label button_link %}
                         </div>
                         <div>
@@ -62,7 +62,7 @@
                     </div>
                     <div>
                         {% trans 'Delete my account' as button_label %}
-                        {% url 'member__delete' as button_link %}
+                        {% url 'member__delete' user.username as button_link %}
                         {% tpl_button button_label button_link class='is-danger' %}
                     </div>
                 </div>

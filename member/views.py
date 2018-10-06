@@ -1,17 +1,18 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.views.generic import DeleteView
 
 from trail.models import Trail
 from .models import User
 from .forms import UserCreateForm, UserProfileForm
 
 
-def main(request, username):
+def main(request, slug):
     current_user = request.user
-    member = get_object_or_404(User, username=username)
+    member = get_object_or_404(User, username=slug)
     member_trails = Trail.objects.filter(author=member, pub_date__lte=timezone.now(), is_draft=False)
     member_favorite_trails = Trail.objects.filter(favorite_by=member, pub_date__lte=timezone.now(), is_draft=False)
 
@@ -40,7 +41,7 @@ def register(request):
             )
             user.save()
 
-            return HttpResponseRedirect(reverse('member__edit'))
+            return HttpResponseRedirect(reverse('member__edit', args=[user.username]))
 
     else:
         form = UserCreateForm()
@@ -53,8 +54,12 @@ def register(request):
 
 
 @login_required
-def edit(request):
+def edit(request, slug):
     current_user = request.user
+    slug_user = get_object_or_404(User, username=slug)
+
+    if current_user != slug_user:
+        raise Http404()
 
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, instance=current_user)
@@ -62,7 +67,7 @@ def edit(request):
         if form.is_valid():
             form.save()
 
-            return HttpResponseRedirect(reverse('member__main', None, args=[current_user.username]))
+            return HttpResponseRedirect(reverse('member__main', args=[current_user.username]))
 
     else:
         form = UserProfileForm(instance=current_user)
@@ -74,9 +79,11 @@ def edit(request):
     return render(request, 'member/edit.html', context)
 
 
-@login_required
-def delete(request):
-    current_user = request.user
-    current_user.delete()
+class MemberDelete(DeleteView):
+    model = User
+    slug_field = 'username'
+    success_url = reverse_lazy('home')
 
-    return HttpResponseRedirect(reverse('home'))
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(username=self.request.user)

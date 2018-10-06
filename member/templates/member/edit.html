@@ -8,7 +8,7 @@
         <div class="o-group o-flex-inline is-large">
             <div class="cell-2of3">
                 <h1>{% trans 'Edit profile' %}</h1>
-                <form action="{% url 'member__edit' %}" method="post">
+                <form action="{% url 'member__edit' user.username%}" method="post">
                     {% csrf_token %}
                     <ul class="django__form__list">
                         {{ form.as_ul }}
@@ -20,7 +20,7 @@
                         </div>
                         <div>
                             {% trans 'Cancel' as button_label %}
-                            {% url 'member__main' username=user.username as button_link %}
+                            {% url 'member__main' user.username as button_link %}
                             {% tpl_button button_label button_link class='is-secondary' %}
                         </div>
                     </div>
