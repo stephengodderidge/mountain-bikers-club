@@ -36,7 +36,7 @@
                         <use xlink:href="#lock"></use>
                     </svg>
                 {% endif %}
-                {% url 'member__main' username=trail.author.username as link %}
+                {% url 'member__main' trail.author.username as link %}
                 {% blocktrans trimmed with user=trail.author.username date=trail.pub_date|date link=link %}
                     Published by <a href="{{ link }}">@{{ user }}</a> on {{ date }}.
                 {% endblocktrans %}
