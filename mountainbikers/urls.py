@@ -20,10 +20,9 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
     path('shell/', include('shell.urls')),
-    path('@<str:username>/', member_views.main, name='member__main'),
     path('dashboard/', include('dashboard.urls')),
     path('trail/', include('trail.urls')),
-    path('member/', include('member.urls')),
+    path('', include('member.urls')),
     path('', include('discover.urls')),
 ]
 

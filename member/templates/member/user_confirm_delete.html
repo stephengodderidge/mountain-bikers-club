@@ -1,0 +1,32 @@
+{% extends 'shell/base.html' %}
+{% load static i18n tpl_button tpl_trail_preview %}
+
+{% block title %}Delete my account{% endblock %}
+
+{% block content %}
+    <div class="o-section">
+        <div class="o-group is-large">
+            <div class="o-flex-inline has-gutter">
+                <div class="cell-2of3">
+                    <h1>Delete {{ object.username }}'s account</h1>
+                    <p>Are you sure you want to delete your account?</p>
+                    <form method="post" class="django__form">
+                        {% csrf_token %}
+                        <div class="o-flex-inline has-horizontal-gutter">
+                            <div>
+                                {% trans 'Yes, I am sure!' as button_label %}
+                                {% tpl_button button_label class='is-danger' %}
+                            </div>
+                            <div>
+                                {% trans 'Cancel' as button_label %}
+                                {% url 'member__main' object.username as button_link %}
+                                {% tpl_button button_label button_link class='is-secondary' %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="cell-1of3"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
