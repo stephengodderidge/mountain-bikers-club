@@ -1,10 +1,35 @@
-from django.contrib import sitemaps
+from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.apps import apps as django_apps
+from django.utils import timezone
+
+from trail.models import Trail
+from member.models import User
 
 
-class StaticViewSitemap(sitemaps.Sitemap):
+class TrailSitemap(Sitemap):
+    protocol = 'https'
+
+    def items(self):
+        return Trail.objects.filter(pub_date__lte=timezone.now(), is_draft=False, is_private=False)
+
+    def location(self, obj):
+        return reverse('trail__main', args=[obj.id])
+
+
+class MemberSitemap(Sitemap):
     changefreq = 'daily'
+    protocol = 'https'
+
+    def items(self):
+        return User.objects.filter(is_active=True)
+
+    def location(self, obj):
+        return reverse('member__main', args=[obj.username])
+
+
+class StaticViewSitemap(Sitemap):
+    changefreq = 'monthly'
     protocol = 'https'
 
     def items(self):

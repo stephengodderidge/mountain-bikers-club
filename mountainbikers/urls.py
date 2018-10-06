@@ -5,11 +5,13 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from member import views as member_views
-from .sitemaps import FlatPageSitemap, StaticViewSitemap
+from .sitemaps import FlatPageSitemap, StaticViewSitemap, TrailSitemap, MemberSitemap
 
 sitemaps = {
     'static': StaticViewSitemap,
     'flatpages': FlatPageSitemap,
+    'trail': TrailSitemap,
+    'member': MemberSitemap,
 }
 
 urlpatterns = [
