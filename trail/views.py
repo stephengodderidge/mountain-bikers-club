@@ -1,6 +1,6 @@
 import os
 import requests
-from bokeh.models import Range1d, LinearAxis
+from bokeh.models import Range1d, LinearAxis, PrintfTickFormatter
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse, Http404, HttpResponse
@@ -111,27 +111,61 @@ def main(request, trail_id):
             y_speed = list(map(lambda p: p['speed'], track['points']))
 
             plot = figure(
-                tools='crosshair,pan,wheel_zoom,box_zoom,reset',
+                tools='crosshair,pan,wheel_zoom,box_zoom,reset,save',
+                toolbar_location='above',
                 sizing_mode='scale_width',
                 plot_width=1100,
                 plot_height=400,
-                title=_('Elevation and Speed'),
-                x_axis_label=_('Distance') + ' (km)',
-                y_axis_label=_('Elevation') + ' (m)',
-                toolbar_location='above',
             )
-
-            # TODO http://bokeh.pydata.org/en/latest/docs/user_guide/styling.html
-            plot.border_fill_color = '#e8e6df'
-            plot.background_fill_color = '#f2f0ec'
 
             plot.y_range = Range1d(start=min(y_elevation) - 30, end=max(y_elevation) + 30)
             plot.extra_y_ranges['speed'] = Range1d(start=min(y_speed), end=max(y_speed) + 3)
-            plot.add_layout(LinearAxis(y_range_name='speed', axis_label=_('Speed') + ' (km/h)'), 'right')
+            plot.add_layout(LinearAxis(y_range_name='speed'), 'right')
 
             plot.line(x_distance, y_elevation, legend=_('Elevation'), line_width=3, color='#3d85cc')
             plot.line(x_distance, savgol_filter(y_speed, 101, 9), legend=_('Speed'), line_width=1,
                       y_range_name='speed', color='#66cc66')
+
+            plot.xaxis[0].formatter = PrintfTickFormatter(format='%4.0d km')
+            plot.yaxis[0].formatter = PrintfTickFormatter(format='%5.0d m')
+            plot.yaxis[1].formatter = PrintfTickFormatter(format='%3.0d km/h')
+
+            # Styling
+            # http://bokeh.pydata.org/en/latest/docs/user_guide/styling.html
+            plot.border_fill_color = '#2d2d2d'
+            plot.background_fill_color = '#393939'
+
+            plot.outline_line_color = 'black'
+
+            plot.xaxis.major_label_text_color = '#d3d0c8'
+            plot.xaxis.axis_label_text_color = '#d3d0c8'
+            plot.yaxis[0].major_label_text_color = '#3d85cc'
+            plot.yaxis[0].axis_label_text_color = '#3d85cc'
+            plot.yaxis[1].major_label_text_color = '#66cc66'
+            plot.yaxis[1].axis_label_text_color = '#66cc66'
+
+            plot.xgrid.grid_line_color = '#515151'
+            plot.xgrid.grid_line_dash = [6, 4]
+            plot.ygrid.grid_line_color = '#515151'
+            plot.ygrid.grid_line_dash = [6, 4]
+
+            plot.xgrid.minor_grid_line_color = '#515151'
+            plot.xgrid.minor_grid_line_alpha = 0.5
+            plot.xgrid.minor_grid_line_dash = [6, 4]
+            plot.ygrid.minor_grid_line_color = '#515151'
+            plot.ygrid.minor_grid_line_alpha = 0.5
+            plot.ygrid.minor_grid_line_dash = [6, 4]
+
+            plot.title.text_color = '#a09f93'
+
+            plot.legend.location = 'top_left'
+            # plot.legend.orientation = 'horizontal'
+            plot.legend.label_text_color = '#a09f93'
+            plot.legend.border_line_color = '#515151'
+            plot.legend.background_fill_color = '#2d2d2d'
+            plot.legend.background_fill_alpha = 0.85
+            plot.legend.click_policy = 'hide'
+            plot.legend.inactive_fill_color = '#2d2d2d'
 
             script, div = components(plot)
 
