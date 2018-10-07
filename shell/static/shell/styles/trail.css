@@ -160,6 +160,24 @@
     overflow: hidden;
 }
 
+.trail-map__chart .bk-button-bar::before {
+    display: none !important;
+}
+
+.trail-map__chart .bk-toolbar-button {
+    cursor: pointer;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.trail-map__chart .bk-toolbar-button:hover {
+    background-color: #515151 !important;
+}
+
+.trail-map__chart .bk-toolbar-button.bk-active {
+    border-bottom-color: var(--blue) !important;
+}
+
 
 /* --- Leaflet --- */
 
