@@ -1,9 +1,10 @@
 import math
 import xml.etree.ElementTree as ET
 import re
-
 import requests
+
 from dateutil.parser import parse as parse_time
+from timezonefinder import TimezoneFinder
 
 
 def cheap_ruler_distance(points):
@@ -139,6 +140,7 @@ def get_moving_data(parsed_points):
 def parse(xml):
     parsed_start_datetime = None
     total_distance = {'value': 0.}
+    tf = TimezoneFinder()
 
     def __filter(n):
         p = parsed_points[n]
@@ -207,7 +209,8 @@ def parse(xml):
 
         start_datetime = parsed_points[0]['time']
         end_datetime = parsed_points[-1]['time']
-        # distance = cheap_ruler_distance(parsed_points)
+        timezone = tf.timezone_at(lng=parsed_points[0]['longitude'], lat=parsed_points[0]['latitude'])
+
         total_time = None
         average_speed = None
 
@@ -229,6 +232,7 @@ def parse(xml):
             'description': track_description.text if track_description else None,
             'start_datetime': start_datetime,
             'end_datetime': end_datetime,
+            'timezone': timezone,
             'location': get_location(parsed_points[0]),
             'distance': distance,
             'moving_distance': moving_distance / 1000.,

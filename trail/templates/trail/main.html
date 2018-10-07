@@ -1,5 +1,5 @@
 {% extends 'shell/base.html' %}
-{% load static i18n tpl_button filter_gpx index %}
+{% load tz static i18n tpl_button filter_gpx index %}
 
 {% block title %}{{ trail.name|default:'' }}{% endblock %}
 {% block description %}{{ trail.description|default:'' }}{% endblock %}
@@ -93,7 +93,9 @@
                                     <use xlink:href="#calendar"></use>
                                 </svg>
                                 <span class="is-visually-hidden">{% trans 'Start date and time' %}:</span>
-                                {{ track.start_datetime|parse_time|date:"SHORT_DATE_FORMAT" }}
+                                {% timezone track.timezone %}
+                                    {{ track.start_datetime|parse_time|date:"SHORT_DATE_FORMAT" }}
+                                {% endtimezone %}
                             </li>
                             <!-- weather -->
                         </ul>
