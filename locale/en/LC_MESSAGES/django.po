@@ -95,7 +95,7 @@ msgstr ""
 "change anything in the website, don't hesitate to <a href=\"&#109;&#97;&#x69;"
 "&#x6c;&#116;&#x6f;&#x3a;&#104;&#101;&#x6c;&#x6c;&#111;&#64;&#109;&#111;&#117;"
 "&#110;&#116;&#x61;&#105;&#110;&#98;&#x69;&#x6b;&#x65;&#x72;&#115;&#x2e;&#99;"
-"&#108;&#x75;&#x62;\">send me a polite email</a>. I may not answer but I will "
+"&#108;&#x75;&#x62;\">send me a polite email</a>. I may not answer, but I will "
 "read it!</p><p>Respect nature, plants and animals. Priority for walkers. "
 "Have fun!</p>"
 
@@ -165,7 +165,7 @@ msgid "Login"
 msgstr ""
 
 #: member/templates/member/login.html:24
-msgid "Forgotten your password?"
+msgid "Forgot your password?"
 msgstr ""
 
 #: member/templates/member/main.html:5 member/templates/member/main.html:14
@@ -222,7 +222,7 @@ msgstr ""
 
 #: member/templates/member/password_reset.html:11
 msgid ""
-"Forgotten your password? Enter your email address below, and we'll email "
+"Forgot your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
 
@@ -268,8 +268,8 @@ msgstr ""
 
 #: member/templates/member/password_reset_done.html:11
 msgid ""
-"We've emailed you instructions for setting your password, if an account "
-"exists with the email you entered. You should receive them shortly."
+"If an account exists with the email you entered,  we will email you "
+"instructrions for resetting your password. You should receive the email shortly."
 msgstr ""
 
 #: member/templates/member/password_reset_done.html:12
@@ -447,7 +447,7 @@ msgstr ""
 #: trail/templates/trail/main.html:145
 #, python-format
 msgid ""
-"Your trail is currently analyzed. It will take a few minutes. Once "
+"Your trail is currently being analyzed. It will take a few minutes. Once "
 "completed, you will receive an email.<br> You can continue to navigate on "
 "Mountain Bikers Club or <a href=\"%(url_trail_new)s\">upload a new trail</a>."
 msgstr ""
